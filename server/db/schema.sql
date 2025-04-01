@@ -1,16 +1,16 @@
 -- SQLBook: Code
 -- DROP DATABASE
-DROP DATABASE IF EXISTS specialshop_db
+DROP DATABASE IF EXISTS specialShop_db
 -- CREATE DATABASE
-CREATE DATABASE specialshop_db;
+CREATE DATABASE specialShop_db;
 
 
 Create Table users (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
-    usertype ENUM('admin', 'buyer', 'seller') NOT NULL,
-    password VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    usertype ENUM('admin', 'buyer', 'seller') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
