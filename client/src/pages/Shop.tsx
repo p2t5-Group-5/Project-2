@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-// import ErrorPage from "./ErrorPage";
-// import UserList from '../components/Users';
-// import auth from '../utils/auth';
 import { Product } from "../interfaces/Product";
 
 const Shop = () => {
+   const cart: Product[] = ;
    const [Products, setProducts] = useState<Product[]>([]);
 
    const fetchProducts = async () => {
@@ -16,6 +14,11 @@ const Shop = () => {
             console.error("Error fetching products:", error);
         }
     };
+    
+    const handleAddToCart = (product: Product) => {
+
+    }
+
 
     useEffect(() => {
         fetchProducts();

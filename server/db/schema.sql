@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- DROP DATABASE
 DROP DATABASE IF EXISTS friends_db;
 

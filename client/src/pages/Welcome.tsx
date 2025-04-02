@@ -6,26 +6,25 @@ const welcome = () =>{
 
 return(
 <>
-<header>
-<img src="" alt=""/> 
-<h1>Shop Name</h1>
-<button onClick={ go to cart!!!!!!!}> 
-
-</button>
-
-</header>
+<Header/>
 <Navbar/>
 <main>
-
+<h2>Welcome!</h2>
 <section className="flex">
 <div className="seller">
-<img src="" alt="" />
-<p></p>
+<img src="" alt="Seller" />
+<p>
+Are you here to sell or 
+</p>
 </div>
+
 <div className="item">
-<img src="" alt="" />
-<p></p>
+<img src="" alt="Item" />
+<p>
+
+</p>
 </div>
+
 </section>
 
 </main>

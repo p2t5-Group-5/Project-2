@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import "../styles/Footer.css";
 return(
     <footer className=''>
         <Link to='/Contact'>Contact</Link>

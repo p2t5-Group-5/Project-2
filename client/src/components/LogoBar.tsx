@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
+import "../styles/LogoBar.css";
 const Logobar = () => {
   // State to track the login status
   const [loginCheck, setLoginCheck] = useState(false);
