@@ -9,7 +9,8 @@ class AuthService {
   // Retrieve the JWT token from localStorage
   getToken(): string {
     const loggedUser = localStorage.getItem('id_token') || '';
-    return loggedUser;
+    // console.log(jwtDecode(loggedUser));
+    return loggedUser || "";
   }
 
   // Store the JWT token in localStorage and redirect to the home page
