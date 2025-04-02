@@ -14,7 +14,7 @@ return(
 <div className="seller">
 <img src="" alt="Seller" />
 <p>
-Are you here to sell or 
+
 </p>
 </div>
 
