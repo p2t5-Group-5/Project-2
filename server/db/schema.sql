@@ -17,7 +17,7 @@ CREATE TABLE users (
 
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
+    category VARCHAR(50) NOT NULL,
     description TEXT NOT NULL
 );
 
@@ -26,8 +26,14 @@ CREATE TABLE products (
     name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     category_id INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
     seller_id INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    image_url VARCHAR(255),
+    brand VARCHAR(50),
+    size VARCHAR(50),
+    color VARCHAR(50),
+    year varchar(4),
+    condition VARCHAR(50),
     FOREIGN KEY (seller_id) REFERENCES users(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
