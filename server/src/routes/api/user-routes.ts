@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (_req: Request, res: Response) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password'] }
+      attributes: ['username', 'usertype', 'email']
     });
     res.json(users);
   } catch (error: any) {
@@ -21,7 +21,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id, {
-      attributes: { exclude: ['password'] }
+      attributes: ['username', 'usertype', 'email']
     });
     if (user) {
       res.json(user);
@@ -49,7 +49,9 @@ router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { username, password } = req.body;
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: ['username', 'usertype', 'email']
+    });
     if (user) {
       user.username = username;
       user.password = password;
@@ -67,7 +69,9 @@ router.put('/:id', async (req: Request, res: Response) => {
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: ['username', 'usertype', 'email']
+    });
     if (user) {
       await user.destroy();
       res.json({ message: 'User deleted' });

@@ -11,7 +11,8 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     usertype usertype NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL
+    email VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -27,13 +28,16 @@ CREATE TABLE products (
     description TEXT NOT NULL,
     category_id INT NOT NULL,
     seller_id INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    image_url VARCHAR(255),
-    brand VARCHAR(50),
-    size VARCHAR(50),
-    color VARCHAR(50),
-    year varchar(4),
-    condition VARCHAR(50),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (seller_id) REFERENCES users(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
+
+    -- price DECIMAL(10, 2) NOT NULL,
+    -- image_url VARCHAR(255),
+    -- brand VARCHAR(50),
+    -- size VARCHAR(50),
+    -- color VARCHAR(50),
+    -- year varchar(4),
+    -- condition VARCHAR(50),
