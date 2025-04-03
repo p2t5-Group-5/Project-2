@@ -16,7 +16,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     category VARCHAR(50) NOT NULL,
@@ -35,10 +34,10 @@ CREATE TABLE products (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
-    -- price DECIMAL(10, 2) NOT NULL,
-    -- image_url VARCHAR(255),
-    -- brand VARCHAR(50),
-    -- size VARCHAR(50),
-    -- color VARCHAR(50),
-    -- year varchar(4),
-    -- condition VARCHAR(50),
+-- price DECIMAL(10, 2) NOT NULL,
+-- image_url VARCHAR(255),
+-- brand VARCHAR(50),
+-- size VARCHAR(50),
+-- color VARCHAR(50),
+-- year varchar(4),
+-- condition VARCHAR(50),
