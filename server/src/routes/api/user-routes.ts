@@ -33,17 +33,6 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-// POST /users - Create a new user
-router.post('/', async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
-  try {
-    const newUser = await User.create({ username, email, password });
-    res.status(201).json(newUser);
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
 // PUT /users/:id - Update a user by id
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -51,7 +40,8 @@ router.put('/:id', async (req: Request, res: Response) => {
   try {
     const user = await User.findByPk(id, {
       attributes: ['username', 'usertype', 'email']
-    });
+    }, 
+ );
     if (user) {
       user.username = username;
       user.password = password;
@@ -68,6 +58,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 // DELETE /users/:id - Delete a user by id
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
+  // Check if the user exist
   try {
     const user = await User.findByPk(id, {
       attributes: ['username', 'usertype', 'email']

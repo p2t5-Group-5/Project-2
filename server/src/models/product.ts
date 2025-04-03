@@ -8,6 +8,7 @@ interface ProductAttributes {
   category_id: number;
   price: number;
   seller_id: number;
+  image_url: string;
 }
 
 // Define the optional attributes for creating a new Product
@@ -19,9 +20,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
   public name!: string;
   public description!: string;
   public category_id!: number;
-  public price!: number;
   public seller_id!: number;
-
+  public price!: number;
+  public image_url!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -47,14 +48,18 @@ export function ProductFactory(sequelize: Sequelize): typeof Product {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      seller_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       price: {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
-      seller_id: {
-        type: DataTypes.INTEGER,
+      image_url: {
+        type: DataTypes.STRING,
         allowNull: false,
-      }
+      },
     },
     {
       tableName: 'products',  // Name of the table in PostgreSQL

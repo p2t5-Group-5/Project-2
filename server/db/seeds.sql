@@ -18,7 +18,7 @@ VALUES
     (2, 'Clothing', 'Apparel and accessories'),
     (3, 'Household', 'Household items and kitchenware'),
     (4, 'Books', 'Literature and educational materials'),
-    (5, 'Toys', 'Children\'s toys and games'),
+    (5, 'Toys', Childrens toys and games'),
     (6, 'Food', 'Groceries and consumables');
 
 

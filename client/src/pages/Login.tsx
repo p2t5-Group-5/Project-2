@@ -1,5 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-
+import Footer from "../components/Footer"; 
+import Header from "../components/Header"; 
 import Auth from '../utils/auth';  // Import the Auth utility for managing authentication state
 import { login } from "../api/authAPI";  // Import the login function from the API
 import { UserLogin } from "../interfaces/UserLogin";  // Import the interface for UserLogin
@@ -35,6 +36,7 @@ const Login = () => {
 
   return (
     <div className='form-container'>
+      <Header />
       <form className='form login-form' onSubmit={handleSubmit}>
         <h1>Login</h1>
         {/* Username input field */}
@@ -64,6 +66,7 @@ const Login = () => {
           <button className="btn btn-primary" type='submit'>Login</button>
         </div>
       </form>
+      <Footer />
     </div>
   )
 };

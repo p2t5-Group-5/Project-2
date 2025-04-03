@@ -1,36 +1,38 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { retrieveUsers } from "../api/userAPI";
-import type { UserData } from "../interfaces/UserData";
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import "../styles/components.css";
 
-const welcome = () =>{
-
+const Welcome = () =>{
+   const users = { name: "John Doe" }; //placeholder
+   const Item = { name: "Sample Item", image: "item.jpg" }; //placeholder
 return(
 <>
-<Header/>
-<Navbar/>
+<Header />
+<Navbar />
 <main>
 <h2>Welcome!</h2>
 <section className="flex">
 <div className="seller">
-<img src="" alt="Seller" />
+<img src="" alt="Featured Seller" />
 <p>
-
+This is our featured seller {users.name}
 </p>
 </div>
 
 <div className="item">
-<img src="" alt="Item" />
+<img src="" alt="Featured Item" />
 <p>
-
+This is our featured Iteam {Item.name}
 </p>
 </div>
 
 </section>
 
 </main>
-<Footer/>  
+<Footer />  
 </>
 ); 
 }
 
-export default welcome;
+export default Welcome;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
-import "../styles/Navbar.css";
+import "../styles/components.css";
 
 const Navbar = () => {
   // State to track the login status
@@ -20,7 +20,7 @@ const Navbar = () => {
   }, [loginCheck]);  // Dependency array ensures useEffect runs when loginCheck changes
 
   return (
-    <div className=" ">
+    <nav>
         <button className=''>
            <Link to='/'>Home</Link>
         </button>
@@ -29,9 +29,9 @@ const Navbar = () => {
         </button>
      
       <button className=''>
-        <Link to='/Seller'>Seller</Link>
+        <Link to='/seller'>Seller</Link>
       </button>
-    </div>
+    </nav>
   )
 }
 

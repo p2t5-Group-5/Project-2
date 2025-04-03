@@ -1,4 +1,5 @@
 import React from 'react';
+import "../styles/components.css";
 
 import type { UserData } from "../interfaces/UserData";
 // import auth from '../utils/auth';
@@ -11,7 +12,7 @@ interface UserListProps {
 const UserList: React.FC<UserListProps> = ({ users }) => {
     return (
         <>
-            <h2 className="pb-5">
+            <h2 className="pb-5 users">
                 Check out all your friends!
             </h2>
             {users && users.map((user) => (

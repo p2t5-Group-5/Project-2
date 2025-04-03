@@ -1,0 +1,29 @@
+/* general page look */
+*{
+   margin: 0;
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+/* Header.tsx */
+header{
+   img{}
+   h1{}
+   button{}
+}
+
+/* Navbar.tsx */
+nav{}
+
+/* Contactform.tsx */
+form{
+   label{}
+   input{}
+}
+
+/* users.tsx */
+.users{}
+
+/* footer.tsx */
+footer{
+   link{}
+   Link{}
+}

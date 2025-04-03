@@ -32,10 +32,45 @@ export const login = async (req: Request, res: Response) => {
   return res.json({ token });  // Send the token as a JSON response
 };
 
+export const signup = async (req: Request, res: Response) => {
+  const { username, password } = req.body;
+  
+  try {
+    const user = await User.findOne({
+      where: { username },
+    });
+
+    if (user) {
+      return res.status(401).json({ message: 'Username is already taken' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({
+      username, password: hashedPassword,
+      usertype: '',
+      email: ''
+    });
+    console.log(newUser);
+
+    // Get the secret key from environment variables
+    const secretKey = process.env.JWT_SECRET_KEY || '';
+
+    // Generate a JWT token for the authenticated user
+    const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
+
+    return res.json({ token });  // Send the token as a JSON response
+  } catch (error: any) {
+    return res.status(400).json({ message: error.message });
+  }
+};
+
 // Create a new router instance
 const router = Router();
 
 // POST /login - Login a user
 router.post('/login', login);  // Define the login route
+
+// POST - signup - Create a new user
+router.post('/signup', signup); 
 
 export default router;  // Export the router instance
