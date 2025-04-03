@@ -21,10 +21,6 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public password!: string;
   public usertype!: string;
 
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-
-  // Method to hash and set the password for the user
   public async setPassword(password: string) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(password, saltRounds);
@@ -58,14 +54,13 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       },
     },
     {
-      tableName: 'users',  // Name of the table in PostgreSQL
-      sequelize,            // The Sequelize instance that connects to PostgreSQL
+      tableName: 'users',
+      sequelize,
+      timestamps: false,
       hooks: {
-        // Before creating a new user, hash and set the password
         beforeCreate: async (user: User) => {
           await user.setPassword(user.password);
         },
-        // Before updating a user, hash and set the new password if it has changed
         beforeUpdate: async (user: User) => {
           if (user.changed('password')) {
             await user.setPassword(user.password);
@@ -75,5 +70,5 @@ export function UserFactory(sequelize: Sequelize): typeof User {
     }
   );
 
-  return User;  // Return the initialized User model
+  return User;
 }

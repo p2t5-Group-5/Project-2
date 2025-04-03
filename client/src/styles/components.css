@@ -1,41 +1,139 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+/* general color */
+:root{
+   --hovertxt:rgba(242, 0, 255, 0.623);
+   --orange: rgb(193, 128, 7);
+}
 
 /* general page look */
-*{
-   margin: 0;
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+* {
+  margin: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+body{
+   background-color: beige;
+   margin-bottom: 80px;
 }
 /* Header.tsx */
-header{
-   background-color: pink;
-   img{}
-   h1{}
-   button{}
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgb(251, 215, 166);
+  .flex {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+  }
+  img {
+    height: 100px;
+    width: 100px;
+  }
+  a {
+    color: black;
+    text-decoration: none;
+   }
+   a:hover{
+      color: white;
+      text-decoration: none;
+  }
+  button.login {
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(242, 0, 255, 0.481);
+    font-size: 25px;
+  }
+  button.login:hover {
+    border: 2px solid black;
+    background-color: var(--hovertxt);
+  }
+  h1 {
+    font-weight: bolder;
+    text-decoration: underline;
+    font-size: 3em;
+    color: black;
+  }
+  button {
+    border: unset;
+    background-color: unset;
+    color: black;
+    font-size: 25px;
+  }
+  button:hover {
+    color: var(--hovertxt);
+    font-size: 25px;
+  }
 }
 
 /* Navbar.tsx */
-nav{}
+nav {
+   height: 45px;
+   line-height: 45px;
+   background-color: rgba(242, 0, 255, 0.481);
+   display: flex;
+   justify-content: space-evenly;
+   a{
+      text-decoration: underline;
+      color: black;
+      font-size: 20px;
+      font-weight: bold;
+   }
+   .nav-item:hover {
+      background-color: rgb(70, 0, 123);
+      border-radius: 15px;
+      box-shadow: -1px 5px 5px rgb(91, 0, 160);
+    }
+    a.active {
+      padding: 10px;
+      background-color: rgb(70, 0, 123);
+      color: white;
+    }
+}
 
 /* Contactform.tsx */
-form{
-   label{}
-   input{}
+form {
+  label {
+  }
+  input {
+  }
 }
 
 /* users.tsx */
-.users{}
-
-/* footer.tsx */
-footer{
-   link{}
-   Link{}
+.users {
 }
 
+/* footer.tsx */
+footer {
+   padding-top: 8px;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+   background-color: rgb(251, 215, 166);
+   .fflex{
+      display: flex;
+      justify-content: space-evenly;
+   }
+  Link, a {
+   color: black;
+   font-size: 18px;
+  }
+  Link:hover, a:hover {
+   color: var(--hovertxt);
+   text-decoration: none;
+  }
+}
 
 /* Darkmode */
-header{
-   background-color: blueviolet;
-   img{}
-   h1{}
-   button{}
+.dark{  
+   header {
+    background-color: blueviolet;
+    img {
+    }
+    h1 {
+    }
+    button {
+    }
+  }
 }

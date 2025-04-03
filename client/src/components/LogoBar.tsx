@@ -9,7 +9,7 @@ const Logobar = () => {
     // Toggle dark mode
 const toggleDarkMode = () => {
   setDarkMode(!darkMode);
-  document.body.classList.toggle('dark-mode', !darkMode);
+  document.body.classList.toggle('dark', !darkMode);
 };
   // Hook to navigate programmatically
   const navigate = useNavigate();
@@ -35,17 +35,16 @@ const toggleDarkMode = () => {
   }, [loginCheck]);  // Dependency array ensures useEffect runs when loginCheck changes
 
   return (
-    <div className="display-flex justify-space-between align-center py-2 px-5 mint-green">
+    <>
       <header>
       <img src="" alt="shop name logo"/> 
         <h1>
-          Handcrafted Goodies
+        Handcrafted Harmony
         </h1>
-        <button onClick={toggleDarkMode}>
+      <div className='flex'>
+      <button onClick={toggleDarkMode}>
           <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-fill'}`}></i>
         </button>
-      </header>
-      <div>
       <button onClick={goToCart}> 
           <i className="bi bi-cart4"></i>
         </button>
@@ -53,18 +52,19 @@ const toggleDarkMode = () => {
           // Conditional rendering based on loginCheck state
           !loginCheck ? (
             // Render login button if user is not logged in
-            <button className="btn" type='button'>
+            <button className='login' type='button'>
               <Link to='/login'>Login</Link>
             </button>
           ) : (
             // Render logout button if user is logged in
-            <button className="btn" type='button' onClick={() => {
+            <button  type='button' onClick={() => {
               auth.logout();  // Call logout() method from auth utility on button click
             }}><i className="bi bi-file-person"></i></button>
           )
         }
       </div>
-    </div>
+      </header>
+    </>
   )
 }
 
