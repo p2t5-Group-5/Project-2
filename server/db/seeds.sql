@@ -13,17 +13,13 @@ VALUES
     (4,'casualshopper','buyer','consumer1','shoptilludrop@buy.com'),
     (5,'buyer','buyer','password','buybuybuy@gmail.com');
 
-INSERT INTO categories (id, name, description)
+INSERT INTO categories (id, category, description)
 VALUES
     (1, 'Electronics', 'Devices and gadgets'),
     (2, 'Clothing', 'Apparel and accessories'),
     (3, 'Household', 'Household items and kitchenware'),
     (4, 'Books', 'Literature and educational materials'),
-<<<<<<< HEAD
-    (5, 'Toys', Childrens toys and games'),
-=======
     (5, 'Toys', 'Childrens toys and games'),
->>>>>>> 6d86fb2d78c7b043cf4faa090cfc5986075298c4
     (6, 'Food', 'Groceries and consumables');
 
 INSERT INTO products (id, name, description, category_id, seller_id, createdAt, updatedAt)

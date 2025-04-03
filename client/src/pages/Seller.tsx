@@ -3,7 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 import { Product } from "../interfaces/Product";
 
-const Sell = () => {
+const Seller = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string }
 
     const [Products, setProducts] = useState<Product[]>([]);
@@ -23,16 +23,22 @@ const Sell = () => {
     }, []);
 
     return (
-        <div className="container">
-            {Products.map((product:Product) => (
-                <div key={product.id} className="product-item">
-                    <h2>{product.name}</h2>
-                    <p>{product.description}</p>
-                    <p>Price: ${product.price}</p>
-                    {/* <img src={product.image} alt={product.name} /> */}
-                </div>
-                ))}
-        </div>
+        <>
+        <h1>This is the Seller Page</h1>
+         <div className="container">
+             {Products.map((product:Product) => (
+                 <div key={product.id} className="product-item">
+                     <h2>{product.name}</h2>
+                     <p>{product.description}</p>
+                     <p>Price: ${product.price}</p>
+                     {/* <img src={product.image} alt={product.name} /> */}
+                 </div>
+                 ))}
+         </div>
+        </>
     );
 }
-export default Sell;
+export default Seller;
+
+
+// The seller page loads when you remove all the code from it.

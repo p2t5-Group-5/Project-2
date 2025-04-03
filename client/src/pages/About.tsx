@@ -1,13 +1,8 @@
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import "../styles/components.css";
 
 const About =() => {
     return(
       <>
-      <Header />
-      <Navbar />
         <div className="about">
          <h1>About Us</h1>
          <section className="flex">
@@ -38,7 +33,6 @@ const About =() => {
          </div>
          </section>
         </div>
-        <Footer />
         </>
     );
 

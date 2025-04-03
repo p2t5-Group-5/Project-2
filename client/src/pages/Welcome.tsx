@@ -1,6 +1,3 @@
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import "../styles/components.css";
 
 const Welcome = () =>{
@@ -8,8 +5,6 @@ const Welcome = () =>{
    const Item = { name: "Sample Item", image: "item.jpg" }; //placeholder
 return(
 <>
-<Header />
-<Navbar />
 <main>
 <h2>Welcome!</h2>
 <section className="flex">
@@ -30,7 +25,6 @@ This is our featured Iteam {Item.name}
 </section>
 
 </main>
-<Footer />  
 </>
 ); 
 }

@@ -6,8 +6,12 @@ import App from './App.tsx';
 // import Shop from './pages/Shop.tsx';
 import Seller from './pages/Seller.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
-import Home from './pages/Home.tsx';
+import Welcome from './pages/Welcome.tsx';
 import Login from './pages/Login.tsx';
+import About from './pages/About.tsx';
+import Contact from './pages/Contact.tsx';
+import Cart from './pages/Cart.tsx';
+import Shop from './pages/Shop.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,17 +21,32 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Welcome />
       }, 
       {
         path: '/login',
         element: <Login />
       }, 
-  
       {
         path: '/seller',
         element: <Seller />
       }, 
+      {
+        path: '/About',
+        element: <About />
+      }, 
+      {
+        path: '/Shop',
+        element: <Shop />
+      }, 
+      {
+        path: '/Contact',
+        element: <Contact />
+      },
+      {
+        path: '/Cart',
+        element: <Cart />
+      }
     ]
   }
 ])
