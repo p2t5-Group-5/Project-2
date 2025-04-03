@@ -23,8 +23,6 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
   public seller_id!: number;
   public price!: number;
   public image_url!: string;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
 }
 
 // Define the ProductFactory function to initialize the User model
@@ -62,22 +60,11 @@ export function ProductFactory(sequelize: Sequelize): typeof Product {
       },
     },
     {
-      tableName: 'products',  // Name of the table in PostgreSQL
-      sequelize,            // The Sequelize instance that connects to PostgreSQL
-      hooks: {
-        // // Before creating a new user, hash and set the password
-        // beforeCreate: async (user: User) => {
-        //   await user.setPassword(user.password);
-        // },
-        // // Before updating a user, hash and set the new password if it has changed
-        // beforeUpdate: async (user: User) => {
-        //   if (user.changed('password')) {
-        //     await user.setPassword(user.password);
-        //   }
-        // },
-      }
+      tableName: 'products',
+      timestamps: false,
+      sequelize
     }
   );
 
-  return Product;  // Return the initialized User model
+  return Product;
 }

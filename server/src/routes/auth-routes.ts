@@ -1,70 +1,60 @@
 import { Router, Request, Response } from 'express';
-import { User } from '../models/user.js';  // Import the User model
-import jwt from 'jsonwebtoken';  // Import the JSON Web Token library
-import bcrypt from 'bcrypt';  // Import the bcrypt library for password hashing
+import { User } from '../models/user.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
-// Login function to authenticate a user
 export const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;  // Extract username and password from request body
+  const { username, password } = req.body;
 
-  // Find the user in the database by username
   const user = await User.findOne({
     where: { username },
   });
 
-  // If user is not found, send an authentication failed response
   if (!user) {
     return res.status(401).json({ message: 'Authentication failed' });
   }
 
-  // Compare the provided password with the stored hashed password
   const passwordIsValid = await bcrypt.compare(password, user.password);
-  // If password is invalid, send an authentication failed response
+
   if (!passwordIsValid) {
     return res.status(401).json({ message: 'Authentication failed' });
   }
 
-  // Get the secret key from environment variables
   const secretKey = process.env.JWT_SECRET_KEY || '';
 
-  // Generate a JWT token for the authenticated user
   const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
-  return res.json({ token });  // Send the token as a JSON response
+  return res.json({ token });
 };
 
 export const signup = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { username, password, usertype, email } = req.body;
   
   try {
     const user = await User.findOne({
       where: { username },
+      attributes: ['username']
     });
 
     if (user) {
       return res.status(401).json({ message: 'Username is already taken' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({
-      username, password: hashedPassword,
-      usertype: '',
-      email: ''
+    await User.create({
+      username,
+      password: password,
+      usertype,
+      email
     });
-    console.log(newUser);
 
-    // Get the secret key from environment variables
     const secretKey = process.env.JWT_SECRET_KEY || '';
 
-    // Generate a JWT token for the authenticated user
     const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' });
-
-    return res.json({ token });  // Send the token as a JSON response
+    return res.json({ token });
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }
 };
 
-// Create a new router instance
 const router = Router();
 
 // POST /login - Login a user
@@ -73,4 +63,4 @@ router.post('/login', login);  // Define the login route
 // POST - signup - Create a new user
 router.post('/signup', signup); 
 
-export default router;  // Export the router instance
+export default router;
