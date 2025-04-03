@@ -45,7 +45,7 @@ const Shop = () => {
 
      useEffect(() => {
         fetchProducts();
-        //  newCart(username);
+        // newCart(username);
      }, []);
 
      return (
