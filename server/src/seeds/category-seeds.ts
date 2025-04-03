@@ -1,4 +1,4 @@
-import { Category } from '../models/category.js';
+import { Category } from '../models/index.js';
 
 export const seedCategories = async () => {
     await Category.bulkCreate([
@@ -10,4 +10,3 @@ export const seedCategories = async () => {
         {id: 6, category: 'Food', description: 'Groceries and consumables' },
     ], { individualHooks: true });
 };
-

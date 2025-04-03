@@ -1,4 +1,4 @@
--- Active: 1741632178763@@127.0.0.1@5432@project_2_db
+-- Active: 1740443663810@@127.0.0.1@5432@postgres
 -- SQLBook: Code
 -- DROP DATABASE
 DROP DATABASE IF EXISTS project_2_db;
