@@ -1,29 +1,25 @@
 import { useState, useEffect } from "react";
-// import ErrorPage from "./ErrorPage";
-// import UserList from '../components/Users';
-// import auth from '../utils/auth';
+import { jwtDecode } from "jwt-decode";
+import auth from '../utils/auth';
 import { Product } from "../interfaces/Product";
 
-const Shop = () => {
-   const [Products, setProducts] = useState<Product[]>([]);
+const Sell = () => {
+    const { username } = jwtDecode(auth.getToken()) as { username: string }
 
-   const fetchProducts = async () => {
+    const [Products, setProducts] = useState<Product[]>([]);
+
+    const fetchProducts = async (sellerId: string) => {
         try {
-            const response = await fetch("http://localhost:3001/api/products");
+            const response = await fetch(`http://localhost:3001/api/${sellerId}`);
             const data = await response.json();
             setProducts(data);
         } catch (error) {
             console.error("Error fetching products:", error);
         }
     };
-    
-    // const handleAddToCart = (product: Product) => {
-
-    // }
-
 
     useEffect(() => {
-        fetchProducts();
+        fetchProducts(username);
     }, []);
 
     return (
@@ -39,4 +35,4 @@ const Shop = () => {
         </div>
     );
 }
-export default Shop;
+export default Sell;
