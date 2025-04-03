@@ -11,7 +11,6 @@ import Login from './pages/Login.tsx';
 import About from './pages/About.tsx';
 import Contact from './pages/Contact.tsx';
 import Cart from './pages/Cart.tsx';
-import Shop from './pages/Shop.tsx';
 
 const router = createBrowserRouter([
   {
