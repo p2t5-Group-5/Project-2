@@ -1,4 +1,3 @@
--- Active: 1741632178763@@127.0.0.1@5432@project_2_db
 -- SQLBook: Code
 -- DROP DATABASE
 DROP DATABASE IF EXISTS project_2_db;
@@ -12,8 +11,7 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     usertype usertype NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    email VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE categories (
@@ -28,10 +26,19 @@ CREATE TABLE products (
     description TEXT NOT NULL,
     category_id INT NOT NULL,
     seller_id INT NOT NULL,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image_url TEXT NOT NULL,
+    price DECIMAL NOT NULL,
     FOREIGN KEY (seller_id) REFERENCES users(id),
     FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE user_cart (
+    id SERIAL PRIMARY KEY,
+    buyer_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 -- price DECIMAL(10, 2) NOT NULL,
