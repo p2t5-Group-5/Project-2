@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import logo from "../assets/logo.jpeg";
 import auth from "../utils/auth";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
 import "../styles/components.css";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -35,15 +35,15 @@ const Navigation = () => {
       <Navbar.Brand>
       <img
               src={ logo }
-              width="30"
-              height="30"
+              width="40"
+              height="40"
               alt="Handcrafted Harmony logo"
             />
       </Navbar.Brand>
       <Nav className="">
-        <Nav.Link href="/">Home</Nav.Link>
-        <Nav.Link href="/shop">Shop</Nav.Link>
-        <Nav.Link href="/seller">Seller</Nav.Link>
+        <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
+        <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
+        <NavLink to="/seller" className={({ isActive }) => isActive ? "active" : ""}>Seller</NavLink>
         <button onClick={goToCart}> 
           <i className="bi bi-cart4"></i>
         </button>
@@ -64,11 +64,6 @@ const Navigation = () => {
       </Nav>
     </Container>
   </Navbar>
-    // <nav>
-    //   <Link to="/">Home</Link>
-    //   <Link to="/shop">Shop</Link>
-    //   <Link to="/seller">Seller</Link>
-    // </nav>
   );
 };
 

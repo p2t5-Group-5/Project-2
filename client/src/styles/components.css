@@ -4,28 +4,25 @@
 :root{
    --hovertxt:rgba(242, 0, 255, 0.623);
    --orange: rgb(193, 128, 7);
-}
+   --teal: rgba(80, 255, 185, 0.448);
+   --lightteal: rgb(80, 255, 185);
+   --brown: rgb(79, 0, 0);
+  }
 
 /* general page look */
 * {
   margin: 0;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Times New Roman', Times, serif
 }
 body{
    background-color: beige;
-   margin-bottom: 80px;
+   margin-bottom: 115px;
 }
 /* Header.tsx */
 header {
-  display: flex;
-  justify-content: space-between;
+ text-align: center;
   padding: 10px;
-  background-color: rgb(251, 215, 166);
-  .flex {
-    display: flex;
-    flex-direction: column;
-    padding: 2px;
-  }
+  /* background-color: rgb(251, 215, 166); */
   img {
     border-radius: 50px;
     height: 100px;
@@ -39,23 +36,14 @@ header {
     color: white;
     text-decoration: none;
   }
-  button.login {
-    border-radius: 8px;
-    border: 2px solid white;
-    background-color: rgba(242, 0, 255, 0.481);
-    font-size: 25px;
-  }
-  button.login:hover {
-    border: 2px solid black;
-    background-color: var(--hovertxt);
-  }
   h1 {
     font-weight: bolder;
     text-decoration: underline;
-    font-size: 3em;
+    font-size: 4em;
     color: black;
   }
   button {
+    float: right;
     border: unset;
     background-color: unset;
     color: black;
@@ -69,37 +57,96 @@ header {
 
 /* Navbar.tsx */
 .nav {
-  height: 45px;
+  height: 50px;
   line-height: 45px;
-  background-color: rgba(246, 186, 249, 0.481);
+  background-color: rgb(251, 215, 166);
   display: flex;
   justify-content: space-evenly;
-  a{
+  .navbar-nav a{
     text-decoration: underline;
     color: black;
     font-size: 20px;
     font-weight: bold;
+    margin: 0 12px;
+    padding: 0px 3px;
   }
   img{
     border-radius: 50px;
   }
-   .nav-item:hover {
-      background-color: rgb(70, 0, 123);
-      border-radius: 15px;
-      box-shadow: -1px 5px 5px rgb(91, 0, 160);
+  .navbar-nav a:hover {
+    background-color: rgba(80, 255, 185, 0.448);
+    border-radius: 15px;
+    /* box-shadow: -1px 5px 5px rgb(91, 0, 160); */
     }
-    a.active {
-      padding: 10px;
-      background-color: rgb(70, 0, 123);
-      color: white;
+    .navbar-nav{
+      align-items: center;
+    }
+    .navbar-nav a.active {
+      background-color: rgb(70, 215, 157);
+      color: black;
+      border-radius: 15px 15px 0px 0px;
+      box-shadow: 0px 5px 5px  rgb(80, 255, 185);
+    }
+    button.login {
+      border-radius: 8px;
+      border: 2px solid white;
+      background-color: var(--teal);
+      font-size: 15px;
+      height: 35px;
+      margin: 0 12px;
+      padding: 0px 3px; 
+    }
+    button.login:hover {
+      border: 2px solid black;
+      background-color: var(--lightteal);
+    }
+    button {
+      border: unset;
+      background-color: unset;
+      color: black;
+      font-size: 25px;
+    }
+    button:hover {
+      color: var(--hovertxt);
     }
 }
 
 /* Contactform.tsx */
 form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 1rem;
+    input, textarea{
+       width: 80%;
+       padding: 10px;
+       margin-bottom: 1rem;
+       border-radius: 5px;
+       border: 1px solid #ccc;
+       font-size: 18px;
+       &:focus{
+          outline: none;
+          border-color: var(--hovertxt);
+       }
+ }
   label {
+    font-size: 25px;
+    width: 80%;
   }
-  input {
+ button {
+    background-color: var(--hovertxt);
+    border: 3px solid var(--brown);
+    color: black;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--lightteal);
+      color: black;
+      font-size: 20px;
+    }
   }
 }
 

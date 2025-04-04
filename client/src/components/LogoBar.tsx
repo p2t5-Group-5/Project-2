@@ -32,15 +32,13 @@ const toggleDarkMode = () => {
   return (
     <>
       <header>
-      <img src={ logo } alt="Handcrafted Harmoney logo"/> 
+      {/* <img src={ logo } alt="Handcrafted Harmoney logo"/>  */}
         <h1>
         Handcrafted Harmony
-        </h1>
-      <div className='flex'>
       <button onClick={toggleDarkMode}>
           <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-fill'}`}></i>
         </button>
-      </div>
+        </h1>
       </header>
     </>
   )
