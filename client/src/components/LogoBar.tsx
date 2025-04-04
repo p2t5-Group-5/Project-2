@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-
 import auth from '../utils/auth';
 import "../styles/components.css";
+import logo from "../assets/logo.jpeg";
 const Logobar = () => {
   // State to track dark mode
   const [darkMode, setDarkMode] = useState(false);
@@ -11,9 +11,6 @@ const toggleDarkMode = () => {
   setDarkMode(!darkMode);
   document.body.classList.toggle('dark', !darkMode);
 };
-  // Hook to navigate programmatically
-
- // Function to navigate to the cart page
 
 
   // State to track the login status
@@ -35,7 +32,7 @@ const toggleDarkMode = () => {
   return (
     <>
       <header>
-      <img src="" alt="shop name logo"/> 
+      <img src={ logo } alt="Handcrafted Harmoney logo"/> 
         <h1>
         Handcrafted Harmony
         </h1>
@@ -43,8 +40,6 @@ const toggleDarkMode = () => {
       <button onClick={toggleDarkMode}>
           <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-fill'}`}></i>
         </button>
-     
-    
       </div>
       </header>
     </>
