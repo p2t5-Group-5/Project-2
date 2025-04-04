@@ -19,6 +19,7 @@ const Navigation = () => {
     }
   };
 
+  // Removed duplicate goToCart function
   const goToCart = () => {
     window.location.assign('/cart'); // Navigate to the cart page
   };
@@ -28,10 +29,8 @@ const Navigation = () => {
   }, [loginCheck]); // Dependency array ensures useEffect runs when loginCheck changes
   // Hook to navigate programmatically
   const navigate = useNavigate();
+  navigate('/Cart'); // Navigate to the home page or provide a valid path
  // Function to navigate to the cart page
- const goToCart = () => {
-  navigate('/cart'); // Navigate to the cart page
-};
 
   return (
     <Navbar className="nav">
@@ -68,11 +67,6 @@ const Navigation = () => {
       </Nav>
     </Container>
   </Navbar>
-    // <nav>
-    //   <Link to="/">Home</Link>
-    //   <Link to="/shop">Shop</Link>
-    //   <Link to="/seller">Seller</Link>
-    // </nav>
   );
 };
 
