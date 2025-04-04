@@ -1,4 +1,9 @@
 import { useState, useEffect,  } from "react";
+//import { Link } from "react-router-dom";
+
+
+//import { addToCart } from "../api/shopAPI";
+
 // useLayoutEffect
 //import { retrieveUsers } from "../api/userAPI";
 import type { Product } from "../interfaces/Product";
@@ -39,7 +44,7 @@ import "../styles/ProductsPage.css";
             <h1>{item.name}</h1>
             <p>{item.description}</p>
             <p>Price: ${item.price}</p>
-            <img src={item.image} alt={item.name} />
+            <img src={item.image_url} alt={item.name} />
         </div>
     );
  }

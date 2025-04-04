@@ -10,6 +10,7 @@ import Navbar from 'react-bootstrap/Navbar';
 const Navigation = () => {
   // State to track the login status
   const [loginCheck, setLoginCheck] = useState(false);
+  
 
   // Function to check if the user is logged in using auth.loggedIn() method
   const checkLogin = () => {
@@ -18,16 +19,18 @@ const Navigation = () => {
     }
   };
 
+  // Removed duplicate goToCart function
+  const goToCart = () => {
+    window.location.assign('/cart'); // Navigate to the cart page
+  };
   // useEffect hook to run checkLogin() on component mount and when loginCheck state changes
   useEffect(() => {
     checkLogin(); // Call checkLogin() function to update loginCheck state
   }, [loginCheck]); // Dependency array ensures useEffect runs when loginCheck changes
   // Hook to navigate programmatically
   const navigate = useNavigate();
+  navigate('/Cart'); // Navigate to the home page or provide a valid path
  // Function to navigate to the cart page
- const goToCart = () => {
-  navigate('/cart'); // Navigate to the cart page
-};
 
   return (
     <Navbar className="nav">

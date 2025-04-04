@@ -15,7 +15,7 @@ return(
                 <a href='https://wwww.Instaram.com'><i className="bi bi-instagram"></i></a>
            </div>
         </div>
-        <p> ©️ T5P2</p>
+        <p> ©️ P2T5 </p>
     </footer>
 );
 };

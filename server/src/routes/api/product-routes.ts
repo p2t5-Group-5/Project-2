@@ -49,6 +49,19 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
+// GET /products/:sellerId/products
+router.get('/:sellerId/products', async (req: Request, res: Response) => {
+  const { sellerId } = req.params;
+  try {
+    const products = await Product.findAll({
+      where: { seller_id: +sellerId }
+    });
+    res.json(products);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // POST /products - Create a new product
 router.post('/', async (req: Request, res: Response) => {
   const {
@@ -81,7 +94,7 @@ router.post('/', async (req: Request, res: Response) => {
   }
 });
 
-// PUT /products/:id - Update a user by id
+// PUT /products/:id - Update a product by id
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { 

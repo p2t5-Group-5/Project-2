@@ -7,7 +7,7 @@ export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   const user = await User.findOne({
-    where: { username },
+    where: { username: username },
   });
 
   if (!user) {
@@ -31,7 +31,7 @@ export const signup = async (req: Request, res: Response) => {
   
   try {
     const user = await User.findOne({
-      where: { username },
+      where: { username: username },
       attributes: ['username']
     });
 
@@ -40,7 +40,7 @@ export const signup = async (req: Request, res: Response) => {
     }
 
     await User.create({
-      username,
+      username: username,
       password: password,
       usertype,
       email

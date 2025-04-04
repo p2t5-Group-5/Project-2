@@ -1,18 +1,19 @@
 import { useState, FormEvent, ChangeEvent } from "react"; 
 import Auth from '../utils/auth';
-import { login } from "../api/authAPI";
-import { UserLogin } from "../interfaces/UserLogin";
+import { signup } from "../api/authAPI";
+import { UserSignup } from "../interfaces/UserSignup";
 
-const Login = () => {
-  const [loginData, setLoginData] = useState<UserLogin>({
+const Signup = () => {
+  const [signupData, setSignupData] = useState<UserSignup>({
     username: '',
+    email: '',
     password: ''
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setLoginData({
-      ...loginData,
+    setSignupData({
+      ...signupData,
       [name]: value
     });
   };
@@ -20,28 +21,34 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(loginData);
+      const data = await signup(signupData);
       Auth.login(data.token);
     } catch (err) {
-      console.error('Failed to login', err);
+      console.error('Failed to sign up', err);
     }
   };
-
-  const handleCreateAccount = () => {
-    window.location.assign('/signup');
-  }
 
   return (
     <div className='form-container'>
       <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1>Sign up</h1>
         <div className="form-group">
           <label>Username</label>
           <input 
             className="form-input"
             type='text'
             name='username'
-            value={loginData.username || ''}
+            value={signupData.username || ''}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input 
+            className="form-input"
+            type='email'
+            name='email'
+            value={signupData.email || ''}
             onChange={handleChange}
           />
         </div>
@@ -51,17 +58,16 @@ const Login = () => {
             className="form-input"
             type='password'
             name='password'
-            value={loginData.password || ''}
+            value={signupData.password || ''}
             onChange={handleChange}
           />
         </div>
         <div className="form-group">
-          <button className="btn btn-primary" type='submit'>Login</button>
+          <button className="btn btn-primary" type='submit'>Sign up</button>
         </div>
-        <div className="btn-create-account" onClick={handleCreateAccount}><h6>Don't have an account? Create one now!</h6></div>
       </form>
     </div>
   )
 };
 
-export default Login;
+export default Signup;
