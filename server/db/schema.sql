@@ -1,4 +1,6 @@
 -- SQLBook: Code
+-- Active: 1743032828996@@127.0.0.1@5432@project_2_db
+-- SQLBook: Code
 -- DROP DATABASE
 DROP DATABASE IF EXISTS project_2_db;
 -- CREATE DATABASE

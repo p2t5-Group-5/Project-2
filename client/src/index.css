@@ -1167,6 +1167,16 @@ form [type='radio'] {
   display: inline-block;
 }
 
+.btn-create-account{
+  text-decoration: underline;
+  color: #7ac9ef;
+}
+
+.btn-create-account:hover {
+  cursor: pointer;
+  color: #3085ae;
+}
+
 .container {
   width: 85%;
   max-width: 1200px;

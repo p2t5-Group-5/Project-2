@@ -6,13 +6,13 @@ const Footer =() =>{
 return(
     <footer>
         <div className='fflex'>
-            <Link to='/Contact'>Contact</Link><br/>
+            <Link to='/Contact'>Contact</Link>
             <Link to='/About'>About</Link><br/>
-            <a href='https://www.x.com'>Twitter</a><br/>
-            <a href='https://www.youtube.com'>Youtube</a><br/>
-            <a href='https://wwww.Instaram.com'>Instagram</a><br/>
+            <a href='https://www.x.com'>Twitter</a>
+            <a href='https://www.youtube.com'>Youtube</a>
+            <a href='https://wwww.Instagram.com'>Instagram</a>
         </div>
-        <p> ©️ T5P2</p>
+        <p> ©️ P2T5 </p>
     </footer>
 );
 };

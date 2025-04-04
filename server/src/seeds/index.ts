@@ -16,6 +16,9 @@ const seedAll = async (): Promise<void> => {
 
     await seedProducts();
     console.log('\n----- PRODUCTS SEEDED -----\n');
+
+    // await seedUserCart();
+    // console.log('\n----- USER CART SEEDED -----\n');
     
     process.exit(0);
   } catch (error) {

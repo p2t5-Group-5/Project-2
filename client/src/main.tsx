@@ -4,13 +4,14 @@ import './index.css';
 
 import App from './App.tsx';
 import Shop from './pages/Shop.tsx';
-import Seller from './pages/Seller.tsx';
+import Sell from './pages/Sell.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Welcome from './pages/Welcome.tsx';
 import Login from './pages/Login.tsx';
 import About from './pages/About.tsx';
 import Contact from './pages/Contact.tsx';
 import Cart from './pages/Cart.tsx';
+import Signup from './pages/Signup.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,14 +26,18 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
+      },
+      {
+        path: '/signup',
+        element: <Signup />
       }, 
       {
         path: '/shop',
         element: <Shop/>
       }, 
       {
-        path: '/seller',
-        element: <Seller />
+        path: '/sell',
+        element: <Sell />
       }, 
       {
         path: '/About',

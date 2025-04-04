@@ -3,7 +3,8 @@ export interface Product {
     name: string | undefined;
     description: string | null;
     price: number | null;
-    image: string | undefined;
+    quantity: number | null;
+    image_url: string | undefined;
     category: string | null;
     sellerId: number | null;
 }
