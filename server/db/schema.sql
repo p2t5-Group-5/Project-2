@@ -1,6 +1,4 @@
--- SQLBook: Code
--- Active: 1743733683396@@dpg-cvnjtg49c44c73eb79v0-a.oregon-postgres.render.com@5432@project_2_db_jq6c32828996@@127.0.0.1@5432@project_2_db
--- SQLBook: Code
+-- Active: 1743647542566@@127.0.0.1@5432@project_2_db
 -- DROP DATABASE
 DROP DATABASE IF EXISTS project_2_db;
 -- CREATE DATABASE

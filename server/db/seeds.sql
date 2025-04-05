@@ -22,7 +22,7 @@ VALUES
     (5, 'Toys', 'Childrens toys and games'),
     (6, 'Food', 'Groceries and consumables');
 
-INSERT INTO products (id, name, description, category_id, seller_id, createdAt, updatedAt)
+INSERT INTO products (id, name, description, category_id, seller_id, price, image_url)
 VALUES
     (1, 'GameBoy', 'Electronic game', 1, 2, 32, 'https://m.media-amazon.com/images/I/51K+7ftcmNL._SX522_.jpg' ), 
     (2, 'smart watch', 'watch that keeps track of health stats', 1, 3, 112.48, 'https://www.att.com/scmsassets/global/devices/other/google/google-pixel-watch-3-41mm/defaultimage/obsidian-hero-zoom.png' ), 
