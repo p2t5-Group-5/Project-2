@@ -33,6 +33,18 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
+// GET/users/username/:username - Get a user by username
+router.get('/username/:username', async (_req: Request, res: Response) => {
+  try {
+    const user = await User.findOne({
+      attributes: ['id', 'username', 'usertype', 'email']
+    });
+    res.json(user);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // PUT /users/:id - Update a user by id
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;

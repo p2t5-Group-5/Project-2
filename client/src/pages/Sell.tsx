@@ -6,12 +6,19 @@ import "../styles/components.css";
 import "../styles/Sell.css";
 
 const Sell = () => {
-    const { username } = jwtDecode(auth.getToken()) as { username: string }
+    const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([]);
 
-    const fetchProducts = async (sellerId: string) => {
+    const getUserIdByUsername = async () => {
+        const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
+        const data = await response.json();
+        return data.id;
+    }
+
+    const fetchProducts = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/api/${sellerId}/products`);
+            const userId = await getUserIdByUsername();
+            const response = await fetch(`http://localhost:3001/api/products/${userId}/products`);
             const data = await response.json();
             setProducts(data);
         } catch (error) {
@@ -20,12 +27,12 @@ const Sell = () => {
     };
 
     useEffect(() => {
-        fetchProducts(username);
+        fetchProducts();
     }, []);
 
     return (
         <div className="container productCard">
-            {products.map((product:Product) => (
+            {products.length ? products.map((product:Product) => (
                 <div key={product.id} className="product-card">
                     <h2>{product.name}</h2>
                     <img width="200" src={product.image_url} alt={product.description || ''}></img>
@@ -35,7 +42,8 @@ const Sell = () => {
                         // onClick={handleAddToCart}
                     >Delete Item</button>
                     </div>          
-                ))}
+                )) : 
+                <h3>You don't have anything to sell</h3>}
         </div>
     );
 }

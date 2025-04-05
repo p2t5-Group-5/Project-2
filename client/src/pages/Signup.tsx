@@ -7,7 +7,8 @@ const Signup = () => {
   const [signupData, setSignupData] = useState<UserSignup>({
     username: '',
     email: '',
-    password: ''
+    password: '',
+    usertype: 'buyer'
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -22,6 +23,9 @@ const Signup = () => {
     e.preventDefault();
     try {
       const data = await signup(signupData);
+      if (!data) {
+        throw new Error('Something went wrong with the sign up');
+      }
       Auth.login(data.token);
     } catch (err) {
       console.error('Failed to sign up', err);

@@ -38,7 +38,7 @@ const Navigation = () => {
       <Nav className="">
         <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
         <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
-        <NavLink to="/seller" className={({ isActive }) => isActive ? "active" : ""}>Seller</NavLink>
+        <NavLink to="/sell" className={({ isActive }) => isActive ? "active" : ""}>Seller</NavLink>
         <button onClick={goToCart}> 
           <i className="bi bi-cart4"></i>
         </button>

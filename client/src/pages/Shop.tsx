@@ -6,17 +6,14 @@ import { Product } from "../interfaces/Product";
 //  import { jwtDecode } from "jwt-decode";
 //  import auth from '../utils/auth';
 
-
 const Shop = () => {
-
-    const [Products, setProducts] = useState<Product[]>([]);
-    const [ dataCheck, setDataCheck ] = useState(true);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [dataCheck, setDataCheck ] = useState(true);
 
     const fetchProducts = async () => {
         try {
             const response = await fetch("http://localhost:3001/api/products");
             const data = await response.json();
-            console.log(data);
             setProducts(data);
         } catch (error) {
              console.error("Error fetching products:", error);
@@ -24,7 +21,7 @@ const Shop = () => {
      };
     
     useEffect(() => {
-        if(dataCheck) {
+        if (dataCheck) {
             fetchProducts();
         } else {
             setDataCheck(false);
@@ -47,7 +44,7 @@ const Shop = () => {
 
     return (
         <div className="container productCard">
-            {Products.map((product:Product) => (
+            {products.map((product:Product) => (
                 <div key={product.id} className="product-card">
                     <h2>{product.name}</h2>
                     <img width="200" src={product.image_url} alt={product.description ||  ''}></img>
