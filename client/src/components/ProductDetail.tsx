@@ -8,8 +8,8 @@ const ProductDetail = ({ name, img, price }: ProductDetailProps) => {
    return (
       <>
          <h2>{name}</h2>
-         <img width="200" src={img} alt={`Image for ${name}`}></img>
-         <p>Price: ${price}</p>
+         <img className="product-image" src={img} alt={`Image for ${name}`}></img>
+         <p className="price">Price: ${price}</p>
       </>
    );
 }

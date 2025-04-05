@@ -2,7 +2,7 @@
 
 /* general color */
 :root{
-   --hovertxt:rgba(242, 0, 255, 0.623);
+   --hovertxt: #9c6c3a;
    --orange: rgb(193, 128, 7);
    --teal: rgba(80, 255, 185, 0.448);
    --lightteal: rgb(80, 255, 185);
@@ -37,11 +37,12 @@ header {
     text-decoration: none;
   }
   h1 {
+    font-family: cursive;
     font-weight: bolder;
-    text-decoration: underline;
     font-size: 4em;
-    color: black;
+    color: #9c6c3a;
   }
+
   button {
     float: right;
     border: unset;

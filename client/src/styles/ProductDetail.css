@@ -5,8 +5,42 @@
 }
 
 .product-card {
-    margin: 4em;
+    margin: 2em;
     padding: 2em;
-    border: 1px solid red;
+    border-radius: 10%;
     background-color: rgb(251, 215, 166);
+    width: 20em;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.product-image {
+    width: 15em;
+    height: 10em;
+    border: 1px solid green;
+    border-radius: 5%;
+}
+
+.price {
+    margin-top: 0.4em;
+    margin-bottom: 0.2em;
+    text-align: end;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-buttons div {
+    margin-left: 0.6em;
+    cursor: pointer;
+    padding: 0.5em;
+    border-radius: 40%;
+    text-align: center;
+}
+
+.action-buttons div:hover {
+    background-color: #e99c10;
 }
