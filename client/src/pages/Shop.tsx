@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Product } from "../interfaces/Product";
+import ProductDetail from "../components/ProductDetail.tsx";
 
 //  import { addToCart } from "../api/shopAPI";
 //  import { jwtDecode } from "jwt-decode";
@@ -43,21 +43,17 @@ const Shop = () => {
     // };
 
     return (
-        <div className="container productCard">
-            {products.map((product:Product) => (
-                <div key={product.id} className="product-card">
-                    <h2>{product.name}</h2>
-                    <img width="200" src={product.image_url} alt={product.description ||  ''}></img>
-                    <p>Price: ${product.price}</p>
-                    <Link to={'/ProductPage'} state={{id: product.id}}>
-                        <button>Details</button>
-                    </Link>
-                    <button 
-                        value={product.id!}
-                        // onClick={handleAddToCart}
-                    >Add to Cart</button>
-                    </div>          
-                ))}
+        <div className="product-container">
+            {products.length ? products.map((product:Product) => (
+                <ProductDetail
+                    page='shop'
+                    id={product.id!}
+                    name={product.name!}
+                    img={product.image_url!}
+                    price={product.price!}/>        
+                )) : 
+                <h3>There is nothing in the shop</h3>
+            }
         </div>
     );
 }

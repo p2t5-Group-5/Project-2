@@ -4,11 +4,11 @@ import { MouseEventHandler } from "react";
 
 interface SellerCardProps {
     id: number; // id: number | null;
-    name: string | null;
+    name: string | undefined;
     description: string | null;
     price: number | null;
     quantity: number | null;
-    image_url: string | null;
+    image_url: string | undefined;
     deleteIndvProduct: (id: number) => Promise<ApiMessage>;
 }
 
