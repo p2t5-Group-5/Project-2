@@ -39,9 +39,15 @@ const Navigation = () => {
         <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
         <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
         <NavLink to="/sell" className={({ isActive }) => isActive ? "active" : ""}>Seller</NavLink>
-        <button onClick={goToCart}> 
-          <i className="bi bi-cart4"></i>
-        </button>
+
+
+        {loginCheck && (
+          <button onClick={goToCart}> 
+            <i className="bi bi-cart4"></i>
+          </button>
+        )}
+
+
         {
           !loginCheck ? (
             <button className='login' type='button'>
