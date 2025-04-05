@@ -34,9 +34,10 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 // GET/users/username/:username - Get a user by username
-router.get('/username/:username', async (_req: Request, res: Response) => {
+router.get('/username/:username', async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({
+      where: { username: req.params.username },
       attributes: ['id', 'username', 'usertype', 'email']
     });
     res.json(user);

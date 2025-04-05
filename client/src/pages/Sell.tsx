@@ -10,8 +10,10 @@ const Sell = () => {
     const [products, setProducts] = useState<Product[]>([]);
 
     const getUserIdByUsername = async () => {
+        console.log("Fetching user ID for username:", username);
         const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
         const data = await response.json();
+        console.log(data);
         return data.id;
     }
 
