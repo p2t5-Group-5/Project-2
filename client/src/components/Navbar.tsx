@@ -37,9 +37,12 @@ const Navigation = () => {
       </Navbar.Brand>
       <Nav className="">
         <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
-        <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
-        <NavLink to="/sell" className={({ isActive }) => isActive ? "active" : ""}>Seller</NavLink>
 
+        <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
+
+        {loginCheck && (
+        <NavLink to="/sell" className={({ isActive }) => isActive ? "active" : ""}>Sell</NavLink>
+        )}
 
         {loginCheck && (
           <button onClick={goToCart}> 
@@ -58,7 +61,8 @@ const Navigation = () => {
               auth.logout();
             }}><i className="bi bi-file-person"></i></button>
           )
-        }    
+        }
+
       </Nav>
     </Container>
   </Navbar>
