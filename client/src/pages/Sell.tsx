@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import { Product } from "../interfaces/Product";
-// import { retrieveProducts } from "../api/shopAPI";
-import SellerCard from "../components/SellerCard";
-import { Link } from "react-router-dom";
-import { ApiMessage } from "../interfaces/ApiMessage";
-
 import { jwtDecode } from "jwt-decode";
+import { Product } from "../interfaces/Product";
+import '../styles/ProductDetail.css';
+import { Link } from "react-router-dom";
 import auth from '../utils/auth';
 import ProductDetail from "../components/ProductDetail";
 
 const Sell = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([]);
+    // const [userId, setUserId] = useState<number | null>(null);
 
     const getUserIdByUsername = async () => {
         console.log("Fetching user ID for username:", username);
@@ -19,6 +17,7 @@ const Sell = () => {
         const data = await response.json();
         console.log(data);
         return data.id;
+        // setUserId(data.id);
     }
 
     const fetchProducts = async () => {
@@ -32,46 +31,45 @@ const Sell = () => {
         }
     };
 
-    const deleteIndvProduct = async (id: number): Promise<ApiMessage> => {
-        const response = await fetch(`http://localhost:3001/api/products/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${auth.getToken()}`
-            }
+    const deleteProduct = async (productId: number | null)=> {
+        const response = await fetch(`http://localhost:3001/api/products/${productId as number}`, {
+           method: 'DELETE',
+           headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${auth.getToken()}`
+           }
         });
-        const data = await response.json();
-        return data;
+        await response.json();
+        const updatedProducts = products.filter((item) => item.id !== productId);
+        setProducts(updatedProducts);
     };
 
     useEffect(() => {
         fetchProducts();
     }, []);
+
     return (
         <div className="sell-page">
             <div className="new-product">
                 <h1>Sell Your Products</h1>
                 <Link to="/add-product"><button className="add-product-btn">Add New Product</button></Link>
             </div>
-            <div className="container productCard">
-                {products.length ? products.map((product:Product) => (
-                        <SellerCard
-                            key={product.id}
-                            id={product.id!}
-                            name={product.name}
-                            description={product.description}
-                            price={product.price}
-                            quantity={product.quantity}
-                            image_url={product.image_url!}
-                            deleteIndvProduct={deleteIndvProduct}
-                        />      
-                    )
-                    ) : (
+            <div className="product-container">
+            {products.length ? products.map((product:Product) => (
+                <div key={product.id} className="product-card">
+                    <ProductDetail
+                        name={product.name!}
+                        img={product.image_url!}
+                        price={product.price!}
+                    />
                     <div>
-                        <h3>You don't have anything to sell, yo! Try adding an item using the button above. (And pray that it works!)</h3>
-                    </div>
-                    )
-                }
+                        <button>Edit</button>
+                        <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                    </div>     
+                </div>
+                )) : 
+                <h3>You don't have anything to sell. Try adding an item using the button above.</h3>
+            }
             </div>
         </div>
     );

@@ -18,8 +18,25 @@ const Shop = () => {
         } catch (error) {
              console.error("Error fetching products:", error);
         }
-     };
+    };
     
+    const handleDetailsClick = () => {
+        window.location.assign('/ProductPage'); // add product id
+    }
+
+    const handleAddToCart = async (productId: number | null) => {
+        console.log(productId);
+        // const response = await fetch(`http://localhost:3001/api/products/${userId as number}`, {
+        //    method: 'POST',
+        //    headers: {
+        //       'Content-Type': 'application/json',
+        //       'Authorization': `Bearer ${auth.getToken()}`
+        //    }
+        // });
+        // const data = await response.json();
+        // return data;
+    }
+
     useEffect(() => {
         if (dataCheck) {
             fetchProducts();
@@ -28,29 +45,20 @@ const Shop = () => {
         }
     }, [dataCheck]);
 
-    // const handleGoToProduct: MouseEventHandler<HTMLButtonElement> = async (event) => {
-    //     console.log(event.currentTarget.value)
-    //     const productID = Number(event.currentTarget.value);
-    //     if (!isNaN(productID)) {
-    //         try {
-    //             const data = await goToItem(productID);
-    //             fetchProducts();
-    //             return data;
-    //         } catch (error) {
-    //             console.error('Whoops! Unable to go to item:', error)
-    //         }
-    //     }
-    // };
-
     return (
         <div className="product-container">
             {products.length ? products.map((product:Product) => (
-                <ProductDetail
-                    page='shop'
-                    id={product.id!}
-                    name={product.name!}
-                    img={product.image_url!}
-                    price={product.price!}/>        
+                <div key={product.id} className="product-card">
+                    <ProductDetail
+                        name={product.name!}
+                        img={product.image_url!}
+                        price={product.price!}
+                    />
+                    <div>
+                        <button onClick={handleDetailsClick}>Details</button>
+                        <button onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
+                    </div>
+                </div>    
                 )) : 
                 <h3>There is nothing in the shop</h3>
             }
