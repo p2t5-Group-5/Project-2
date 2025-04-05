@@ -1,0 +1,12 @@
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product-card {
+    margin: 4em;
+    padding: 2em;
+    border: 1px solid red;
+    background-color: rgb(251, 215, 166);
+}

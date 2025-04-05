@@ -7,8 +7,7 @@ import { ApiMessage } from "../interfaces/ApiMessage";
 
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
-import "../styles/components.css";
-import "../styles/Sell.css";
+import ProductDetail from "../components/ProductDetail";
 
 const Sell = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
@@ -63,18 +62,8 @@ const Sell = () => {
                             quantity={product.quantity}
                             image_url={product.image_url!}
                             deleteIndvProduct={deleteIndvProduct}
-                        />
-
-                        // <div key={product.id} className="product-card">
-                        //     <h2>{product.name}</h2>
-                        //     <img width="200" src={product.image_url} alt={product.description || ''}></img>
-                        //     <p>Price: ${product.price}</p>
-                        //     <button>Edit Item</button>
-                        //     <button value={product.id!}
-                        //         // onClick={handleAddToCart}
-                        //     >Delete Item</button>
-                        // </div>          
-                        )
+                        />      
+                    )
                     ) : (
                     <div>
                         <h3>You don't have anything to sell, yo! Try adding an item using the button above. (And pray that it works!)</h3>
