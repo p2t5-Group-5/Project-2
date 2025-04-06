@@ -16,7 +16,7 @@ const About =() => {
         </div>
         <div className="profile">
         <div className="left">
-          <h3>Antonia Stancheva </h3>
+          <h3>Antonina Stancheva </h3>
           <a href="http://">Github</a>
         </div>
         <div className="right"><p>Bio information </p></div>

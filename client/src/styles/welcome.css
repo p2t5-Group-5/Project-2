@@ -4,25 +4,24 @@
    --teal: rgba(80, 255, 185, 0.448);
    --lightteal: rgb(80, 255, 185);
 }
-.welcome{
-   h1{
+.welcome {
+   h1 {
       text-align: center;
-      color: #333;
       font-size:45px;
       font-style: italic;
       font-weight: bold;
    }
-   p{
+
+   p {
       text-align: center;
-      color:black;
       font-size: 20px;
    }
-   .flex{
+
+   .featured {
       display: flex;
-      /* justify-content: center; */
-      /* align-items: center; */
    }
-   .seller{
+
+   .seller {
       width: 50%;
       padding: 20px;
       background-color: var(--orange);
@@ -30,27 +29,27 @@
       margin: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease-in-out;
+
       &:hover{
          background-color: var(--hovertxt);
          transform: scale(1.05);
          cursor: pointer;
       }
    }
-      .item{
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         flex-direction: column;
-         padding: 20px;
-         background-color: var(--lightteal);
-         border-radius: 10px;
-         margin: 10px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-         transition: all 0.3s ease-in-out;
-         &:hover{
-            background-color: var(--hovertxt);
-            transform: scale(1.05);
-            cursor: pointer;
-         }
+
+   .item {
+      width: 50%;
+      padding: 20px;
+      background-color: var(--lightteal);
+      border-radius: 10px;
+      margin: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+
+      &:hover{
+         background-color: var(--hovertxt);
+         transform: scale(1.05);
+         cursor: pointer;
       }
+   }
 }

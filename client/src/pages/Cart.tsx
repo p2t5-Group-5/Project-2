@@ -4,38 +4,76 @@ import { useState, useEffect } from "react";
 import { Product } from "../interfaces/Product";
 // Removed unused import of Products
 import auth from '../utils/auth'; 
+import CartProduct from '../components/CartProduct';
 //import {addToCart} from '../utils/addTOCart';
 
 const Cart = () => {
    const { username } = jwtDecode(auth.getToken()) as { username: string };
+
    const [Cart, setCart] = useState<Product[]>([]);
-   const newCart = async (username:string) => {
+   // const [ dataCheck, setDataCheck ] = useState(false);
+
+   const getCart = async (username: string) => {
       try {
          const response = await fetch(`http://localhost:3001/api/cart/${username}`);
          const data = await response.json();
          setCart(data);
       } catch (error) {
          console.error("Error fetching cart:", error);
-      }
-   }
+      };
+   };
 
    useEffect(() => {
-      newCart(username);
+      getCart(username);
    }, []);
 
+   const deleteCartProduct = async (productID: number) => {
+         if (!isNaN(productID)) {
+            try {
+               const response = await fetch(`http://localhost:3001/api/cart/${productID}`, {
+                  method: 'DELETE',
+                  headers: {
+                     'Content-Type': 'application/json',
+                     'Authorization': `Bearer ${auth.getToken()}`
+                  }
+               });
+               const data = await response.json();
+               console.log(data);
+               setCart(Cart.filter((item) => item.id !== productID));
+            } catch (error) {
+               console.error('Whoops! Unable to delete item:', error)
+            }
+         }
+      }
+   console.log(Cart);
+
    return (
-      <>
-         <div>
+      <div className="cart-page">
+         <div className='cart-container'>
             <h1>{username}'s Cart</h1>
             <ul>
-               {Cart.map((product: Product) => (
-                  <li key={product.id}>
-                     {product.name} - ${product.price}
-                  </li>
-               ))}
+               {Cart.length ? Cart.map((product:Product) => (
+                  <div key={product.id} className="cart-product">
+                      <li>
+                        <CartProduct
+                           id={product.id}
+                           name={product.name!}
+                           image_url={product.image_url!}
+                           price={product.price!}
+                           deleteCartProduct={deleteCartProduct}
+                        />
+                        <div>
+                           <button onClick={() => deleteCartProduct(product.id)}>Delete</button>
+                        </div>
+                      </li>
+                  </div>
+                  )) : (
+                  <h3>You do not have anything in your cart! Go to the Shop page to buy.</h3>
+                  )
+               }
             </ul>
          </div>
-      </>
+      </div>
    );
 };
 

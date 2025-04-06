@@ -24,6 +24,8 @@ const Login = () => {
       if (!data) {
         throw new Error('Something went wrong with the login');
       }
+      console.log('Login successful!');
+      console.log(data);
       Auth.login(data.token);
     } catch (err) {
       console.error('Failed to login', err);
@@ -61,7 +63,9 @@ const Login = () => {
         <div className="form-group">
           <button className="btn btn-primary" type='submit'>Login</button>
         </div>
-        <div className="btn-create-account" onClick={handleCreateAccount}><h6>Don't have an account? Create one now!</h6></div>
+        <div className="btn-create-account" onClick={handleCreateAccount}>
+          <h5>Don't have an account? Create one now!</h5>
+        </div>
       </form>
     </div>
   )

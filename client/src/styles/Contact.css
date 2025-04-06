@@ -1,9 +1,8 @@
 .contact{
-   border: 2px dashed black;
+   border: 2px dashed rgb(251, 215, 166);
    padding: 8px;
    border-radius: 15px;
    h1{
-      color: #333;
       font-size:45px;
       font-weight: bold;
       text-align: center;
@@ -14,9 +13,8 @@
       font-size: 35px;
       text-align: center;
    }
-   p{
+   p {
       font-size: 25px;
-      color: black;
       text-align: center;
    }
 
