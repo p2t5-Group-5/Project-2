@@ -101,6 +101,7 @@ router.put('/:id', async (req: Request, res: Response) => {
     name,
     description,
     price,
+    image_url
   } = req.body;
   try {
     const product = await Product.findByPk(id, {
@@ -114,6 +115,14 @@ router.put('/:id', async (req: Request, res: Response) => {
     product.name = name;
     product.description = description;
     product.price = price;
+    product.image_url = image_url;
+    // if (image_url && image_url.startsWith('data:image/')) {
+    //   const base64Data = image_url.split(',')[1]; // Remove the prefix
+    //   const buffer = Buffer.from(base64Data, 'base64'); // Decode base64 to binary
+    //   product.image_url = buffer; // Store binary data
+    // } else {
+    //   throw new Error('Invalid image data');
+    // }
 
     await product.save();
     res.json(product);

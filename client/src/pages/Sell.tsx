@@ -3,8 +3,7 @@ import { Product } from "../interfaces/Product";
 // import { retrieveProducts } from "../api/shopAPI";
 import SellerCard from "../components/SellerCard";
 import { Link } from "react-router-dom";
-import { ApiMessage } from "../interfaces/ApiMessage";
-
+import { ApiMessage } from "../interfaces/ApiMessage"
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 import ProductDetail from "../components/ProductDetail";
@@ -41,12 +40,14 @@ const Sell = () => {
             }
         });
         const data = await response.json();
+        fetchProducts();
         return data;
     };
 
     useEffect(() => {
         fetchProducts();
     }, []);
+
     return (
         <div className="sell-page">
             <div className="new-product">
