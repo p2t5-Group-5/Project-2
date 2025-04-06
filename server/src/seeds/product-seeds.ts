@@ -23,7 +23,7 @@ export const seedProducts = async () => {
     {id: 19, name: 'GI Joe', description: 'A Real American Hero', category_id: 5, seller_id: 3, price: 17.76, image_url: 'https://i5.walmartimages.com/asr/57f2f091-fb0b-4196-8ddf-d5539b402edb.2dcd6bdc69b0f2a6f0daeb27ee87ba31.jpeg?odnHeight=2000&odnWidth=2000&odnBg=FFFFFF' },
     {id: 20, name: 'toy gun', description: 'Shall not be infringed', category_id: 5, seller_id: 3, price: 2.22, image_url: 'https://m.media-amazon.com/images/I/71W-qrnQCjL._AC_SL1500_.jpg' },
     {id: 21, name: 'Paste sauce', description: 'Foody pasta sauce', category_id: 6, seller_id: 2, price: 1.99, image_url: 'https://www.kitchentreaty.com/wp-content/uploads/2012/05/magic-3-ingredient-pasta-sauce-8.jpg' },
-    {id: 22, name: 'Anchovies', description: 'fresh import from Italy', category_id: 6, seller_id: 2, price: 6.5, image_url: 'https://i.etsystatic.com/27476817/r/il/980a19/6147825227/il_794xN.6147825227_5yo4.jpg' },
+    {id: 22, name: 'Anchovies', description: 'fresh import from Italy', category_id: 6, seller_id: 2, price: 6.54, image_url: 'https://i.etsystatic.com/27476817/r/il/980a19/6147825227/il_794xN.6147825227_5yo4.jpg' },
     {id: 23, name: 'Hambone', description: 'Good for boiling to make a broth', category_id: 6, seller_id: 3, price: 0.79, image_url: 'https://rawdogchews.com/cdn/shop/products/44031-ham-bone.jpg?v=1647442951' },
     {id: 24, name: 'panko crumbs', description: 'Which I got from my couch', category_id: 6, seller_id: 2, price: 14, image_url: 'https://www.thewickednoodle.com/wp-content/uploads/2023/09/panko-breadcrumbs-recipe-720x720.jpg.webp' },
   ], { individualHooks: true });
