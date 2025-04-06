@@ -3,15 +3,12 @@ import { jwtDecode } from "jwt-decode";
 import { Product } from "../interfaces/Product";
 import '../styles/ProductDetail.css';
 import { Link } from "react-router-dom";
-import { ApiMessage } from "../interfaces/ApiMessage"
-import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 import ProductDetail from "../components/ProductDetail";
 
 const Sell = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([]);
-    // const [userId, setUserId] = useState<number | null>(null);
 
     const getUserIdByUsername = async () => {
         console.log("Fetching user ID for username:", username);
@@ -19,7 +16,6 @@ const Sell = () => {
         const data = await response.json();
         console.log(data);
         return data.id;
-        // setUserId(data.id);
     }
 
     const fetchProducts = async () => {
@@ -37,22 +33,20 @@ const Sell = () => {
         const response = await fetch(`http://localhost:3001/api/products/${productId as number}`, {
            method: 'DELETE',
            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${auth.getToken()}`
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth.getToken()}`
            }
         });
         const data = await response.json();
-        fetchProducts();
-        return data;
-        await response.json();
-        const updatedProducts = products.filter((item) => item.id !== productId);
-        setProducts(updatedProducts);
+        if (data.message == "Product deleted") {
+            const updatedProducts = products.filter((item) => item.id !== productId);
+            setProducts(updatedProducts);
+        }
     };
 
     useEffect(() => {
         fetchProducts();
     }, []);
-
 
     return (
         <div className="sell-page">
