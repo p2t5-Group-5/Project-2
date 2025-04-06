@@ -51,7 +51,7 @@ const Sell = () => {
         <div className="sell-page">
             <div className="new-product">
                 <h1>Sell Your Products</h1>
-                <Link to="/add-product"><button className="add-product-btn">Add New Product</button></Link>
+                <Link to="/products/new"><button className="add-product-btn">Add New Product</button></Link>
             </div>
             <div className="product-container">
             {products.length ? products.map((product:Product) => (
@@ -62,7 +62,7 @@ const Sell = () => {
                         price={product.price!}
                     />
                     <div className="action-buttons">
-                        <div>
+                        <div onClick={() => window.location.assign(`/products/${product.id}/edit`)}>
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 width="20"
                                 height="20"

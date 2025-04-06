@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Product } from "../interfaces/Product";
 import auth from '../utils/auth'; 
 import CartProduct from '../components/CartProduct';
+import { quantityIncrease } from '../utils/adjustQuantity';
+
 
 const Cart = () => {
    const { username } = jwtDecode(auth.getToken()) as { username: string };
@@ -57,6 +59,7 @@ const Cart = () => {
       <div className="cart-page">
          <div className='cart-container'>
             <h1>{username}'s Cart</h1>
+            <p></p>
             <ul>
                {cart.length ? cart.map((product:Product) => (
                   <div key={product.id}>
@@ -66,6 +69,8 @@ const Cart = () => {
                         image_url={product.image_url!}
                         price={product.price!}
                         quantity={product.quantity}
+                        increaseQuantity={quantityIncrease}
+                        decreaseQuantity={quantityIncrease}
                         deleteCartProduct={deleteCartProduct}
                      />
                      {/* <div onClick={() => deleteCartProduct(product.id)}>Delete</div> */}

@@ -16,7 +16,39 @@
 
    .featured {
       display: flex;
+      padding: 20px;
    }
+
+   .highlight {
+      width: 50%;
+      padding: 20px;
+      background-color: var(--lightteal);
+      border-radius: 10px;
+      margin: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+
+      /* &:hover{
+         background-color: var(--hovertxt);
+         transform: scale(1.05);
+         cursor: pointer;
+      } */
+   }
+
+   .highlight-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 100%;
+      height: 15em;
+      margin-bottom: 0.5em;
+
+      &:hover{
+         transform: scale(1.05);
+         cursor: pointer;
+      }
+   }
+
 
    .seller {
       width: 50%;

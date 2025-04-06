@@ -13,6 +13,8 @@ import About from './pages/About.tsx';
 import Contact from './pages/Contact.tsx';
 import Cart from './pages/Cart.tsx';
 import Signup from './pages/Signup.tsx';
+import ProductsPage from "./pages/ProductsPage.tsx";
+import EditProduct from "./pages/EditProduct.tsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,18 @@ const router = createBrowserRouter([
         element: <Shop/>
       }, 
       {
+        path: '/products/new',
+        element: <EditProduct />
+      },
+      {
+        path: '/products/:id',
+        element: <ProductsPage />
+      },
+      {
+        path: '/products/:id/edit',
+        element: <EditProduct />
+      },
+      {
         path: '/sell',
         element: <Sell />
       }, 
@@ -51,7 +65,7 @@ const router = createBrowserRouter([
       {
         path: '/Cart',
         element: <Cart />
-      }
+      },
     ]
   }
 ])

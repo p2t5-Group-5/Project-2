@@ -3,8 +3,8 @@ import { Product } from "../interfaces/Product";
 import ProductDetail from "../components/ProductDetail.tsx";
 
 //  import { addToCart } from "../api/shopAPI";
- import { jwtDecode } from "jwt-decode";
- import auth from '../utils/auth';
+import { jwtDecode } from "jwt-decode";
+import auth from '../utils/auth';
 
 const Shop = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
@@ -27,8 +27,8 @@ const Shop = () => {
         }
     };
     
-    const handleDetailsClick = () => {
-        window.location.assign('/ProductPage'); // add product id
+    const handleDetailsClick = (productId: Number) => {
+        window.location.assign(`/products/${productId}`); // add product id
     }
 
     const handleAddToCart = async (productId: number | null) => {
@@ -62,7 +62,7 @@ const Shop = () => {
                         price={product.price!}
                     />
                     <div className="action-buttons">
-                        <div onClick={() => handleDetailsClick()}>
+                        <div onClick={() => handleDetailsClick(product.id)}>
                             <svg xmlns="http://www.w3.org/2000/svg" 
                                 width="20"
                                 height="20"

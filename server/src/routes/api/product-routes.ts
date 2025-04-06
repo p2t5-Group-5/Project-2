@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { Product } from '../../models/index.js';
+import { Category, Product } from '../../models/index.js';
 
 const router = express.Router();
 
@@ -16,6 +16,8 @@ router.get('/', async (_req: Request, res: Response) => {
         'price',
         'seller_id',
         'image_url'
+      ], include: [
+        { model: Category, as: 'Category', attributes: ['category'] }
       ]
     });
     res.json(products);
@@ -37,6 +39,8 @@ router.get('/:id', async (req: Request, res: Response) => {
         'price',
         'seller_id',
         'image_url'
+      ], include: [
+        { model: Category, as: 'Category', attributes: ['category'] }
       ]
     });
     if (product) {

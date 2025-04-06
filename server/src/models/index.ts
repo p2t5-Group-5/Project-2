@@ -9,7 +9,7 @@ const Category = CategoryFactory(sequelize);
 const Product = ProductFactory(sequelize);
 const UserCart = UserCartFactory(sequelize);
 
-Product.associate({ UserCart });
+Product.associate({ UserCart, Category });
 UserCart.associate({ Product });
 
 export { User, Category, Product, UserCart };
