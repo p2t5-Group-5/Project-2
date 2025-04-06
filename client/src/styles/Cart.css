@@ -1,0 +1,9 @@
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    width: 100vw;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+}
