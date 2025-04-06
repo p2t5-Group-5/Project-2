@@ -12,12 +12,13 @@
 /* general page look */
 * {
   margin: 0;
-  font-family: 'Times New Roman', Times, serif
 }
-body{
-   background-color: beige;
-   margin-bottom: 115px;
+
+body {
+  background-color: beige;
+  margin-bottom: 115px;
 }
+
 /* Header.tsx */
 header {
  text-align: center;
@@ -28,14 +29,17 @@ header {
     height: 100px;
     width: 100px;
   }
+
   a {
     color: black;
     text-decoration: none;
   }
+
   a:hover{
     color: white;
     text-decoration: none;
   }
+
   h1 {
     font-family: cursive;
     font-weight: bolder;
@@ -50,6 +54,7 @@ header {
     color: black;
     font-size: 25px;
   }
+
   button:hover {
     color: var(--hovertxt);
     font-size: 25px;
@@ -74,53 +79,56 @@ header {
   background-color: rgb(251, 215, 166);
   display: flex;
   justify-content: space-evenly;
-  .navbar-nav a{
-    text-decoration: underline;
-    color: black;
+
+  img {
+    border-radius: 50px;
+  }
+
+  .navbar-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbar-nav button {
+    line-height: 0;
+  }
+
+  .navbar-nav a {
+    color: #9c6c3a;
     font-size: 20px;
     font-weight: bold;
     margin: 0 12px;
-    padding: 0px 3px;
+    padding: 0.5em;
   }
-  img{
-    border-radius: 50px;
-  }
+
   .navbar-nav a:hover {
     background-color: rgba(80, 255, 185, 0.448);
     border-radius: 15px;
-    /* box-shadow: -1px 5px 5px rgb(91, 0, 160); */
-    }
-    .navbar-nav{
-      align-items: center;
-    }
-    .navbar-nav a.active {
-      background-color: rgb(70, 215, 157);
-      color: black;
-      border-radius: 15px 15px 0px 0px;
-      box-shadow: 0px 5px 5px  rgb(80, 255, 185);
-    }
-    button.login {
-      border-radius: 8px;
-      border: 2px solid white;
-      background-color: var(--teal);
-      font-size: 15px;
-      height: 35px;
-      margin: 0 12px;
-      padding: 0px 3px; 
-    }
-    button.login:hover {
-      border: 2px solid black;
-      background-color: var(--lightteal);
-    }
-    button {
-      border: unset;
-      background-color: unset;
-      color: black;
-      font-size: 25px;
-    }
-    button:hover {
-      color: var(--hovertxt);
-    }
+  }
+
+  .navbar-nav a.active {
+    background-color: rgb(164 228 196);
+    padding: 0.5em;
+    border-radius: 10px;
+    /* box-shadow: 0px 5px 5px  rgb(80, 255, 185); */
+  }
+/* 
+  button.login {
+    border-radius: 8px;
+    padding: 0.5em;
+  } */
+
+  /* button {
+    border: unset;
+    background-color: unset;
+    color: black;
+    font-size: 25px;
+  }
+
+  button:hover {
+    color: var(--hovertxt);
+  } */
 }
 
 /* Contactform.tsx */
@@ -156,14 +164,9 @@ form {
     cursor: pointer;
     &:hover {
       background-color: var(--lightteal);
-      color: black;
       font-size: 20px;
     }
   }
-}
-
-/* users.tsx */
-.users {
 }
 
 /* footer.tsx */
