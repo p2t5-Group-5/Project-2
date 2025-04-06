@@ -24,7 +24,8 @@
 }
 
 .product-image-container {
-    display: flex;
+    /* display: flex; */
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;

@@ -12,6 +12,7 @@ const EditProduct = () => {
   const [inputValue, setInputValue] = useState("");
   const [username, setUserId] = useState(undefined);
   const params = useParams();
+  console.log("params", params.id);
   // const { username } = jwtDecode(auth.getToken()) as { username: string };
   
   const getUserIdByUsername = async () => {
@@ -20,18 +21,25 @@ const EditProduct = () => {
     setUserId(data.id);
   }
 
+
   const fetchProduct = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/api/products/" + params.id);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setThisProduct(data);
-    } catch (error) {
-      console.error("Error fetching product:", error);
-    };
+    // if (params.id === undefined) {
+    //   console.log("New product: Product ID is undefined");
+    // } else {
+        try {
+          const response = await fetch("http://localhost:3001/api/products/" + params.id);
+          console.log("response", response);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          setThisProduct(data);
+        } catch (error) {
+          console.error("Error fetching product:", error);
+        };
+    // };
   };
+
 
   const fetchCategories = async () => {
     try {
@@ -109,7 +117,7 @@ const EditProduct = () => {
     <div className="form-container">
         <p>Name:  </p><input className="edit-product-field" id="name" type="text" defaultValue={thisProduct?.name || ''} />
         <p>Description:  </p><input className="edit-product-field" id="description" type="text" defaultValue={thisProduct?.description || '' }  />
-        <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" defaultValue={thisProduct?.price || 0}/>
+        <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" defaultValue={Number(thisProduct?.price) || 4.04}/>
         {/* <p>Available Quantity:  </p><input  className="edit-product-field" id="quantity" type="number" value={thisProduct?.quantity || 0}/> */}
         <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" defaultValue={thisProduct?.image_url} />
         <div className="image-preview-container">
