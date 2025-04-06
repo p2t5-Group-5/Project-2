@@ -6,7 +6,7 @@ interface ProductDetailProps {
 
 const ProductDetail = ({ name, img, price }: ProductDetailProps) => {
    return (
-      <div className="product-card">
+      <div>
          <h2>{name}</h2>
          <img className="product-image" src={img} alt={`Image for ${name}`}></img>
          <p className="price">Price: ${price}</p>
