@@ -24,6 +24,8 @@ const Login = () => {
       if (!data) {
         throw new Error('Something went wrong with the login');
       }
+      console.log('Login successful!');
+      console.log(data);
       Auth.login(data.token);
     } catch (err) {
       console.error('Failed to login', err);

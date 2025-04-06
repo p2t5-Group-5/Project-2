@@ -15,7 +15,7 @@
     "build": "cd server && npm run build",
     "seed": "cd server && npm run seed",
     "render-build": "npm install && npm run build",
-    "potato": "npm run build && npm run start:dev"
+    "potato": "npm run build && npm run seed && npm run start:dev"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,7 @@
   "dependencies": {
     "@types/cors": "^2.8.17",
     "bootstrap": "^5.3.4",
-    "react-bootstrap": "^2.10.9"
+    "react-bootstrap": "^2.10.9",
+    "sequelize": "^6.37.7"
   }
 }
