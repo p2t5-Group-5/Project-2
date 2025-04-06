@@ -32,7 +32,6 @@ const Shop = () => {
     }
 
     const handleAddToCart = async (productId: number | null) => {
-        console.log(productId, products);
         const response = await fetch(`http://localhost:3001/api/userCart/${userId}`, {
             method: 'POST',
             headers: {
@@ -45,7 +44,7 @@ const Shop = () => {
             })
         });
         const data = await response.json();
-        console.log(data);
+        alert(data.message);
     }
 
     useEffect(() => {

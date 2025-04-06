@@ -41,8 +41,8 @@ const Cart = () => {
               })
             });
             const data = await response.json();
-            console.log(data);
             setCart(cart.filter((item) => item.id !== productId));
+            alert(data.message);
          } catch (error) {
             console.error('Whoops! Unable to delete item:', error)
          }
