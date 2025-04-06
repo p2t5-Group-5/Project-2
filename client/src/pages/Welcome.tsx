@@ -25,7 +25,7 @@ const Welcome = () => {
           through our featured store and products below, and we look forward to
           providing you with a great shopping experience.
         </p>
-        <section className="flex">
+        <section className="featured">
           <div className="seller">
             <img src="" alt="Featured Seller" />
             <p>This is our featured seller {users.name}</p>

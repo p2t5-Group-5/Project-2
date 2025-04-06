@@ -63,7 +63,9 @@ const Login = () => {
         <div className="form-group">
           <button className="btn btn-primary" type='submit'>Login</button>
         </div>
-        <div className="btn-create-account" onClick={handleCreateAccount}><h6>Don't have an account? Create one now!</h6></div>
+        <div className="btn-create-account" onClick={handleCreateAccount}>
+          <h5>Don't have an account? Create one now!</h5>
+        </div>
       </form>
     </div>
   )

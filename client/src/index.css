@@ -968,12 +968,16 @@ a:hover {
 }
 
 .btn.btn-primary {
-  background-color: #2d3e50;
-  color: #d9e9e8;
+  background-color: #fbd7a6;
+  color: #9c6c3a;;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .btn.btn-primary:hover {
-  background-color: #57779a;
+  background-color: #9c6c3a;
+  border-color: #9c6c3a;
+  color: #fbd7a6;
 }
 
 .btn.btn-danger {
@@ -1068,7 +1072,7 @@ a:hover {
 }
 
 form {
-  width: 100%;
+  width: 70%;
 }
 
 form .form-group {
@@ -1080,15 +1084,6 @@ form .form-group {
 form .form-input,
 form .form-textarea {
   display: block;
-}
-
-form select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
-  background-repeat: no-repeat;
-  background-position-x: 98%;
-  background-position-y: 50%;
 }
 
 form label,
@@ -1109,21 +1104,7 @@ form .form-input {
   border-radius: 0.3rem;
 }
 
-form .form-input.form-input-squared {
-  border-radius: 0;
-}
-
-form [type='checkbox'],
-form [type='radio'] {
-  display: inline-block;
-}
-
-label form [type='checkbox'], label
-form [type='radio'] {
-  display: inline-block;
-}
-
-.btn-create-account{
+.btn-create-account {
   text-decoration: underline;
   color: #7ac9ef;
 }

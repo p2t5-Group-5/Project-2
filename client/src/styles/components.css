@@ -12,6 +12,7 @@
 /* general page look */
 * {
   margin: 0;
+  color: #9c6c3a;
 }
 
 body {
@@ -31,7 +32,6 @@ header {
   }
 
   a {
-    color: black;
     text-decoration: none;
   }
 
@@ -44,14 +44,12 @@ header {
     font-family: cursive;
     font-weight: bolder;
     font-size: 4em;
-    color: #9c6c3a;
   }
 
   button {
     float: right;
     border: unset;
     background-color: unset;
-    color: black;
     font-size: 25px;
   }
 
@@ -103,65 +101,55 @@ header {
   }
 
   .navbar-nav a:hover {
-    background-color: rgba(80, 255, 185, 0.448);
-    border-radius: 15px;
+    background-color: #9c6c3a;
+    color: #fbd7a6;
+    border-radius: 10px;
   }
 
   .navbar-nav a.active {
-    background-color: rgb(164 228 196);
+    background-color: #9c6c3a;
+    color: #fbd7a6;
     padding: 0.5em;
     border-radius: 10px;
-    /* box-shadow: 0px 5px 5px  rgb(80, 255, 185); */
   }
-/* 
-  button.login {
-    border-radius: 8px;
-    padding: 0.5em;
-  } */
-
-  /* button {
-    border: unset;
-    background-color: unset;
-    color: black;
-    font-size: 25px;
-  }
-
-  button:hover {
-    color: var(--hovertxt);
-  } */
 }
 
 /* Contactform.tsx */
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-top: 1rem;
-    input, textarea{
-       width: 80%;
-       padding: 10px;
-       margin-bottom: 1rem;
-       border-radius: 5px;
-       border: 1px solid #ccc;
-       font-size: 18px;
-       &:focus{
-          outline: none;
-          border-color: var(--hovertxt);
-       }
- }
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: 1rem;
+
+  input, textarea {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+
+    &:focus{
+      outline: none;
+      border-color: var(--hovertxt);
+    }
+  }
+
   label {
     font-size: 25px;
     width: 80%;
   }
- button {
+
+  button {
     background-color: var(--hovertxt);
     border: 3px solid var(--brown);
-    color: black;
+    color: #9c6c3a;
     font-size: 20px;
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
+
     &:hover {
       background-color: var(--lightteal);
       font-size: 20px;
@@ -171,28 +159,35 @@ form {
 
 /* footer.tsx */
 footer {
-   padding-top: 8px;
-   position: fixed;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   text-align: center;
-   background-color: rgb(251, 215, 166);
-   .ficons{
+  padding: 8px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(251, 215, 166);
+  display: flex;
+  justify-content: space-between;
+
+  .contact-links,
+  .social-media-links {
     display: flex;
-    justify-content: space-evenly;
-   }
-   .fcontact{
-    display: flex;
-    justify-content: space-evenly;
-   }
-  Link, a {
-   color: black;
-   font-size: 18px;
+    justify-content: center;
   }
-  Link:hover, a:hover {
-   color: var(--hovertxt);
-   text-decoration: none;
+
+  .social-media-links a,
+  .contact-links a {
+    margin: 0 1em;
+  }
+
+  a {
+    color: #9c6c3a;
+    font-size: 18px;
+  }
+
+  a:hover {
+    color: #9c6c3a;
+    text-decoration: underline;
   }
 }
 
