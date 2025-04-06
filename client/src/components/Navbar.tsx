@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import logo from "../assets/logo.jpeg";
 import auth from "../utils/auth";
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import "../styles/components.css";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -35,34 +35,29 @@ const Navigation = () => {
         alt="Handcrafted Harmony logo"
       />
       </Navbar.Brand>
-      <Nav className="">
-        <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
-
-        <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
-
-        {loginCheck && (
-        <NavLink to="/sell" className={({ isActive }) => isActive ? "active" : ""}>Sell</NavLink>
-        )}
-
-        {loginCheck && (
-          <button onClick={goToCart}> 
-            <i className="bi bi-cart4"></i>
-          </button>
-        )}
-
-
-        {
-          !loginCheck ? (
-            <button className='login' type='button'>
-              <Link to='/login'>Login</Link>
+      <Nav className="navbar-links">
+        <div>
+          <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
+          <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
+          {loginCheck && (
+            <NavLink to="/sell" className={({ isActive }) => isActive ? "active" : ""}>Sell</NavLink>
+          )}
+        </div>
+        <div>
+          {loginCheck && (
+            <button onClick={goToCart}> 
+              <i className="bi bi-cart4"></i>
             </button>
+          )}
+          {!loginCheck ? (
+            <NavLink className={({ isActive }) => isActive ? "active" : ""} to='/login'>Login</NavLink>
           ) : (
-            <button  type='button' onClick={() => {
-              auth.logout();
-            }}><i className="bi bi-file-person"></i></button>
-          )
-        }
-
+              <button type='button' onClick={() => auth.logout()}>
+                <i className="bi bi-file-person"></i>
+              </button>
+            )
+          }
+        </div>
       </Nav>
     </Container>
   </Navbar>
