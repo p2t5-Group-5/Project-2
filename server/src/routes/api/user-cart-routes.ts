@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { UserCart } from '../../models/index.js';
+import { Product, UserCart } from '../../models/index.js';
 
 const router = express.Router();
 
@@ -8,15 +8,28 @@ const router = express.Router();
 router.get('/:userId', async (req: Request, res: Response) => {
     const { userId } = req.params;
     try {
-        const cartItems = await UserCart.findAll(
-            {
-                where: { buyer_id: +userId },
-                attributes: ['buyer_id', 'product_id', 'quantity']
-            }
-        );
-        if (!cartItems) {
-          throw new Error("User's cart is empty");
-        }
+        const cartItems: any = []
+        await UserCart.findAll(
+          {
+            where: { buyer_id: +userId },
+            attributes: ['buyer_id', 'product_id', 'quantity'],
+            include: [{
+              model: Product,
+            }]
+          }
+        )
+        .then(products => {
+          products.forEach((product) => {
+            cartItems.push({
+              id: product.dataValues.product_id,
+              quantity: product.dataValues.quantity,
+              name: (product.dataValues.Product as any).name,
+              image_url: (product.dataValues.Product as any).image_url,
+              price: (product.dataValues.Product as any).price,
+            })
+          });
+          return cartItems;
+        });
 
         res.json(cartItems);
     } catch (error: any) {

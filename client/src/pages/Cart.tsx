@@ -1,74 +1,72 @@
 import '../styles/components.css';
-//import { addToCart } from "../api/shopAPI";
 import { useState, useEffect } from "react";
 import { Product } from "../interfaces/Product";
-// Removed unused import of Products
 import auth from '../utils/auth'; 
 import CartProduct from '../components/CartProduct';
-//import {addToCart} from '../utils/addTOCart';
 
 const Cart = () => {
    const { username } = jwtDecode(auth.getToken()) as { username: string };
+   const [cart, setCart] = useState<Product[]>([]);
 
-   const [Cart, setCart] = useState<Product[]>([]);
-   // const [ dataCheck, setDataCheck ] = useState(false);
+   const getUserIdByUsername = async () => {
+      const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
+      const data = await response.json();
+      return data.id;
+  }
 
-   const getCart = async (username: string) => {
+   const getCart = async () => {
       try {
-         const response = await fetch(`http://localhost:3001/api/cart/${username}`);
+         const userId = await getUserIdByUsername();
+         const response = await fetch(`http://localhost:3001/api/userCart/${userId}`);
          const data = await response.json();
          setCart(data);
       } catch (error) {
          console.error("Error fetching cart:", error);
-      };
+      }
    };
 
-   useEffect(() => {
-      getCart(username);
-   }, []);
-
    const deleteCartProduct = async (productID: number) => {
-         if (!isNaN(productID)) {
-            try {
-               const response = await fetch(`http://localhost:3001/api/cart/${productID}`, {
-                  method: 'DELETE',
-                  headers: {
-                     'Content-Type': 'application/json',
-                     'Authorization': `Bearer ${auth.getToken()}`
-                  }
-               });
-               const data = await response.json();
-               console.log(data);
-               setCart(Cart.filter((item) => item.id !== productID));
-            } catch (error) {
-               console.error('Whoops! Unable to delete item:', error)
-            }
+      if (!isNaN(productID)) {
+         try {
+            const response = await fetch(`http://localhost:3001/api/userCart/${productID}`, {
+               method: 'DELETE',
+               headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${auth.getToken()}`
+               }
+            });
+            const data = await response.json();
+            console.log(data);
+            setCart(cart.filter((item) => item.id !== productID));
+         } catch (error) {
+            console.error('Whoops! Unable to delete item:', error)
          }
       }
-   console.log(Cart);
+   }
+
+   useEffect(() => {
+      getCart();
+   }, []);
 
    return (
       <div className="cart-page">
          <div className='cart-container'>
             <h1>{username}'s Cart</h1>
             <ul>
-               {Cart.length ? Cart.map((product:Product) => (
-                  <div key={product.id} className="cart-product">
-                      <li>
-                        <CartProduct
-                           id={product.id}
-                           name={product.name!}
-                           image_url={product.image_url!}
-                           price={product.price!}
-                           deleteCartProduct={deleteCartProduct}
-                        />
-                        <div>
-                           <button onClick={() => deleteCartProduct(product.id)}>Delete</button>
-                        </div>
-                      </li>
+               {cart.length ? cart.map((product:Product) => (
+                  <div key={product.id}>
+                     <CartProduct
+                        id={product.id}
+                        name={product.name!}
+                        image_url={product.image_url!}
+                        price={product.price!}
+                        quantity={product.quantity}
+                        deleteCartProduct={deleteCartProduct}
+                     />
+                     {/* <div onClick={() => deleteCartProduct(product.id)}>Delete</div> */}
                   </div>
                   )) : (
-                  <h3>You do not have anything in your cart! Go to the Shop page to buy.</h3>
+                     <h3>You do not have anything in your cart! Go to the Shop page to buy.</h3>
                   )
                }
             </ul>

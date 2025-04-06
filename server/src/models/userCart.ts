@@ -1,4 +1,5 @@
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
+import { Product } from './product';
 
 // Define the attributes for the Product model
 interface UserCartAttributes {
@@ -6,6 +7,7 @@ interface UserCartAttributes {
   buyer_id: number;
   product_id: number;
   quantity: number;
+  Product?: Product
 }
 
 // Define the optional attributes for creating a new Product
@@ -17,6 +19,10 @@ export class UserCart extends Model<UserCartAttributes, UserCartCreationAttribut
   public buyer_id!: number;
   public product_id!: number;
   public quantity!: number;
+
+  public static associate(models: any) {
+    UserCart.belongsTo(models.Product, { foreignKey: 'product_id' });
+  }
 }
 
 // Define the CategoryFactory function to initialize the User model

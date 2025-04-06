@@ -61,22 +61,31 @@ header {
 
 /* Cart.tsx */
 .cart-item {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+  text-align: center;
+  padding: 0.5em;
+  margin: 0.5em;
   border-bottom: 1px solid #ccc;
-  width: 100vw;
   background-color: #f5f5f5;
-  box-sizing: border-box;
+  font-size: 20px;
+}
+
+.cart-item p {
+  border: none;
+}
+
+.cart-item button {
+  border: none;
 }
 
 /* Navbar.tsx */
 .nav {
-  height: 50px;
-  line-height: 45px;
   background-color: rgb(251, 215, 166);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   img {
     border-radius: 50px;
@@ -111,6 +120,14 @@ header {
     color: #fbd7a6;
     padding: 0.5em;
     border-radius: 10px;
+  }
+
+  .user-info {
+    display: flex;
+  }
+
+  .user-info div {
+    cursor: pointer;
   }
 }
 
