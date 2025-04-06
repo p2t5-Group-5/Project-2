@@ -5,14 +5,14 @@ import { MouseEventHandler } from "react";
 interface CartProductProps {
     id: number; // id: number | null;
     name: string | undefined;
-    description: string | null;
+    // description: string | null;
     price: number | null;
-    quantity: number | null;
+    // quantity: number | null;
     image_url: string | undefined;
-    deleteCartProduct: (id: number) => Promise<ApiMessage>;
+    deleteCartProduct: (id: number) => Promise<ApiMessage | void>;
 }
 
-const CartProduct = ({id, name, description, price, image_url, deleteCartProduct: deleteCartProduct}: CartProductProps) => {
+const CartProduct = ({id, name, price, image_url, deleteCartProduct: deleteCartProduct}: CartProductProps) => {
     
     const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
         const productID = Number(event.currentTarget.value);
@@ -30,9 +30,9 @@ const CartProduct = ({id, name, description, price, image_url, deleteCartProduct
     return (
         <div className="cart-item">
             <h4>{name}</h4>
-            <img width="25" src={image_url} alt={description || ''}></img>
+            <img width="25" src={image_url}></img>
             <p>${price}</p>
-            <button value={id} onClick={handleDelete}>Delete</button>
+            <button value={String(id)} onClick={handleDelete}>Delete</button>
         </div>
     );
 };

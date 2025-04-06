@@ -11,7 +11,7 @@ const Cart = () => {
    const { username } = jwtDecode(auth.getToken()) as { username: string };
 
    const [Cart, setCart] = useState<Product[]>([]);
-   const [ dataCheck, setDataCheck ] = useState(false);
+   // const [ dataCheck, setDataCheck ] = useState(false);
 
    const getCart = async (username: string) => {
       try {
@@ -27,6 +27,26 @@ const Cart = () => {
       getCart(username);
    }, []);
 
+   const deleteCartProduct = async (productID: number) => {
+         if (!isNaN(productID)) {
+            try {
+               const response = await fetch(`http://localhost:3001/api/cart/${productID}`, {
+                  method: 'DELETE',
+                  headers: {
+                     'Content-Type': 'application/json',
+                     'Authorization': `Bearer ${auth.getToken()}`
+                  }
+               });
+               const data = await response.json();
+               console.log(data);
+               setCart(Cart.filter((item) => item.id !== productID));
+            } catch (error) {
+               console.error('Whoops! Unable to delete item:', error)
+            }
+         }
+      }
+   console.log(Cart);
+
    return (
       <div className="cart-page">
          <div className='cart-container'>
@@ -36,12 +56,14 @@ const Cart = () => {
                   <div key={product.id} className="cart-product">
                       <li>
                         <CartProduct
+                           id={product.id}
                            name={product.name!}
-                           img_url={product.image_url!}
+                           image_url={product.image_url!}
                            price={product.price!}
+                           deleteCartProduct={deleteCartProduct}
                         />
                         <div>
-                           <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                           <button onClick={() => deleteCartProduct(product.id)}>Delete</button>
                         </div>
                       </li>
                   </div>
