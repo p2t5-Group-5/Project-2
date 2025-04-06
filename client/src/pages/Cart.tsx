@@ -7,17 +7,19 @@ import CartProduct from '../components/CartProduct';
 const Cart = () => {
    const { username } = jwtDecode(auth.getToken()) as { username: string };
    const [cart, setCart] = useState<Product[]>([]);
+   const [userId, setUserId] = useState(undefined);
 
    const getUserIdByUsername = async () => {
       const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
       const data = await response.json();
-      return data.id;
-  }
+      return data.id
+   }
 
    const getCart = async () => {
       try {
-         const userId = await getUserIdByUsername();
-         const response = await fetch(`http://localhost:3001/api/userCart/${userId}`);
+         const userIdByUsername = await getUserIdByUsername();
+         setUserId(userIdByUsername);
+         const response = await fetch(`http://localhost:3001/api/userCart/${userIdByUsername}`);
          const data = await response.json();
          setCart(data);
       } catch (error) {
@@ -25,19 +27,22 @@ const Cart = () => {
       }
    };
 
-   const deleteCartProduct = async (productID: number) => {
-      if (!isNaN(productID)) {
+   const deleteCartProduct = async (productId: number) => {
+      if (!isNaN(productId)) {
          try {
-            const response = await fetch(`http://localhost:3001/api/userCart/${productID}`, {
+            const response = await fetch(`http://localhost:3001/api/userCart/${userId}`, {
                method: 'DELETE',
                headers: {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${auth.getToken()}`
-               }
+               },
+               body: JSON.stringify({
+                  productId,
+              })
             });
             const data = await response.json();
             console.log(data);
-            setCart(cart.filter((item) => item.id !== productID));
+            setCart(cart.filter((item) => item.id !== productId));
          } catch (error) {
             console.error('Whoops! Unable to delete item:', error)
          }

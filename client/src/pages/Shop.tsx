@@ -3,12 +3,19 @@ import { Product } from "../interfaces/Product";
 import ProductDetail from "../components/ProductDetail.tsx";
 
 //  import { addToCart } from "../api/shopAPI";
-//  import { jwtDecode } from "jwt-decode";
-//  import auth from '../utils/auth';
+ import { jwtDecode } from "jwt-decode";
+ import auth from '../utils/auth';
 
 const Shop = () => {
+    const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([]);
-    const [dataCheck, setDataCheck ] = useState(true);
+    const [userId, setUserId] = useState(undefined);
+
+    const getUserIdByUsername = async () => {
+        const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
+        const data = await response.json();
+        setUserId(data.id);
+    }
 
     const fetchProducts = async () => {
         try {
@@ -25,25 +32,26 @@ const Shop = () => {
     }
 
     const handleAddToCart = async (productId: number | null) => {
-        console.log(productId);
-        // const response = await fetch(`http://localhost:3001/api/products/${userId as number}`, {
-        //    method: 'POST',
-        //    headers: {
-        //       'Content-Type': 'application/json',
-        //       'Authorization': `Bearer ${auth.getToken()}`
-        //    }
-        // });
-        // const data = await response.json();
-        // return data;
+        console.log(productId, products);
+        const response = await fetch(`http://localhost:3001/api/userCart/${userId}`, {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${auth.getToken()}`
+            },
+            body: JSON.stringify({
+                productId,
+                quantity: 1
+            })
+        });
+        const data = await response.json();
+        console.log(data);
     }
 
     useEffect(() => {
-        if (dataCheck) {
-            fetchProducts();
-        } else {
-            setDataCheck(false);
-        }
-    }, [dataCheck]);
+        fetchProducts();
+        getUserIdByUsername();
+    }, []);
 
     return (
         <div className="product-container">

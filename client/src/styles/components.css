@@ -24,7 +24,7 @@ body {
 header {
  text-align: center;
   padding: 10px;
-  /* background-color: rgb(251, 215, 166); */
+
   img {
     border-radius: 50px;
     height: 100px;
@@ -73,8 +73,13 @@ header {
   font-size: 20px;
 }
 
-.cart-item p {
-  border: none;
+.cart-item .item-name {
+  width: 10em;
+  text-align: start;
+}
+
+.cart-item div {
+  width: 5em;
 }
 
 .cart-item button {
@@ -95,6 +100,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .navbar-nav button {
@@ -128,6 +134,7 @@ header {
 
   .user-info div {
     cursor: pointer;
+    margin: 0.3em;
   }
 }
 
@@ -209,8 +216,11 @@ footer {
 }
 
 /* Darkmode */
-.dark{  
-   header {
+.dark {
+  body {
+    background-color: #9c6c3a;
+  }
+  header {
     background-color: blueviolet;
     img {
     }
