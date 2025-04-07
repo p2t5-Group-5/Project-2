@@ -15,6 +15,7 @@ import Cart from './pages/Cart.tsx';
 import Signup from './pages/Signup.tsx';
 import ProductsPage from "./pages/ProductsPage.tsx";
 import EditProduct from "./pages/EditProduct.tsx";
+import NewProduct from "./pages/NewProduct.tsx";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       }, 
       {
         path: '/products/new',
-        element: <EditProduct />
+        element: <NewProduct />
       },
       {
         path: '/products/:id',
