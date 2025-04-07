@@ -34,3 +34,16 @@ a:hover{
    transition: 0.3s;
 }
 }
+
+.dark{
+   color: ;
+   .right{
+      border: 2px solid white;
+   }
+   .left {
+      border: 2px solid white;
+   }
+   a {
+      /* background-color: var(--teal); */
+   }
+}
