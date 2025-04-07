@@ -3,7 +3,7 @@ import auth from '../utils/auth';
 import "../styles/components.css";
 // import logo from "../assets/logo.jpeg";
 
-const Logobar = () => {
+const TitleBar = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
@@ -39,4 +39,4 @@ const Logobar = () => {
   )
 }
 
-export default Logobar;
+export default TitleBar;

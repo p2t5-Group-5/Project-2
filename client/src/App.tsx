@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Logobar from './components/LogoBar';
+import TitleBar from './components/TitleBar';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div>
-      <Logobar/>
+      <TitleBar/>
       <Navbar />
       <main className='container pt-5'>
         <Outlet />

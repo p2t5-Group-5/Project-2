@@ -55,7 +55,7 @@ const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: d
         const productID = Number(event.currentTarget.value);
         if (!isNaN(productID)) {
             try {
-                const data = await deleteCartProduct(productID);
+                const data =  deleteCartProduct(productID);
                 console.log(data);
                 return data;
             } catch (error) {
