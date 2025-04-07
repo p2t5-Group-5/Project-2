@@ -6,12 +6,12 @@ import { Category } from "../interfaces/Category";
 
 
 const NewProduct = () => {
-  const [name , setName] = useState();
-  const [description, setDescription] = useState();
-  const [price, setPrice] = useState();
-  const [image_url, setImageUrl] = useState();
+  const [name , setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(0);
+  const [image_url, setImageUrl] = useState("");
   const [categoryList, setCategoryList] = useState<Category[]>([] as Category[]);
-  const [category_id, setCategoryId] = useState(1);;
+  const [category_id, setCategoryId] = useState(1);
 
   let sellerId: number;
 
@@ -102,14 +102,11 @@ const NewProduct = () => {
         <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" value={image_url} onChange={(e) => setImageUrl(e.target.value)} />
         <div className="image-preview-container">
           <img src={image_url} alt="Product" className="edit-product-image"/>
-          <img src={image_url} alt="Product" className="edit-product-image"/>
         </div>
         <p>Category: </p>
         <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => setCategoryId(parseInt(e.target.value))}>
-        <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => setCategoryId(parseInt(e.target.value))}>
           {categoryList.map((category) => (
             <option key={category.id} value={category.id}>
-              {category.category}
               {category.category}
             </option>
           ))}

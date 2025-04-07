@@ -37,7 +37,7 @@ const EditProduct = () => {
           setThisProduct(data);
         } catch (error) {
           console.error("Error fetching product:", error);
-        };
+        }
     // };
   };
 
@@ -53,7 +53,7 @@ const EditProduct = () => {
       setCategories(data);
     } catch (error) {
       console.error("Error fetching categories:", error);
-    };
+    }
   };
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const EditProduct = () => {
         errorMessageElement.innerHTML = "Please fill out all fields---they are all required.";
       }
       return;
-    };
+    }
 
     const productId = params.id;
     const name = (document.getElementById("name") as HTMLInputElement).value;
