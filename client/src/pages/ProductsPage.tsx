@@ -74,12 +74,12 @@ const ProductsPage = () => {
         <div>
             <h1>{thisProduct.name}</h1>
             <p><i>Category: {thisProduct.Category.category}</i></p>
-            <div className="product-image-container">
-                <img src={thisProduct.image_url} alt={thisProduct.name} />
+            <div className="product-image-container-solo">
+                <img src={thisProduct.image_url} alt={thisProduct.name} className="product-image" />
             </div>
             <p>{thisProduct.description}</p>
             <p>Price: ${thisProduct.price}</p>
-            <p>Available Quantity: ${thisProduct.quantity}</p>
+            {/* <p>Available Quantity: {thisProduct.quantity}</p> */}
             <button onClick={() => handleAddToCart()}>Add to Cart</button>
         </div>
     );

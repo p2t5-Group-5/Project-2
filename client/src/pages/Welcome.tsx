@@ -3,6 +3,7 @@ import "../styles/welcome.css";
 const Welcome = () => {
   const highlightUser = { name: "Mister Jones", image:"https://barryfestarchive.wordpress.com/wp-content/uploads/2011/07/photo_adam_350rgb-crop2_.jpg?w=1280" }; //placeholder
   const highlightItem = { name: "Golden Nerf Gun", image: "https://m.media-amazon.com/images/I/71W-qrnQCjL._AC_SL1500_.jpg" }; //placeholder
+  const shortcut : string = "/products/20"
   return (
     <>
       <div className="welcome">
@@ -31,13 +32,13 @@ const Welcome = () => {
           <div className="highlight">
             <p>This is our Featured Seller, {highlightUser.name}!</p>
             <div className="highlight-image">
-              <img src={highlightUser.image} alt="Featured Seller" className="highlight-image"/>
+              <a href={shortcut}><img src={highlightUser.image} alt="Featured Seller" className="highlight-image"/></a>
             </div>
           </div>
           <div className="highlight">
             <p>This is one of their Featured Items, a {highlightItem.name}</p>
             <div className="highlight-image">
-              <img src={highlightItem.image} alt="Featured Item" className="highlight-image"/>
+            <a href={shortcut}><img src={highlightItem.image} alt="Featured Item" className="highlight-image"/></a>
             </div>
           </div>
         </section>
