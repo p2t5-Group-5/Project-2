@@ -6,26 +6,26 @@ import { useParams } from "react-router";
 import "../styles/ProductDetail.css";
 import { Category } from "../interfaces/Category";
 
-
 const EditProduct = () => {
   const [thisProduct, setThisProduct] = useState< Product| null>(null);
   const [categories, setCategories] = useState<Category[]>([] as Category[]);
-  const [inputValue, setInputValue] = useState("");
-  const [username, setUserId] = useState(undefined);
+  //const [inputValue, setInputValue] = useState("");
+  const [userId, setUserId] = useState(undefined);
   const params = useParams();
   console.log("params", params.id);
-  // const { username } = jwtDecode(auth.getToken()) as { username: string };
+  const { username } = jwtDecode(auth.getToken()) as { username: string };
   
   const getUserIdByUsername = async () => {
     const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
     const data = await response.json();
+    console.log(userId);
     setUserId(data.id);
   }
 
 
   const fetchProduct = async () => {
     // if (params.id === undefined) {
-    //   console.log("New product: Product ID is undefined");
+    console.log("New product: Product ID is undefined");
     // } else {
         try {
           const response = await fetch("http://localhost:3001/api/products/" + params.id);

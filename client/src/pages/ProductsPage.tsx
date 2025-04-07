@@ -1,11 +1,7 @@
 import { useState, useEffect,  } from "react";
-//import { Link } from "react-router-dom";
-//import { addToCart } from "../api/shopAPI";
 import type { Product } from "../interfaces/Product";
 import { useParams } from "react-router";
 import "../styles/ProductDetail.css";
-//import { retrieveUsers } from "../api/userAPI";
-// useLayoutEffect
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 
