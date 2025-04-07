@@ -215,18 +215,169 @@ footer {
   }
 }
 
+:root{
+  --darkhovertxt: #9c6c3a;
+  --lightorange: rgb(193, 128, 7);
+  --teal: rgba(80, 255, 185, 0.448);
+  --lightteal: rgb(80, 255, 185);
+  --brown: rgb(79, 0, 0);
+ }
+
 /* Darkmode */
 .dark {
-  body {
-    background-color: #9c6c3a;
+  /* general page look */
+  background-color: #9c6c3a;
+  * {
+    color: rgb(251, 215, 166);
   }
+  /* general color */  
+  /* Header.tsx */
   header {
-    background-color: blueviolet;
-    img {
+    a:hover{
+      color: white;
+      text-decoration: none;
     }
+  
     h1 {
+      font-family: cursive;
+      font-weight: bolder;
+      font-size: 4em;
     }
+  
     button {
+      float: right;
+      border: unset;
+      background-color: unset;
+      font-size: 25px;
     }
+  
+    button:hover {
+      color: var(--hovertxt);
+      font-size: 25px;
+    }
+  }
+  
+  /* Cart.tsx */
+  .cart-item {
+    border-bottom: 1px solid #ccc;
+    background-color: rgb(251, 215, 166);
+    font-size: 20px;
+  }
+  /* Navbar.tsx */
+  .nav {
+    background-color: #6e4b25;   
+    .navbar-nav a {
+      color: rgb(251, 215, 166);
+    }
+  
+    .navbar-nav a:hover {
+      background-color: rgb(251, 215, 166);
+      color: rgb(129, 83, 20);
+    }
+  
+    .navbar-nav a.active {
+      background-color: rgb(251, 215, 166);
+      color: rgb(129, 83, 20);;
+    }
+  }
+  
+  /* Contactform.tsx */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 1rem;
+  
+    input, textarea {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 18px;
+  
+      &:focus{
+        outline: none;
+        border-color: var(--hovertxt);
+      }
+    }
+  
+    label {
+      font-size: 25px;
+      width: 80%;
+    }
+  
+    button {
+      background-color: var(--hovertxt);
+      border: 3px solid var(--brown);
+      color: #9c6c3a;
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: var(--lightteal);
+        font-size: 20px;
+      }
+    }
+  }
+  
+  /* footer.tsx */
+  footer {
+    background-color: #6e4b25;     
+    a {
+      color: rgb(251, 215, 166);
+    }
+  
+    a:hover {
+      color: rgb(180, 155, 121);
+    }
+  }
+}
+
+@media  (max-width: 991px) {
+  header {
+    h1 {
+      font-size: 3em;
+    }
+  }
+
+  
+  .cart-item {
+    font-size: 18px;
+  }
+  
+  form {
+    input, textarea {
+      width: 90%;
+    }
+  }
+  /* Nav bar */
+  .nav-links-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .nav {
+    .navbar-nav a {
+      font-size: 18px;
+    }
+  }
+  
+  .nav-links-container a {
+    display: block;
+    margin: 0.5em 0;
+    font-size: 18px;
+    text-align: left;
+    padding-left: 1rem;
+  }
+
+  .user-info {
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 1rem;
   }
 }
