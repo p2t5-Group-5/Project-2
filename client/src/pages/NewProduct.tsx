@@ -1,30 +1,26 @@
-import { Product } from "../interfaces/Product";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
-import { useParams } from "react-router";
 import "../styles/ProductDetail.css";
 import { Category } from "../interfaces/Category";
 
 
-
-
 const NewProduct = () => {
-  const [thisProduct, setThisProduct] = useState< Product| null>(null);
-  const [name , setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [image_url, setImageUrl] = useState("");
-//   let categoryList = [] as Category[];
+  const [name , setName] = useState();
+  const [description, setDescription] = useState();
+  const [price, setPrice] = useState();
+  const [image_url, setImageUrl] = useState();
   const [categoryList, setCategoryList] = useState<Category[]>([] as Category[]);
-  const [seller_id, setSellerId] = useState("");
-  const params = useParams();
+  const [category_id, setCategoryId] = useState(1);;
+
+  let sellerId: number;
 
   const getUserIdByUsername = async () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
     const data = await response.json();
-    setSellerId(data.id);
+    sellerId = data.id;
+    console.log("sellerId", sellerId);
   }
 
   const fetchCategories = async () => {
@@ -34,20 +30,12 @@ const NewProduct = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-    //   categoryList = data.map((category: { id: number; name: string }) => ({
-    //     id: category.id,
-    //     name: category.name,
-    //   }));
-    setCategoryList(data);
-    console.log(data)
-    console.log(categoryList);
+    setCategoryList(data)
     } catch (error) {
       console.error("Error fetching categories:", error);
     };
   };
 
-
-  
   useEffect(() => {
     fetchCategories();
     getUserIdByUsername();
@@ -67,20 +55,21 @@ const NewProduct = () => {
     }
 
     try {
+      
       const response = await fetch(`http://localhost:3001/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name,
-          description,
-          seller_id,
-          price,
-          image_url,
-        //   categoryId,
-        }),
-      });
+          name: name,
+          description: description,
+          category_id: category_id,
+          seller_id: sellerId,
+          price: price,
+          image_url: image_url
+      })
+    })
 
       if (!response.ok) {
         throw new Error("Failed to update product");
@@ -107,22 +96,15 @@ const NewProduct = () => {
         <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" value={price} onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}/>
         <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" value={image_url} onChange={(e) => setImageUrl(e.target.value)} />
         <div className="image-preview-container">
-          <img src={thisProduct?.image_url} alt="Product" className="edit-product-image"/>
+          <img src={image_url} alt="Product" className="edit-product-image"/>
         </div>
         <p>Category: </p>
-        <select  className="edit-product-field drop-down" id="category" defaultValue={thisProduct?.category_id || 3}>
+        <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => setCategoryId(parseInt(e.target.value))}>
           {categoryList.map((category) => (
             <option key={category.id} value={category.id}>
-              {category.name}
+              {category.category}
             </option>
           ))}
-          {/* Added the hard coding below because I could not get the .map to work. If we fix it, comment out the section below so as not to duplicate the values -JH */}
-          {/* <option value="1">Electronics</option>
-          <option value="2">Clothing</option>
-          <option value="3">Household</option>
-          <option value="4">Books</option>
-          <option value="5">Toys</option>
-          <option value="6">Food</option> */}
         </select>
         <p></p>
 

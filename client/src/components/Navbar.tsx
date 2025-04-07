@@ -6,6 +6,7 @@ import "../styles/components.css";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 const Navigation = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -25,7 +26,7 @@ const Navigation = () => {
   }, [loginCheck]);
 
   return (
-    <Navbar className="nav">
+    <Navbar className="nav" expand="lg">
     <Container>
       <Navbar.Brand>
       <img
@@ -35,8 +36,10 @@ const Navigation = () => {
         alt="Handcrafted Harmony logo"
       />
       </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="navbar-links">
-        <div>
+        <div className="nav-links-container">
           <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
           <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
           {loginCheck && (
@@ -69,10 +72,10 @@ const Navigation = () => {
                   <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/>
                 </svg>
               </div>
-            )
-          }
+            )}
         </div>
       </Nav>
+         </Navbar.Collapse>
     </Container>
   </Navbar>
   );

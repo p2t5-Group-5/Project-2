@@ -82,3 +82,15 @@
       }
    }
 }
+
+/* Medium devices (tablets, 768px - 991px) */
+@media (max-width: 991px) {
+   .welcome .featured {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .welcome .highlight {
+      width: 90%;
+    }
+}
