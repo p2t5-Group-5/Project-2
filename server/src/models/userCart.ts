@@ -3,7 +3,7 @@ import { Product } from './product';
 
 // Define the attributes for the Product model
 interface UserCartAttributes {
-  id: number;
+  id?: number;
   buyer_id: number;
   product_id: number;
   quantity: number;
@@ -15,7 +15,7 @@ interface UserCartCreationAttributes extends Optional<UserCartAttributes, 'id'> 
 
 // Define the userCart class extending Sequelize's Model
 export class UserCart extends Model<UserCartAttributes, UserCartCreationAttributes> implements UserCartAttributes {
-  public id!: number;
+  public id?: number;
   public buyer_id!: number;
   public product_id!: number;
   public quantity!: number;

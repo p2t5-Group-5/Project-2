@@ -8,7 +8,7 @@ import ProductDetail from "../components/ProductDetail";
 
 const Sell = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<Product[]>([] as Product[]);
 
     const getUserIdByUsername = async () => {
         const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
@@ -27,7 +27,7 @@ const Sell = () => {
         }
     };
 
-    const deleteProduct = async (productId: number | null)=> {
+    const deleteProduct = async (productId: number | undefined)=> {
         const response = await fetch(`http://localhost:3001/api/products/${productId as number}`, {
            method: 'DELETE',
            headers: {

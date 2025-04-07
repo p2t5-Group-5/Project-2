@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 // Define the attributes for the User model
 interface UserAttributes {
-  id: number;
+  id?: number;
   username: string;
   usertype: string;
   password: string;
@@ -15,7 +15,7 @@ interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 // Define the User class extending Sequelize's Model
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
-  public id!: number;
+  public id?: number;
   public username!: string;
   public email!: string;
   public password!: string;

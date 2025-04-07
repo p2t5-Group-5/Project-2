@@ -4,7 +4,7 @@ import { Category } from './category';
 
 // Define the attributes for the Product model
 interface ProductAttributes {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   category_id: number;
@@ -18,7 +18,7 @@ interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> {}
 
 // Define the Product class extending Sequelize's Model
 export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
-  public id!: number;
+  declare id?: number;
   public name!: string;
   public description!: string;
   public category_id!: number;

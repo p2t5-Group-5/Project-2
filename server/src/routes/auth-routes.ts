@@ -30,6 +30,13 @@ export const signup = async (req: Request, res: Response) => {
   const { username, password, usertype, email } = req.body;
   
   try {
+    const existingUserIds = await User.findAll({
+      attributes: ['id']
+    });
+    const existingUserIdsArray = existingUserIds.map((user: any) => user.id);
+    const newUserId = Math.max(...existingUserIdsArray) + 1;
+
+
     const user = await User.findOne({
       where: { username: username },
       attributes: ['username']
@@ -40,6 +47,7 @@ export const signup = async (req: Request, res: Response) => {
     }
 
     await User.create({
+      id: newUserId,
       username: username,
       password: password,
       usertype,

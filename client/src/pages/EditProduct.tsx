@@ -120,7 +120,7 @@ const EditProduct = () => {
     <div className="form-container">
         <p>Name:  </p><input className="edit-product-field" id="name" type="text" defaultValue={thisProduct?.name || ''} />
         <p>Description:  </p><input className="edit-product-field" id="description" type="text" defaultValue={thisProduct?.description || '' }  />
-        <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" defaultValue={parseFloat(thisProduct?.price) || 4.04}/>
+        <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" defaultValue={thisProduct?.price || 4.04}/>
         {/* <p>Available Quantity:  </p><input  className="edit-product-field" id="quantity" type="number" value={thisProduct?.quantity || 0}/> */}
         <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" defaultValue={thisProduct?.image_url} />
         <div className="image-preview-container">
@@ -128,18 +128,11 @@ const EditProduct = () => {
         </div>
         <p>Category: </p>
         <select  className="edit-product-field drop-down" id="category" defaultValue={thisProduct?.category_id || 3}>
-          {categories.map((category: { id: number; name: string}) => (
+          {categories.map((category: { id: number; category: string}) => (
             <option key={category.id} value={category.id}>
-              {category.name}
+              {category.category}
             </option>
           ))}
-          {/* Added the hard coding below because I could not get the .map to work. If we fix it, comment out the section below so as not to duplicate the values -JH */}
-          <option value="1">Electronics</option>
-          <option value="2">Clothing</option>
-          <option value="3">Household</option>
-          <option value="4">Books</option>
-          <option value="5">Toys</option>
-          <option value="6">Food</option>
         </select>
         <p></p>
 
