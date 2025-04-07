@@ -74,7 +74,7 @@ const ProductsPage = () => {
         <div>
             <h1>{thisProduct.name}</h1>
             <p><i>Category: {thisProduct.Category.category}</i></p>
-            <div className="product-image-container">
+            <div className="product-image-container-solo">
                 <img src={thisProduct.image_url} alt={thisProduct.name} className="product-image" />
             </div>
             <p>{thisProduct.description}</p>
