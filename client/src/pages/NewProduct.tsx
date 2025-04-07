@@ -21,6 +21,8 @@ const NewProduct = () => {
     const data = await response.json();
     sellerId = data.id;
     console.log("sellerId", sellerId);
+    sellerId = data.id;
+    console.log("sellerId", sellerId);
   }
 
   const fetchCategories = async () => {
@@ -31,10 +33,12 @@ const NewProduct = () => {
       }
       const data = await response.json();
     setCategoryList(data)
+    setCategoryList(data)
     } catch (error) {
       console.error("Error fetching categories:", error);
-    };
+    }
   };
+
 
   useEffect(() => {
     fetchCategories();
@@ -48,13 +52,14 @@ const NewProduct = () => {
         errorMessageElement.innerHTML = "Please fill out all fields---they are all required.";
       }
       return;
-    };
+    }
 
     if (errorMessageElement) {
       errorMessageElement.innerHTML = "Trying to update now...";
     }
 
     try {
+      
       
       const response = await fetch(`http://localhost:3001/api/products`, {
         method: "POST",
@@ -97,11 +102,14 @@ const NewProduct = () => {
         <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" value={image_url} onChange={(e) => setImageUrl(e.target.value)} />
         <div className="image-preview-container">
           <img src={image_url} alt="Product" className="edit-product-image"/>
+          <img src={image_url} alt="Product" className="edit-product-image"/>
         </div>
         <p>Category: </p>
         <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => setCategoryId(parseInt(e.target.value))}>
+        <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => setCategoryId(parseInt(e.target.value))}>
           {categoryList.map((category) => (
             <option key={category.id} value={category.id}>
+              {category.category}
               {category.category}
             </option>
           ))}

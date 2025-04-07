@@ -1,11 +1,7 @@
 import { useState, useEffect,  } from "react";
-//import { Link } from "react-router-dom";
-//import { addToCart } from "../api/shopAPI";
 import type { Product } from "../interfaces/Product";
 import { useParams } from "react-router";
 import "../styles/ProductDetail.css";
-//import { retrieveUsers } from "../api/userAPI";
-// useLayoutEffect
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 
@@ -73,7 +69,7 @@ const ProductsPage = () => {
     return (
         <div>
             <h1>{thisProduct.name}</h1>
-            <p><i>Category: {thisProduct.Category.category}</i></p>
+            {/* <p><i>Category: {thisProduct.Category.category}</i></p> */}
             <div className="product-image-container-solo">
                 <img src={thisProduct.image_url} alt={thisProduct.name} className="product-image" />
             </div>

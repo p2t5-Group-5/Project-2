@@ -3,14 +3,30 @@ import { useState, useEffect } from "react";
 import { Product } from "../interfaces/Product";
 import auth from '../utils/auth'; 
 import CartProduct from '../components/CartProduct';
-import { quantityIncrease } from '../utils/adjustQuantity';
+import { quantityIncrease,quantityDecrease } from '../utils/adjustQuantity';
 
 
+function jwtDecode(token: string): { username: string } {
+   try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+         atob(base64)
+            .split('')
+            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+            .join('')
+      );
+      return JSON.parse(jsonPayload);
+   } catch (error) {
+      console.error("Error decoding JWT:", error);
+      throw new Error('Invalid token');
+   }
+}
 const Cart = () => {
    const { username } = jwtDecode(auth.getToken()) as { username: string };
    const [cart, setCart] = useState<Product[]>([]);
    const [userId, setUserId] = useState(undefined);
-
+   
    const getUserIdByUsername = async () => {
       const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
       const data = await response.json();
@@ -28,7 +44,7 @@ const Cart = () => {
          console.error("Error fetching cart:", error);
       }
    };
-
+   
    const deleteCartProduct = async (productId: number) => {
       if (!isNaN(productId)) {
          try {
@@ -64,16 +80,17 @@ const Cart = () => {
                {cart.length ? cart.map((product:Product) => (
                   <div key={product.id}>
                      <CartProduct
-                        id={product.id}
+                        id={product.id!}
                         name={product.name!}
                         image_url={product.image_url!}
                         price={product.price!}
-                        quantity={product.quantity}
+                        quantity={product.quantity ?? null}
                         increaseQuantity={quantityIncrease}
-                        decreaseQuantity={quantityIncrease}
+                        decreaseQuantity={quantityDecrease}
                         deleteCartProduct={deleteCartProduct}
                      />
-                     {/* <div onClick={() => deleteCartProduct(product.id)}>Delete</div> */}
+                    
+
                   </div>
                   )) : (
                      <h3>You do not have anything in your cart! Go to the Shop page to buy.</h3>
@@ -87,19 +104,3 @@ const Cart = () => {
 
 export default Cart;
 
-function jwtDecode(token: string): { username: string } {
-   try {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(
-         atob(base64)
-            .split('')
-            .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-            .join('')
-      );
-      return JSON.parse(jsonPayload);
-   } catch (error) {
-      console.error("Error decoding JWT:", error);
-      throw new Error('Invalid token');
-   }
-}

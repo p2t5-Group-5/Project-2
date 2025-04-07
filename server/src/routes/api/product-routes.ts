@@ -73,6 +73,7 @@ router.post('/', async (req: Request, res: Response) => {
     description,
     category_id,
     price,
+    quantity,
     seller_id,
     image_url,
   } = req.body;
@@ -89,6 +90,7 @@ router.post('/', async (req: Request, res: Response) => {
       description,
       category_id,
       price,
+      quantity,
       seller_id,
       image_url
     });

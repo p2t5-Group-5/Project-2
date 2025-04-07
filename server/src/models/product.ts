@@ -4,11 +4,12 @@ import { Category } from './category';
 
 // Define the attributes for the Product model
 interface ProductAttributes {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   category_id: number;
   price: number;
+  quantity: number;
   seller_id: number;
   image_url: string;
 }
@@ -18,12 +19,13 @@ interface ProductCreationAttributes extends Optional<ProductAttributes, 'id'> {}
 
 // Define the Product class extending Sequelize's Model
 export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
-  public id!: number;
+  declare id?: number;
   public name!: string;
   public description!: string;
   public category_id!: number;
   public seller_id!: number;
   public price!: number;
+  public quantity!: number;
   public image_url!: string;
 
   public static associate(models: { UserCart: typeof UserCart, Category: typeof Category }) {
@@ -61,6 +63,11 @@ export function ProductFactory(sequelize: Sequelize): typeof Product {
       price: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
       },
       image_url: {
         type: DataTypes.STRING,
