@@ -1,18 +1,20 @@
 // import { Link } from "react-router-dom";
-import { ApiMessage } from "../interfaces/ApiMessage";
+//import { ApiMessage } from "../interfaces/ApiMessage";
 import { MouseEventHandler } from "react";
 import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
-// import { WhereAttributeHashValue } from "sequelize";
+//import { WhereAttributeHashValue } from "sequelize";
+import { Product } from "../interfaces/Product";
 interface CartProductProps {
     id: number;
     name: string | undefined;
     price: number | null;
     quantity: number | null;
     image_url: string | undefined;
-    increaseQuantity: (id: number) => Promise<ApiMessage | void>;
-    decreaseQuantity: (id: number) => Promise<ApiMessage | void>;
-    deleteCartProduct: (id: number) => Promise<ApiMessage | void>;
-}
+    deleteCartProduct: (productId: number) => void;
+    increaseQuantity: (e: React.MouseEvent<HTMLButtonElement>, username: string, cart: Product[], setCart: React.Dispatch<React.SetStateAction<Product[]>>, products: Product[]) => void;
+    decreaseQuantity: (e: React.MouseEvent<HTMLButtonElement>, username: string, cart: Product[], setCart: React.Dispatch<React.SetStateAction<Product[]>>, products: Product[]) => void;
+ }
+
 
 const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: deleteCartProduct}: CartProductProps) => {
     
@@ -22,7 +24,7 @@ const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: d
 
         if (!isNaN(productID)) {
             try {
-                const data = await quantityIncrease(event, username, [], () => {}, []);
+                const data =  quantityIncrease(event, username, [], () => {}, []);
                 console.log(data);
                 return data;
             } catch (error) {
@@ -35,10 +37,10 @@ const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: d
         const productID = Number(event.currentTarget.value);
         if (!isNaN(productID)) {
             if (quantity === 1) {
-                await handleDelete(event);
+                handleDelete(event);
             } else {
                 try {
-                    const data = await quantityDecrease(event, 'username', [], () => {}, []);
+                    const data =  quantityDecrease(event, 'username', [], () => {}, []);
                     console.log(data);
                     return data;
                 } catch (error) {
@@ -53,7 +55,7 @@ const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: d
         const productID = Number(event.currentTarget.value);
         if (!isNaN(productID)) {
             try {
-                const data = await deleteCartProduct(productID);
+                const data =  deleteCartProduct(productID);
                 console.log(data);
                 return data;
             } catch (error) {

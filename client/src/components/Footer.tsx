@@ -5,8 +5,8 @@ const Footer = () =>{
     return(
         <footer>
             <div className='contact-links'>
-                <Link to='/Contact'>Contact</Link>
-                <Link to='/About'>About</Link>
+                <Link to='/contact'>Contact</Link>
+                <Link to='/about'>About</Link>
             </div>
             {/* <div>P2T5</div> */}
             <div className='social-media-links'>
