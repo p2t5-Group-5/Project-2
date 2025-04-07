@@ -9,6 +9,7 @@ interface ProductAttributes {
   description: string;
   category_id: number;
   price: number;
+  quantity: number;
   seller_id: number;
   image_url: string;
 }
@@ -24,6 +25,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
   public category_id!: number;
   public seller_id!: number;
   public price!: number;
+  public quantity!: number;
   public image_url!: string;
 
   public static associate(models: { UserCart: typeof UserCart, Category: typeof Category }) {
@@ -61,6 +63,11 @@ export function ProductFactory(sequelize: Sequelize): typeof Product {
       price: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
       },
       image_url: {
         type: DataTypes.STRING,

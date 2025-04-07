@@ -3,10 +3,10 @@ export interface Product {
     name: string | undefined;
     description: string | null;
     price: number | null;
-    quantity?: number | null;
+    quantity: number | null;
     image_url: string | undefined;
     category_id: number | null;
-    Category?: {
+    Category: {
         id: number | null;
         category: string | null;
     };

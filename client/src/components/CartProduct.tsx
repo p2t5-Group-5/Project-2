@@ -2,7 +2,7 @@
 import { ApiMessage } from "../interfaces/ApiMessage";
 import { MouseEventHandler } from "react";
 import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
-import { WhereAttributeHashValue } from "sequelize";
+// import { WhereAttributeHashValue } from "sequelize";
 interface CartProductProps {
     id: number;
     name: string | undefined;
