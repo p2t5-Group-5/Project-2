@@ -4,6 +4,7 @@ import { Product } from "../interfaces/Product";
 import auth from '../utils/auth'; 
 import CartProduct from '../components/CartProduct';
 import { quantityIncrease,quantityDecrease } from '../utils/adjustQuantity';
+import { calculateCartTotal } from '../utils/calculateCartTotal';
 
 
 function jwtDecode(token: string): { username: string } {
@@ -78,7 +79,7 @@ const Cart = () => {
             <p></p>
             <ul>
                {cart.length ? cart.map((product:Product) => (
-                  <div key={product.id}>
+                  <><div key={product.id}>
                      <CartProduct
                         id={product.id!}
                         name={product.name!}
@@ -87,16 +88,22 @@ const Cart = () => {
                         quantity={product.quantity ?? null}
                         increaseQuantity={quantityIncrease}
                         decreaseQuantity={quantityDecrease}
-                        deleteCartProduct={deleteCartProduct}
-                     />
-                    
+                        deleteCartProduct={deleteCartProduct} />
 
-                  </div>
+
+                  </div> </>
                   )) : (
                      <h3>You do not have anything in your cart! Go to the Shop page to buy.</h3>
                   )
                }
             </ul>
+            
+            <div className="cart-total">
+                        <p>Subtotal: ${calculateCartTotal(cart).subtotal}</p>
+                        <p>Tax (10%): ${calculateCartTotal(cart).taxAmount}</p>
+                        <h3>Total: ${calculateCartTotal(cart).total}</h3>
+                        {/* <button className="checkout-button">Checkout</button> */}
+                     </div>
          </div>
       </div>
    );

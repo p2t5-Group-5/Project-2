@@ -1,152 +1,245 @@
+
+
 import { Product } from "../interfaces/Product";
 import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
-import auth from '../utils/auth';
 import { useParams } from "react-router";
 import "../styles/ProductDetail.css";
 import { Category } from "../interfaces/Category";
 
 const EditProduct = () => {
-  const [thisProduct, setThisProduct] = useState< Product| null>(null);
-  const [categories, setCategories] = useState<Category[]>([] as Category[]);
-  //const [inputValue, setInputValue] = useState("");
-  const [userId, setUserId] = useState(undefined);
-  const params = useParams();
-  console.log("params", params.id);
-  const { username } = jwtDecode(auth.getToken()) as { username: string };
+  const [thisProduct, setThisProduct] = useState<Product | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [newCategory, setNewCategory] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const params = useParams<{ id: string }>();
   
-  const getUserIdByUsername = async () => {
-    const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
-    const data = await response.json();
-    console.log(userId);
-    setUserId(data.id);
-  }
-
-
   const fetchProduct = async () => {
-    // if (params.id === undefined) {
-    console.log("New product: Product ID is undefined");
-    // } else {
-        try {
-          const response = await fetch("http://localhost:3001/api/products/" + params.id);
-          console.log("response", response);
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data = await response.json();
-          setThisProduct(data);
-        } catch (error) {
-          console.error("Error fetching product:", error);
-        }
-    // };
+    if (!params.id) {
+      console.log("New product: Product ID is undefined");
+      setIsLoading(false);
+      return;
+    }
+    
+    try {
+      setIsLoading(true);
+      const response = await fetch(`http://localhost:3001/api/products/${params.id}`);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch product (Status: ${response.status})`);
+      }
+      
+      const data = await response.json();
+      setThisProduct(data);
+      setNewCategory(data.category_id);
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      setErrorMsg("Failed to load product details. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-
+  
+  const handleCategoryChange = (optionId: string) => {
+    setNewCategory(+optionId);
+  };
+  
   const fetchCategories = async () => {
     try {
       const response = await fetch("http://localhost:3001/api/categories");
+      
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error(`Network response was not ok (Status: ${response.status})`);
       }
+      
       const data = await response.json();
-      console.log(data)
       setCategories(data);
     } catch (error) {
       console.error("Error fetching categories:", error);
+      setErrorMsg("Failed to load categories. Please try again.");
     }
   };
-
+  
   useEffect(() => {
-    fetchProduct();
-    fetchCategories();
-    console.log(categories)
-    getUserIdByUsername();
-  }, []);
-
+    const loadData = async () => {
+      await Promise.all([fetchProduct(), fetchCategories()]);
+    };
+    
+    loadData();
+  }, [params.id]);
+  
   const handleUpdateItem = async () => {
-    const errorMessageElement = document.getElementById("error-message");
-    if (document.getElementById("name") === null || document.getElementById("description") === null || document.getElementById("price") === null || document.getElementById("image") === null || document.getElementById("category") === null) {
-      if (errorMessageElement) {
-        errorMessageElement.innerHTML = "Please fill out all fields---they are all required.";
-      }
+    setErrorMsg("");
+    
+    // Get form elements
+    const nameEl = document.getElementById("name") as HTMLInputElement;
+    const descriptionEl = document.getElementById("description") as HTMLInputElement;
+    const priceEl = document.getElementById("price") as HTMLInputElement;
+    const imageEl = document.getElementById("image") as HTMLInputElement;
+    
+    // Validate form fields
+    if (!nameEl?.value || !descriptionEl?.value || !priceEl?.value || !imageEl?.value || !newCategory) {
+      setErrorMsg("Please fill out all fields—they are all required.");
       return;
     }
-
-    const productId = params.id;
-    const name = (document.getElementById("name") as HTMLInputElement).value;
-    const description = (document.getElementById("description") as HTMLInputElement).value;
-    const price = parseFloat((document.getElementById("price") as HTMLInputElement).value);
-    const image_url = (document.getElementById("image") as HTMLInputElement).value;
-    const category_id = parseInt((document.getElementById("category") as HTMLInputElement).value);
-    if (errorMessageElement) {
-      errorMessageElement.innerHTML = "Trying to update now...";
+    
+    const price = parseFloat(priceEl.value);
+    if (isNaN(price) || price <= 0) {
+      setErrorMsg("Please enter a valid price.");
+      return;
     }
-
-
+    
+    const productData = {
+      name: nameEl.value,
+      description: descriptionEl.value,
+      price,
+      image_url: imageEl.value,
+      category_id: newCategory
+    };
+    
     try {
-      const response = await fetch(`http://localhost:3001/api/products/${productId}`, {
+      const response = await fetch(`http://localhost:3001/api/products/${params.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          name,
-          description,
-          price,
-          image_url,
-          category_id,
-        }),
+        body: JSON.stringify(productData),
       });
-
+      
       if (!response.ok) {
-        throw new Error("Failed to update product");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Failed to update product (Status: ${response.status})`);
       }
-
-      if (errorMessageElement) {
-        errorMessageElement.innerHTML = "Update was successful!";
-        setTimeout(function() {
-          window.location.assign("/sell")
-        }, 3000);
-      }
+      
+      setErrorMsg("Update was successful!");
+      setTimeout(() => {
+        window.location.assign("/sell");
+      }, 3000);
     } catch (error) {
       console.error("Error updating product:", error);
-      if (errorMessageElement) {
-        errorMessageElement.innerHTML = "Error updating product. Please try again. :(";
-      }
+      setErrorMsg(`Error updating product: ${error instanceof Error ? error.message : "Please try again."}`);
     }
   };
-
+  
+  if (isLoading) {
+    return <div className="loading">Loading product details...</div>;
+    
+  }    
   return (
     <div className="form-container">
-        <p>Name:  </p><input className="edit-product-field" id="name" type="text" defaultValue={thisProduct?.name || ''} />
-        <p>Description:  </p><input className="edit-product-field" id="description" type="text" defaultValue={thisProduct?.description || '' }  />
-        <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" defaultValue={thisProduct?.price as number}/>
-        {/* <p>Available Quantity:  </p><input  className="edit-product-field" id="quantity" type="number" value={thisProduct?.quantity || 0}/> */}
-        <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" defaultValue={thisProduct?.image_url} />
-        <div className="image-preview-container">
-          <img src={thisProduct?.image_url} alt="Product" className="edit-product-image"/>
+            <p>Name:  </p><input className="edit-product-field" id="name" type="text" defaultValue={thisProduct?.name || ''} />
+            <p>Description:  </p><input className="edit-product-field" id="description" type="text" defaultValue={thisProduct?.description || '' }  />
+            <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" defaultValue={thisProduct?.price as number}/>
+            {/* <p>Available Quantity:  </p><input  className="edit-product-field" id="quantity" type="number" value={thisProduct?.quantity || 0}/> */}
+            <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" defaultValue={thisProduct?.image_url} />
+            <div className="image-preview-container">
+              <img src={thisProduct?.image_url} alt="Product" className="edit-product-image"/>
+            </div>
+            <p>Category: </p>
+            <select
+              className="edit-product-field drop-down"
+              id="category"
+              defaultValue={thisProduct?.category_id || 3}
+              onChange={(e) => handleCategoryChange(e.target.value)}>
+              {categories.map((category: { id: number; category: string}) => (
+                <option key={category.id} value={category.id}>
+                  {category.category}
+                </option>
+              ))}
+            </select>
+            <p></p>
+    
+            <div className="action-buttons">
+            <button className="action-buttons" onClick={() => handleUpdateItem()}>Update Item</button>
+            <div></div>
+            <button className="action-buttons" onClick={() => window.location.assign("/sell")}>Nevermind!</button>
+            <div></div>
+            </div>
+            <p id="error-message">{errorMsg}</p>
         </div>
-        <p>Category: </p>
-        <select  className="edit-product-field drop-down" id="category" defaultValue={thisProduct?.category_id || 3}>
-          {categories.map((category: { id: number; category: string}) => (
-            <option key={category.id} value={category.id}>
-              {category.category}
-            </option>
-          ))}
-        </select>
-        <p></p>
+      );
+    
+    };
+    
+    export default EditProduct;
+    
+    //   return (
+      //     <div className="form-container">
+      //       <h2>Edit Product</h2>
+    
+    //       {errorMsg && <p className="error-message">{errorMsg}</p>}
+      
+//       <div className="form-group">
+//         <label htmlFor="name">Name:</label>
+//         <input 
+//           className="edit-product-field" 
+//           id="name" 
+//           type="text" 
+//           defaultValue={thisProduct?.name || ''} 
+//         />
+//       </div>
+      
+//       <div className="form-group">
+//         <label htmlFor="description">Description:</label>
+//         <textarea
+//           className="edit-product-field" 
+//           id="description" 
+//           defaultValue={thisProduct?.description || ''} 
+//         />
+//       </div>
+      
+//       <div className="form-group">
+//         <label htmlFor="price">Price ($):</label>
+//         <input 
+//           className="edit-product-field" 
+//           id="price" 
+//           type="number" 
+//           step="0.01" 
+//           min="0.01"
+//           defaultValue={thisProduct?.price || ''} 
+//         />
+//       </div>
+      
+//       <div className="form-group">
+//         <label htmlFor="image">Image URL:</label>
+//         <input 
+//           className="edit-product-field" 
+//           id="image" 
+//           type="text" 
+//           defaultValue={thisProduct?.image_url || ''} 
+//         />
+//       </div>
+      
+//       {thisProduct?.image_url && (
+//         <div className="image-preview-container">
+//           <img src={thisProduct.image_url} alt="Product" className="edit-product-image"/>
+//         </div>
+//       )}
+      
+//       <div className="form-group">
+//         <label htmlFor="category">Category:</label>
+//         <select
+//           className="edit-product-field drop-down"
+//           id="category"
+//           value={newCategory || ''}
+//           onChange={(e) => handleCategoryChange(e.target.value)}
+//         >
+//           <option value="" disabled>Select a category</option>
+//           {categories.map((category) => (
+//             <option key={category.id} value={category.id}>
+//               {category.category}
+//             </option>
+//           ))}
+//         </select>
+//       </div>
 
-        <div className="action-buttons">
-        <button className="action-buttons" onClick={() => handleUpdateItem()}>Update Item</button>
-        <div></div>
-        <button className="action-buttons" onClick={() => window.location.assign("/sell")}>Nevermind!</button>
-        <div></div>
-        </div>
-        <p id="error-message"></p>
-    </div>
-  );
+//       <div className="action-buttons">
+//         <button onClick={handleUpdateItem}>Update Item</button>
+//         <button onClick={() => window.location.assign("/sell")}>Cancel</button>
+//       </div>
+//     </div>
+//   );
+// };
 
-};
-
-export default EditProduct;
+// export default EditProduct;
 
