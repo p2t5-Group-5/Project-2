@@ -137,10 +137,9 @@ const EditProduct = () => {
         <p></p>
 
         <div className="action-buttons">
-        <button className="action-buttons" onClick={() => handleUpdateItem()}>Update Item</button>
-        <div></div>
-        <button className="action-buttons" onClick={() => window.location.assign("/sell")}>Nevermind!</button>
-        <div></div>
+        {/* <button className="action-buttons" onClick={() => handleUpdateItem()}>Update Item</button> */}
+        <button className="btn btn-primary" onClick={() => handleUpdateItem()} type='submit'>Update</button>
+        <button className="btn btn-primary" onClick={() => window.location.assign("/sell")}>Cancel</button>
         </div>
         <p id="error-message"></p>
     </div>

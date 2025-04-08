@@ -82,6 +82,12 @@
       }
    }
 }
+.dark {
+   .highlight, .seller, .item {
+      background-color: rgb(118, 11, 11);
+      color: #fbd7a6;
+   }
+}
 
 /* Medium devices (tablets, 768px - 991px) */
 @media (max-width: 991px) {
@@ -91,6 +97,6 @@
     }
   
     .welcome .highlight {
-      width: 90%;
+      width: 80%;
     }
 }

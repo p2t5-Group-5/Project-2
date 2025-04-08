@@ -95,7 +95,7 @@ const NewProduct = () => {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container new-product">
         <p>Name:  </p><input className="edit-product-field" id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
         <p>Description:  </p><input className="edit-product-field" id="description" type="text" value={description} onChange={(e) => setDescription(e.target.value)}  />
         <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" value={price} onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}/>
@@ -114,10 +114,8 @@ const NewProduct = () => {
         <p></p>
 
         <div className="action-buttons">
-        <button className="action-buttons" onClick={() => handlePostItem()}>Update Item</button>
-        <div></div>
-        <button className="action-buttons" onClick={() => window.location.assign("/sell")}>Nevermind!</button>
-        <div></div>
+        <button className="btn btn-primary" onClick={() => handlePostItem()}>Update</button>
+        <button className="btn btn-primary" onClick={() => window.location.assign("/sell")}>Cancel</button>
         </div>
         <p id="error-message"></p>
     </div>
