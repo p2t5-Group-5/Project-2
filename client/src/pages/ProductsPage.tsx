@@ -76,11 +76,9 @@ const ProductsPage = () => {
             <p>{thisProduct.description}</p>
             <p>Price: ${thisProduct.price}</p>
             {/* <p>Available Quantity: {thisProduct.quantity}</p> */}
-            <button onClick={() => handleAddToCart()}>Add to Cart</button>
+            <button className="btn btn-primary" onClick={() => handleAddToCart()}>Add to Cart</button>
         </div>
     );
  }
-
-
 
 export default ProductsPage;
