@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 import "../styles/ProductDetail.css";
@@ -13,16 +13,15 @@ const NewProduct = () => {
   const [categoryList, setCategoryList] = useState<Category[]>([] as Category[]);
   const [category_id, setCategoryId] = useState(1);
 
-  let sellerId: number;
+  // let sellerId: number;
 
   const getUserIdByUsername = async () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
     const data = await response.json();
-    sellerId = data.id;
-    console.log("sellerId", sellerId);
-    sellerId = data.id;
-    console.log("sellerId", sellerId);
+    return data.id;
+    // sellerId = data.id;
+    // console.log("sellerId", sellerId);
   }
 
   const fetchCategories = async () => {
@@ -32,7 +31,6 @@ const NewProduct = () => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-    setCategoryList(data)
     setCategoryList(data)
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -44,6 +42,11 @@ const NewProduct = () => {
     fetchCategories();
     getUserIdByUsername();
   }, []);
+
+  const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+    setCategoryId(parseInt(e.target.value))
+  }
 
   const handlePostItem = async () => {
     const errorMessageElement = document.getElementById("error-message");
@@ -60,7 +63,8 @@ const NewProduct = () => {
 
     try {
       
-      
+      const sellerId = await getUserIdByUsername();
+      console.log("category", category_id);
       const response = await fetch(`http://localhost:3001/api/products`, {
         method: "POST",
         headers: {
@@ -84,7 +88,7 @@ const NewProduct = () => {
         errorMessageElement.innerHTML = "Update was successful!";
         setTimeout(function() {
           window.location.assign("/sell")
-        }, 3000);
+        }, 1000);
       }
     } catch (error) {
       console.error("Error updating product:", error);
@@ -104,7 +108,7 @@ const NewProduct = () => {
           <img src={image_url} alt="Product" className="edit-product-image"/>
         </div>
         <p>Category: </p>
-        <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => setCategoryId(parseInt(e.target.value))}>
+        <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => handleCategoryChange(e)}>
           {categoryList.map((category) => (
             <option key={category.id} value={category.id}>
               {category.category}

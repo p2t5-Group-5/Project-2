@@ -1,10 +1,8 @@
 # Handcrafted Harmony
  
 ## Description
-This website allows for users to create an account where they can purchase and sell products on this website. On our home page we have an area where we feature our seller of  the month and a featured item of the month from that store. You can  also  select the featured store and it will bring you into the store. you can click on the featured item and it will bring you right to that item details page. On the   shop page you get a breakdown of all the items available in the shop. seller page you have access to all the products being sold in that shop and you can add products as well. Once you have added items to your cart you can go to the cart page and checkout. .
-undefined.
-this allows users to purchase and sell items on our website..
-our project is different because we only sell handmade items. .
+This website allows for users to create an account where they can purchase and sell products on this website. On our home page we have an area where we feature our seller of  the month and a featured item of the month from that store. You can  also  select the featured store and it will bring you into the store. you can click on the featured item and it will bring you right to that item details page. On the   shop page you get a breakdown of all the items available in the shop. seller page you have access to all the products being sold in that shop and you can add products as well. Once you have added items to your cart you can go to the cart page and checkout. This allows users to purchase and sell items on our website.
+our project is different because we only sell handmade items.
 
 
 

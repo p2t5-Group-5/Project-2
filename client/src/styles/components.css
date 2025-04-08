@@ -215,14 +215,6 @@ footer {
   }
 }
 
-:root{
-  --darkhovertxt: #9c6c3a;
-  --lightorange: rgb(193, 128, 7);
-  --teal: rgba(80, 255, 185, 0.448);
-  --lightteal: rgb(80, 255, 185);
-  --brown: rgb(79, 0, 0);
- }
-
 /* Darkmode */
 .dark {
   /* general page look */

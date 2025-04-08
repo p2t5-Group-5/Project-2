@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Active: 1743647542566@@127.0.0.1@5432@postgres
 -- DROP DATABASE
 DROP DATABASE IF EXISTS project_2_db;
@@ -41,6 +42,7 @@ CREATE TABLE user_cart (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
+ALTER TABLE products ADD COLUMN quantity INT DEFAULT 0;
 -- price DECIMAL(10, 2) NOT NULL,
 -- image_url VARCHAR(255),
 -- brand VARCHAR(50),
