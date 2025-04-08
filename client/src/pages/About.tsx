@@ -10,7 +10,7 @@ const About =() => {
         <div className="profile">
         <div className="left">
           <h3>Seth Eggenburg </h3>
-          <a href="http://">Github</a>
+          <a href="https://github.com/SethEggz">Github</a>
         </div>
         <div className="right"><p>Bio information</p></div>
         </div>

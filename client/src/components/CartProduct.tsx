@@ -74,8 +74,8 @@ const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: d
                 <div>Qty: {quantity}</div>
                 {/* <button value={String(id)} onClick={handleDecrease}>[-]</button> */}
             </div>
-            <div>${price}</div>
-            <div>Total: ${quantity! * price!}</div>
+            <div className="price">${price}</div>
+            {/* <div>Total: ${quantity! * price!}</div> */}
             <button value={String(id)} onClick={handleDelete}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                     width="30"

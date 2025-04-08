@@ -38,9 +38,7 @@ export function CategoryFactory(sequelize: Sequelize): typeof Category {
     {
       tableName: 'categories',  // Name of the table in PostgreSQL
       sequelize,            // The Sequelize instance that connects to PostgreSQL
-      hooks: {
-        // // Before creating a new category, check that the category doesn't already exist?
-      }
+      timestamps: false
     }
   );
 

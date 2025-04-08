@@ -6,20 +6,22 @@ import ProductDetail from "../components/ProductDetail.tsx";
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
 const Shop = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([]);
     const [userId, setUserId] = useState(undefined);
 
     const getUserIdByUsername = async () => {
-        const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
+        const response = await fetch(`${BASE_URL}/api/users/username/${username}`);
         const data = await response.json();
         setUserId(data.id);
     }
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch("http://localhost:3001/api/products");
+            const response = await fetch(`${BASE_URL}/api/products`);
             const data = await response.json();
             setProducts(data);
         } catch (error) {
@@ -36,7 +38,7 @@ const Shop = () => {
     }
 
     const handleAddToCart = async (productId: number | null) => {
-        const response = await fetch(`http://localhost:3001/api/userCart/${userId}`, {
+        const response = await fetch(`${BASE_URL}/api/userCart/${userId}`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
