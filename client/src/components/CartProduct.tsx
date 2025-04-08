@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom";
 //import { ApiMessage } from "../interfaces/ApiMessage";
 import { MouseEventHandler } from "react";
-import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
+// import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
 //import { WhereAttributeHashValue } from "sequelize";
 import { Product } from "../interfaces/Product";
 interface CartProductProps {
@@ -18,37 +18,37 @@ interface CartProductProps {
 
 const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: deleteCartProduct}: CartProductProps) => {
     
-    const handleIncrease: MouseEventHandler<HTMLButtonElement> = async (event) => {
-        const productID = Number(event.currentTarget.value);
-        const username = localStorage.getItem('username') || "guest"
+    // const handleIncrease: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    //     const productID = Number(event.currentTarget.value);
+    //     const username = localStorage.getItem('username') || "guest"
 
-        if (!isNaN(productID)) {
-            try {
-                const data =  quantityIncrease(event, username, [], () => {}, []);
-                console.log(data);
-                return data;
-            } catch (error) {
-                console.error('Whoops! Unable to increase quantity:', error);
-            }
-        }
-    };
+    //     if (!isNaN(productID)) {
+    //         try {
+    //             const data =  quantityIncrease(event, username, [], () => {}, []);
+    //             console.log(data);
+    //             return data;
+    //         } catch (error) {
+    //             console.error('Whoops! Unable to increase quantity:', error);
+    //         }
+    //     }
+    // };
 
-    const handleDecrease: MouseEventHandler<HTMLButtonElement> = async (event) => {
-        const productID = Number(event.currentTarget.value);
-        if (!isNaN(productID)) {
-            if (quantity === 1) {
-                handleDelete(event);
-            } else {
-                try {
-                    const data =  quantityDecrease(event, 'username', [], () => {}, []);
-                    console.log(data);
-                    return data;
-                } catch (error) {
-                    console.error('Whoops! Unable to decrease quantity:', error);
-                }
-            }
-        }
-    };
+    // const handleDecrease: MouseEventHandler<HTMLButtonElement> = async (event) => {
+    //     const productID = Number(event.currentTarget.value);
+    //     if (!isNaN(productID)) {
+    //         if (quantity === 1) {
+    //             handleDelete(event);
+    //         } else {
+    //             try {
+    //                 const data =  quantityDecrease(event, 'username', [], () => {}, []);
+    //                 console.log(data);
+    //                 return data;
+    //             } catch (error) {
+    //                 console.error('Whoops! Unable to decrease quantity:', error);
+    //             }
+    //         }
+    //     }
+    // };
 
     const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
         // console.log('Delete button clicked');
@@ -69,10 +69,10 @@ const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: d
             <div className="item-name">{name}</div>
             <img width="25" src={image_url}></img>
             <div className="quantity-adjustment">
-                <button value={String(id)} onClick={handleIncrease}>[+]</button> 
+                {/* <button value={String(id)} onClick={handleIncrease}>[+]</button>  */}
                 {/* Dev: use Bootstrap to style buttons later */}
                 <div>Qty: {quantity}</div>
-                <button value={String(id)} onClick={handleDecrease}>[-]</button>
+                {/* <button value={String(id)} onClick={handleDecrease}>[-]</button> */}
             </div>
             <div>${price}</div>
             <div>Total: ${quantity! * price!}</div>
