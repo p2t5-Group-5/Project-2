@@ -1,13 +1,13 @@
 import { useState, useEffect,  } from "react";
 import type { Product } from "../interfaces/Product";
 import { useParams } from "react-router";
-import "../styles/ProductDetail.css";
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
+import '../styles/ProductPage.css';
 
 
 const ProductsPage = () => {
-    const [thisProduct, setThisProduct] = useState< Product| null>(null);
+    const [product, setProduct] = useState< Product| null>(null);
     const [userId, setUserId] = useState(undefined);
     const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,7 @@ const ProductsPage = () => {
                 throw new Error("Network response was not ok");
             }
             const data = await response.json();
-            setThisProduct(data);
+            setProduct(data);
         } catch (error) {
             console.error("Error fetching product:", error);
         } finally {
@@ -62,21 +62,27 @@ const ProductsPage = () => {
         return <div>Loading...</div>;
     }
 
-    if (!thisProduct) {
+    if (!product) {
         return <div>No item found</div>;
     }
 
     return (
-        <div>
-            <h1>{thisProduct.name}</h1>
-            <p><i>Category: {thisProduct.Category.category}</i></p>
-            <div className="product-image-container-solo">
-                <img src={thisProduct.image_url} alt={thisProduct.name} className="product-image" />
+        <div className="product-page">
+            <div className="product-title">
+                <h1>{product.name}</h1>
+                <p><i>Category: {product.Category.category}</i></p>
             </div>
-            <p>{thisProduct.description}</p>
-            <p>Price: ${thisProduct.price}</p>
-            {/* <p>Available Quantity: {thisProduct.quantity}</p> */}
-            <button className="btn btn-primary" onClick={() => handleAddToCart()}>Add to Cart</button>
+            <div className="product-details">
+                <div className="product-image-container-solo">
+                    <img src={product.image_url} alt={product.name} className="product-image" />
+                </div>
+                <div className="product-price-and-button">
+                    <p>{product.description}</p>
+                    <p className="product-price">Price: ${product.price}</p>
+                    {/* <p>Available Quantity: {product.quantity}</p> */}
+                    <button className="btn btn-primary" onClick={() => handleAddToCart()}>Add to Cart</button>
+                </div>
+            </div>
         </div>
     );
  }
