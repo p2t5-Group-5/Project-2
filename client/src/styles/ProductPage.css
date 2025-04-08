@@ -31,3 +31,22 @@
 .product-price-and-button .product-price {
     align-self: flex-end;
 }
+
+/*  */
+
+@media (max-width: 991px) {
+    .product-page {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-details {
+        flex-direction: column;
+        margin-top: 2em;                           ;
+    }
+
+    .product-page button {
+        width: 70%;
+        font-size: 14px !important;
+    }
+}

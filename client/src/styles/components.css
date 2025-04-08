@@ -78,12 +78,22 @@ header {
   text-align: start;
 }
 
+.cart-item img {
+  width: 4em;
+  height: 4em;
+}
+
 .cart-item div {
   width: 5em;
 }
 
+.cart-item .price {
+  text-align: right;
+}
+
 .cart-item button {
   border: none;
+  background-color: none;
 }
 
 /* Navbar.tsx */
@@ -338,8 +348,18 @@ footer {
   
   .cart-item {
     font-size: 18px;
+    flex-direction: column;
   }
   
+  .cart-item .item-name {
+    text-align: center;
+    margin-bottom: 0.2em;
+  }
+
+  .cart-item .price {
+    text-align: center;
+  }
+
   form {
     input, textarea {
       width: 90%;
