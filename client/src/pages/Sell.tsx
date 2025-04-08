@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 import auth from '../utils/auth';
 import ProductDetail from "../components/ProductDetail";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
 const Sell = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([] as Product[]);
 
     const getUserIdByUsername = async () => {
-        const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
+        const response = await fetch(`${BASE_URL}/api/users/username/${username}`);
         const data = await response.json();
         return data.id;
     }
@@ -19,7 +21,7 @@ const Sell = () => {
     const fetchProducts = async () => {
         try {
             const userId = await getUserIdByUsername();
-            const response = await fetch(`http://localhost:3001/api/products/${userId}/products`);
+            const response = await fetch(`${BASE_URL}/api/products/${userId}/products`);
             const data = await response.json();
             setProducts(data);
         } catch (error) {
@@ -28,7 +30,7 @@ const Sell = () => {
     };
 
     const deleteProduct = async (productId: number | undefined)=> {
-        const response = await fetch(`http://localhost:3001/api/products/${productId as number}`, {
+        const response = await fetch(`${BASE_URL}/api/products/${productId as number}`, {
            method: 'DELETE',
            headers: {
             'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import auth from '../utils/auth';
 import "../styles/ProductDetail.css";
 import { Category } from "../interfaces/Category";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const NewProduct = () => {
   const [name , setName] = useState("");
@@ -17,7 +18,7 @@ const NewProduct = () => {
 
   const getUserIdByUsername = async () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
-    const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
+    const response = await fetch(`${BASE_URL}/api/users/username/${username}`);
     const data = await response.json();
     return data.id;
     // sellerId = data.id;
@@ -26,7 +27,7 @@ const NewProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/categories");
+      const response = await fetch(`${BASE_URL}/api/categories`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -65,7 +66,7 @@ const NewProduct = () => {
       
       const sellerId = await getUserIdByUsername();
       console.log("category", category_id);
-      const response = await fetch(`http://localhost:3001/api/products`, {
+      const response = await fetch(`${BASE_URL}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

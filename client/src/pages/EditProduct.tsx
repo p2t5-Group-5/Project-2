@@ -6,6 +6,8 @@ import { useParams } from "react-router";
 import "../styles/ProductDetail.css";
 import { Category } from "../interfaces/Category";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
 const EditProduct = () => {
   const [thisProduct, setThisProduct] = useState<Product | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -23,7 +25,7 @@ const EditProduct = () => {
     
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:3001/api/products/${params.id}`);
+      const response = await fetch(`${BASE_URL}/api/products/${params.id}`);
       
       if (!response.ok) {
         throw new Error(`Failed to fetch product (Status: ${response.status})`);
@@ -46,7 +48,7 @@ const EditProduct = () => {
   
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/categories");
+      const response = await fetch(`${BASE_URL}/api/categories`);
       
       if (!response.ok) {
         throw new Error(`Network response was not ok (Status: ${response.status})`);
@@ -98,7 +100,7 @@ const EditProduct = () => {
     };
     
     try {
-      const response = await fetch(`http://localhost:3001/api/products/${params.id}`, {
+      const response = await fetch(`${BASE_URL}/api/products/${params.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -163,83 +165,5 @@ const EditProduct = () => {
     
     export default EditProduct;
     
-    //   return (
-      //     <div className="form-container">
-      //       <h2>Edit Product</h2>
-    
-    //       {errorMsg && <p className="error-message">{errorMsg}</p>}
-      
-//       <div className="form-group">
-//         <label htmlFor="name">Name:</label>
-//         <input 
-//           className="edit-product-field" 
-//           id="name" 
-//           type="text" 
-//           defaultValue={thisProduct?.name || ''} 
-//         />
-//       </div>
-      
-//       <div className="form-group">
-//         <label htmlFor="description">Description:</label>
-//         <textarea
-//           className="edit-product-field" 
-//           id="description" 
-//           defaultValue={thisProduct?.description || ''} 
-//         />
-//       </div>
-      
-//       <div className="form-group">
-//         <label htmlFor="price">Price ($):</label>
-//         <input 
-//           className="edit-product-field" 
-//           id="price" 
-//           type="number" 
-//           step="0.01" 
-//           min="0.01"
-//           defaultValue={thisProduct?.price || ''} 
-//         />
-//       </div>
-      
-//       <div className="form-group">
-//         <label htmlFor="image">Image URL:</label>
-//         <input 
-//           className="edit-product-field" 
-//           id="image" 
-//           type="text" 
-//           defaultValue={thisProduct?.image_url || ''} 
-//         />
-//       </div>
-      
-//       {thisProduct?.image_url && (
-//         <div className="image-preview-container">
-//           <img src={thisProduct.image_url} alt="Product" className="edit-product-image"/>
-//         </div>
-//       )}
-      
-//       <div className="form-group">
-//         <label htmlFor="category">Category:</label>
-//         <select
-//           className="edit-product-field drop-down"
-//           id="category"
-//           value={newCategory || ''}
-//           onChange={(e) => handleCategoryChange(e.target.value)}
-//         >
-//           <option value="" disabled>Select a category</option>
-//           {categories.map((category) => (
-//             <option key={category.id} value={category.id}>
-//               {category.category}
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-
-//       <div className="action-buttons">
-//         <button onClick={handleUpdateItem}>Update Item</button>
-//         <button onClick={() => window.location.assign("/sell")}>Cancel</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default EditProduct;
+ 
 

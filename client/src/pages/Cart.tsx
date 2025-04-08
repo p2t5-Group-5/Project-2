@@ -6,6 +6,8 @@ import CartProduct from "../components/CartProduct";
 import { quantityIncrease, quantityDecrease } from "../utils/adjustQuantity";
 import { calculateCartTotal } from "../utils/calculateCartTotal";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
 function jwtDecode(token: string): { username: string } {
   try {
     const base64Url = token.split(".")[1];
@@ -29,7 +31,7 @@ const Cart = () => {
 
   const getUserIdByUsername = async () => {
     const response = await fetch(
-      `http://localhost:3001/api/users/username/${username}`
+      `${BASE_URL}/api/users/username/${username}`
     );
     const data = await response.json();
     return data.id;
@@ -40,7 +42,7 @@ const Cart = () => {
       const userIdByUsername = await getUserIdByUsername();
       setUserId(userIdByUsername);
       const response = await fetch(
-        `http://localhost:3001/api/userCart/${userIdByUsername}`
+        `${BASE_URL}/api/userCart/${userIdByUsername}`
       );
       const data = await response.json();
       setCart(data);
@@ -53,7 +55,7 @@ const Cart = () => {
     if (!isNaN(productId)) {
       try {
         const response = await fetch(
-          `http://localhost:3001/api/userCart/${userId}`,
+          `${BASE_URL}/api/userCart/${userId}`,
           {
             method: "DELETE",
             headers: {
