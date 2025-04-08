@@ -105,7 +105,7 @@ const NewProduct = () => {
         <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" value={price} onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}/>
         <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" value={image_url} onChange={(e) => setImageUrl(e.target.value)} />
         <div className="image-preview-container">
-          <img src={image_url} alt="Product" className="edit-product-image"/>
+          {image_url ? <img src={image_url} alt="product-image" className="edit-product-image"/>: ''}
         </div>
         <p>Category: </p>
         <select  className="edit-product-field drop-down" id="category" defaultValue={3} onChange={(e) => handleCategoryChange(e)}>
@@ -118,7 +118,7 @@ const NewProduct = () => {
         <p></p>
 
         <div className="action-buttons">
-        <button className="btn btn-primary" onClick={() => handlePostItem()}>Update</button>
+        <button className="btn btn-primary" onClick={() => handlePostItem()}>Post</button>
         <button className="btn btn-primary" onClick={() => window.location.assign("/sell")}>Cancel</button>
         </div>
         <p id="error-message"></p>

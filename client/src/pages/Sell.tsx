@@ -51,7 +51,8 @@ const Sell = () => {
         <div className="sell-page">
             <div className="new-product">
                 <h1>Sell Your Products</h1>
-                <Link to="/products/new"><button className="add-product-btn">Add New Product</button></Link>
+                <br />
+                <Link to="/products/new"><button className="btn btn-primary">Add New Product</button></Link>
             </div>
             <div className="product-container">
             {products.length ? products.map((product:Product) => (
@@ -87,7 +88,10 @@ const Sell = () => {
                     </div>     
                 </div>
                 )) : 
-                <h3>You don't have anything to sell. Try adding an item using the button above.</h3>
+                <div>
+                    <br />
+                    <h3>You don't have anything to sell. Try adding an item using the button above.</h3>
+                </div>
             }
             </div>
         </div>
