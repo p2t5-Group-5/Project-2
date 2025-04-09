@@ -1609,3 +1609,14 @@ form .form-input {
     align-content: center;
   }
 }
+
+.dark{
+  .btn.btn-primary {
+    background-color: #6e4b25;
+    color: #eeb477 ;
+  }
+  .btn.btn-primary:hover {
+    background-color: #241e15;
+    color: #b88044;
+  }  
+}

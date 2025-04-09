@@ -1,5 +1,6 @@
 import { Product } from '../interfaces/Product';
 // import { Cart } from '../interfaces/Cart';
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 export const quantityIncrease = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -25,7 +26,7 @@ export const quantityIncrease = async (
         setCart(updatedCart);
         
       // Send request to increase the quantity
-      const response = await fetch(`http://localhost:3001/api/cart/${username}/product/${productId}`, {
+      const response = await fetch(`${BASE_URL}/api/cart/${username}/product/${productId}`, {
         method: 'PATCH', // Use PATCH for updating a single field
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -70,7 +71,7 @@ export const quantityDecrease = async (
         setCart(updatedCart);
         
         // Only send the specific product change, not the entire cart
-        const response = await fetch(`http://localhost:3001/api/cart/${username}/product/${productId}`, {
+        const response = await fetch(`${BASE_URL}/api/cart/${username}/product/${productId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 

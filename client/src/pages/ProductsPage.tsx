@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 import '../styles/ProductPage.css';
-
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const ProductsPage = () => {
     const [product, setProduct] = useState< Product| null>(null);
@@ -17,14 +17,14 @@ const ProductsPage = () => {
     
 
     const getUserIdByUsername = async () => {
-        const response = await fetch(`http://localhost:3001/api/users/username/${username}`);
+        const response = await fetch(`${BASE_URL}{/api/users/username/${username}`);
         const data = await response.json();
         setUserId(data.id);
     }
 
     const fetchProduct = async () => {
         try {
-            const response = await fetch("http://localhost:3001/api/products/" + params.id);
+            const response = await fetch(`${BASE_URL}/api/products/` + params.id);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
@@ -38,7 +38,7 @@ const ProductsPage = () => {
     };
 
     const handleAddToCart = async () => {
-        const response = await fetch(`http://localhost:3001/api/userCart/${userId}`, {
+        const response = await fetch(`${BASE_URL}/api/userCart/${userId}`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',

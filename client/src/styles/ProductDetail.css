@@ -142,15 +142,4 @@ input{
 }
 
 
-.action-buttons div:hover {
-    background-color: #4e3d1d;
-}
-.action-buttons .btn.btn-primary {
-  background-color: #4e3d1d;
-  color: #9c6c3a;
-}
-.btn.btn-primary:hover {
-  background-color: #fbd7a6;
-  color: #eeb477;
-}
 }

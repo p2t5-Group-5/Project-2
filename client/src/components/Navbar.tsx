@@ -40,7 +40,9 @@ const Navigation = () => {
       <Nav className="navbar-links">
         <div className="nav-links-container">
           <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
-          <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
+          {loginCheck && (
+            <NavLink to="/shop" className={({ isActive }) => isActive ? "active" : ""}>Shop</NavLink>
+          )}
           {loginCheck && (
             <NavLink to="/sell" className={({ isActive }) => isActive ? "active" : ""}>Sell</NavLink>
           )}

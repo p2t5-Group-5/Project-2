@@ -8,7 +8,7 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    usertype: 'buyer'
+    usertype: 'buyer'  || 'seller'
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -42,7 +42,7 @@ const Signup = () => {
             className="form-input"
             type='text'
             name='username'
-            value={signupData.username || ''}
+            value={signupData.username}
             onChange={handleChange}
           />
         </div>
@@ -52,7 +52,7 @@ const Signup = () => {
             className="form-input"
             type='email'
             name='email'
-            value={signupData.email || ''}
+            value={signupData.email }
             onChange={handleChange}
           />
         </div>
@@ -62,10 +62,21 @@ const Signup = () => {
             className="form-input"
             type='password'
             name='password'
-            value={signupData.password || ''}
+            value={signupData.password }
             onChange={handleChange}
           />
         </div>
+          <div className = "form-group">
+          <select
+            className="drop-down"
+            name="usertype"
+            value={signupData.usertype}
+            onChange={handleChange}
+          >
+            <option value="buyer">Buyer</option>
+            <option value="seller">Seller</option>
+          </select>
+          </div>
         <div className="form-group">
           <button className="btn btn-primary" type='submit'>Sign up</button>
         </div>
