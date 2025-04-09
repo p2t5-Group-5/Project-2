@@ -8,7 +8,7 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    usertype: 'buyer'  || 'seller'
+    usertype: 'seller'
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

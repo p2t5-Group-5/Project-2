@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/:userId', async (req: Request, res: Response) => {
     const { userId } = req.params;
     try {
-        const cartItems: any = []
+        const cartItems: {}[] = []
         await UserCart.findAll(
           {
             where: { buyer_id: +userId },

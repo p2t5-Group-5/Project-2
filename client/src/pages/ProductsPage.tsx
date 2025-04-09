@@ -87,7 +87,7 @@ const ProductsPage = () => {
             </Modal>
             <div className="product-title">
                 <h1>{product.name}</h1>
-                <p><i>Category: {product.category.category}</i></p>
+                <p><i>Category: {product.Category?.category}</i></p>
             </div>
             <div className="product-details">
                 <div className="product-image-container-solo">

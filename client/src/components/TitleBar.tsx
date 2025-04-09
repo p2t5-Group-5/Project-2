@@ -42,12 +42,10 @@ const TitleBar = () => {
     <>
       <header>
       {/* <img src={ logo } alt="Handcrafted Harmoney logo"/>  */}
-        <h1>
-        <div className="company-name">Handcrafted Harmony</div>
-      <button onClick={toggleDarkMode}>
+        <button onClick={toggleDarkMode}>
           <i className={`bi ${darkMode ? 'bi-sun-fill' : 'bi-moon-fill'}`}></i>
         </button>
-        </h1>
+        <h1 className="company-name">Handcrafted Harmony</h1>
       </header>
     </>
   )
