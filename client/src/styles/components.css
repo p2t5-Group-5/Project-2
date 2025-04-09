@@ -15,6 +15,15 @@
   color: #9c6c3a;
 }
 
+.company-name {
+  font-family: cursive;
+  font-weight: bolder;
+  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  /* font-size: 2em; */
+  /* color: var(--hovertxt); */
+}
+
 body {
   background-color: beige;
   margin-bottom: 115px;
