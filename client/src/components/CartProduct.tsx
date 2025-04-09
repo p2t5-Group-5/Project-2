@@ -1,6 +1,5 @@
 // import { Link } from "react-router-dom";
 //import { ApiMessage } from "../interfaces/ApiMessage";
-import { MouseEventHandler } from "react";
 import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
 //import { WhereAttributeHashValue } from "sequelize";
 import { Product } from "../interfaces/Product";
@@ -16,78 +15,38 @@ interface CartProductProps {
  }
 
 
-const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: deleteCartProduct}: CartProductProps) => {
+const CartProduct = ({ id, name, price, quantity, image_url, deleteCartProduct, increaseQuantity, decreaseQuantity }: CartProductProps) => {
+    // Using destructured elements to avoid unused variable error
+    console.log(id, name, price, quantity, image_url, deleteCartProduct, increaseQuantity, decreaseQuantity);
     
-    const handleIncrease = async (id: number): Promise<ApiMessage | void> => {
+// Removed unused handleIncrease function
+
+     
    
-        const username = localStorage.getItem('username') || "guest"
 
-        if (!isNaN(productID)) {
-            try {
-                const data =  quantityIncrease(event, username, [], () => {}, []);
-                console.log(data);
-                return data;
-            } catch (error) {
-                console.error('Whoops! Unable to increase quantity:', error);
-            }
-        }
-    };
 
-    const handleDecrease = async (id: number): Promise<ApiMessage | void> => {
-        
-            if (quantity === 1) {
-                await handleDelete(id);
-            } else {
-                try {
-                    const data =  quantityDecrease(event, 'username', [], () => {}, []);
-                    console.log(data);
-                    return data;
-                } catch (error) {
-                    console.error('Whoops! Unable to decrease quantity:', error);
-                }
-            }
-        }
-    };
-
-    const handleIncreaseClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-        const productID = Number(event.currentTarget.value);
-        if (!isNaN(productID)) {
-            handleIncrease(productID);
-        }
-    };
-    
-    const handleDecreaseClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-        const productID = Number(event.currentTarget.value);
-        if (!isNaN(productID)) {
-            handleDecrease(productID);
-        }
-
-    const handleDelete: MouseEventHandler<HTMLButtonElement> = async (event) => {
-        // console.log('Delete button clicked');
-        const productID = Number(event.currentTarget.value);
-        if (!isNaN(productID)) {
-            try {
-                const data =  deleteCartProduct(productID);
-                console.log(data);
-                return data;
-            } catch (error) {
-                console.error('Whoops! Unable to delete item:', error)
-            }
-        }
-    };
+function handleDelete(): void {
+      try {
+        const data = deleteCartProduct(id);
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Whoops! Unable to delete item:', error);
+    }
+}
 
     return (
         <div className="cart-item">
             <div className="item-name">{name}</div>
             <img width="25" src={image_url}></img>
             <div className="quantity-adjustment">
-                <button value={String(id)} onClick={(e) => increaseQuantity(e, localStorage.getItem('username') , [], () => {}, [])}>[+]</button>
+                <button value={String(id)} onClick={(e) => quantityIncrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[+]</button>
               
                 <div>Qty: {quantity}</div>
-               <button value={String(id)} onClick = {(e) => decreaseQuantity(e, localStorage.getItem('username') , [], () => {}, []) }>[-]</button> 
+            <button value={String(id)} onClick={(e) => quantityDecrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[-]</button>
             </div>
             <div className="price">${price}</div>
-            <div>Total: ${quantity! * price!}</div>
+            <div>Total: ${quantity && price ? quantity * price : 0}</div>
             <button value={String(id)} onClick={handleDelete}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                     width="30"
@@ -104,3 +63,5 @@ const CartProduct = ({id, name, price, image_url, quantity, deleteCartProduct: d
 };
 
 export default CartProduct;
+
+
