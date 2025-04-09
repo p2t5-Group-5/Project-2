@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 //import { ApiMessage } from "../interfaces/ApiMessage";
-import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
+// import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
 //import { WhereAttributeHashValue } from "sequelize";
 import { Product } from "../interfaces/Product";
 interface CartProductProps {
@@ -40,10 +40,10 @@ function handleDelete(): void {
             <div className="item-name">{name}</div>
             <img width="25" src={image_url}></img>
             <div className="quantity-adjustment">
-                <button value={String(id)} onClick={(e) => quantityIncrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[+]</button>
+                {/* <button value={String(id)} onClick={(e) => quantityIncrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[+]</button> */}
               
                 <div>Qty: {quantity}</div>
-            <button value={String(id)} onClick={(e) => quantityDecrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[-]</button>
+            {/* <button value={String(id)} onClick={(e) => quantityDecrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[-]</button> */}
             </div>
             <div className="price">${price}</div>
             <div>Total: ${quantity && price ? quantity * price : 0}</div>
