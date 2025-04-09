@@ -93,7 +93,7 @@ header {
 
 .cart-item button {
   border: none;
-  background-color: none;
+  background-color:unset;
 }
 
 /* Navbar.tsx */
@@ -191,6 +191,21 @@ form {
   }
 }
 
+/* edit page */
+.edit-product-field {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+
+  &:focus{
+    outline: none;
+    border-color: var(--hovertxt);
+  }
+}
+
 /* footer.tsx */
 footer {
   padding: 8px;
@@ -229,7 +244,7 @@ footer {
 .dark {
   /* general page look */
   background-color: #9c6c3a;
-  * {
+   *{
     color: rgb(251, 215, 166);
   }
   /* general color */  
@@ -263,6 +278,9 @@ footer {
     border-bottom: 1px solid #ccc;
     background-color: rgb(251, 215, 166);
     font-size: 20px;
+  * {
+    color: #6e4b25;
+  }
   }
   /* Navbar.tsx */
   .nav {
