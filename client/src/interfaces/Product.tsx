@@ -9,6 +9,6 @@ export interface Product {
     Category: {
         id: number | null;
         category: string | null;
-    };
+    } | null;
     sellerId: number | null;
 }
