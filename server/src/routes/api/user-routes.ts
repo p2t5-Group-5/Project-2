@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', async (_req: Request, res: Response) => {
   try {
     const users = await User.findAll({
-      attributes: { exclude: ['password'] }
+      attributes: ['username', 'usertype', 'email']
     });
     res.json(users);
   } catch (error: any) {
@@ -21,7 +21,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id, {
-      attributes: { exclude: ['password'] }
+      attributes: ['username', 'usertype', 'email']
     });
     if (user) {
       res.json(user);
@@ -33,14 +33,16 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-// POST /users - Create a new user
-router.post('/', async (req: Request, res: Response) => {
-  const { username, email, password } = req.body;
+// GET/users/username/:username - Get a user by username
+router.get('/username/:username', async (req: Request, res: Response) => {
   try {
-    const newUser = await User.create({ username, email, password });
-    res.status(201).json(newUser);
+    const user = await User.findOne({
+      where: { username: req.params.username },
+      attributes: ['id', 'username', 'usertype', 'email']
+    });
+    res.json(user);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -49,7 +51,10 @@ router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { username, password } = req.body;
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: ['username', 'usertype', 'email']
+    }, 
+ );
     if (user) {
       user.username = username;
       user.password = password;
@@ -66,8 +71,11 @@ router.put('/:id', async (req: Request, res: Response) => {
 // DELETE /users/:id - Delete a user by id
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
+  // Check if the user exist
   try {
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      attributes: ['username', 'usertype', 'email']
+    });
     if (user) {
       await user.destroy();
       res.json({ message: 'User deleted' });

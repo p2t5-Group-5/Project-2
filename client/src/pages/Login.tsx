@@ -1,17 +1,14 @@
-import { useState, FormEvent, ChangeEvent } from "react";
-
-import Auth from '../utils/auth';  // Import the Auth utility for managing authentication state
-import { login } from "../api/authAPI";  // Import the login function from the API
-import { UserLogin } from "../interfaces/UserLogin";  // Import the interface for UserLogin
+import { useState, FormEvent, ChangeEvent } from "react"; 
+import Auth from '../utils/auth';
+import { login } from "../api/authAPI";
+import { UserLogin } from "../interfaces/UserLogin";
 
 const Login = () => {
-  // State to manage the login form data
   const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
     password: ''
   });
 
-  // Handle changes in the input fields
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setLoginData({
@@ -20,24 +17,29 @@ const Login = () => {
     });
   };
 
-  // Handle form submission for login
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      // Call the login API endpoint with loginData
       const data = await login(loginData);
-      // If login is successful, call Auth.login to store the token in localStorage
+      if (!data) {
+        throw new Error('Something went wrong with the login');
+      }
+      console.log('Login successful!');
+      console.log(data);
       Auth.login(data.token);
     } catch (err) {
-      console.error('Failed to login', err);  // Log any errors that occur during login
+      console.error('Failed to login', err);
     }
   };
+
+  const handleCreateAccount = () => {
+    window.location.assign('/signup');
+  }
 
   return (
     <div className='form-container'>
       <form className='form login-form' onSubmit={handleSubmit}>
         <h1>Login</h1>
-        {/* Username input field */}
         <div className="form-group">
           <label>Username</label>
           <input 
@@ -48,7 +50,6 @@ const Login = () => {
             onChange={handleChange}
           />
         </div>
-        {/* Password input field */}
         <div className="form-group">
           <label>Password</label>
           <input 
@@ -59,9 +60,11 @@ const Login = () => {
             onChange={handleChange}
           />
         </div>
-        {/* Submit button for the login form */}
         <div className="form-group">
           <button className="btn btn-primary" type='submit'>Login</button>
+        </div>
+        <div className="btn-create-account" onClick={handleCreateAccount}>
+          <h5>Don't have an account? Create one now!</h5>
         </div>
       </form>
     </div>

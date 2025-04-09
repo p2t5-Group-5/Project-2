@@ -1,0 +1,24 @@
+.contact{
+   border: 2px dashed rgb(251, 215, 166);
+   padding: 8px;
+   border-radius: 15px;
+   h1{
+      font-size:45px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-style: italic;
+   }
+   h3{
+      font-size: 35px;
+      text-align: center;
+   }
+   p {
+      font-size: 25px;
+      text-align: center;
+   }
+}
+
+.dark{
+   
+}
