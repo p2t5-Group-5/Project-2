@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { jwtDecode } from "jwt-decode";
 import { Product } from "../interfaces/Product";
 import '../styles/ProductDetail.css';
@@ -11,6 +13,15 @@ const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 const Sell = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([] as Product[]);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [show, setShow] = useState(false);
+    const [modalText, setModalText] = useState('');
+
+    const handleClose = () => setShow(false);
+    const handleShow = (data: string) => {
+        setModalText(data);
+        setShow(true)
+    };
 
     const getUserIdByUsername = async () => {
         const response = await fetch(`${BASE_URL}/api/users/username/${username}`);
@@ -41,7 +52,7 @@ const Sell = () => {
         if (data.message == "Product deleted") {
             const updatedProducts = products.filter((item) => item.id !== productId);
             setProducts(updatedProducts);
-            alert(data.message);
+            handleShow('Your product was deleted');
         }
     };
 
@@ -51,6 +62,12 @@ const Sell = () => {
 
     return (
         <div className="sell-page">
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body><h4>{modalText}</h4></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>Ok</Button>
+                </Modal.Footer>
+            </Modal>
             <div className="new-product">
                 <h1>Sell Your Products</h1>
                 <br />

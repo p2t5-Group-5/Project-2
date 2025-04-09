@@ -43,11 +43,11 @@ router.post('/:userId', async (req: Request, res: Response) => {
     const { productId, quantity } = req.body;
     try {
         const item = await UserCart.findOne({
-            where: { buyer_id: +userId, product_id: productId }
+          where: { buyer_id: +userId, product_id: productId }
         });
 
         if (item) {
-          throw new Error("Item is already added to the cart");
+          return res.json({ message: 'Item is already in your cart' });
         }
   
         await UserCart.create({
@@ -55,9 +55,9 @@ router.post('/:userId', async (req: Request, res: Response) => {
           product_id: productId,
           quantity
         });
-        res.json({ message: 'Item was added to the cart' });
+        return res.json({ message: 'Item was added to the cart' });
     } catch (error: any) {
-      res.status(500).json({ message: error.message });
+      return res.status(500).json({ message: error.message });
     }
 });
 

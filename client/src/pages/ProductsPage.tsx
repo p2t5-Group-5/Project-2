@@ -1,15 +1,26 @@
 import { useState, useEffect,  } from "react";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import type { Product } from "../interfaces/Product";
 import { useParams } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 import '../styles/ProductPage.css';
+
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const ProductsPage = () => {
     const [product, setProduct] = useState< Product| null>(null);
-    const [userId, setUserId] = useState(undefined);
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [show, setShow] = useState(false);
+    const [modalText, setModalText] = useState('');
+
+    const handleClose = () => setShow(false);
+    const handleShow = (data: string) => {
+        setModalText(data);
+        setShow(true)
+    };
 
     const params = useParams(); // useParams is a hook that returns an object of key/value pairs of URL parameters -JH
     console.log(params.id)
@@ -17,9 +28,9 @@ const ProductsPage = () => {
     
 
     const getUserIdByUsername = async () => {
-        const response = await fetch(`${BASE_URL}{/api/users/username/${username}`);
+        const response = await fetch(`${BASE_URL}/api/users/username/${username}`);
         const data = await response.json();
-        setUserId(data.id);
+        return data.id;
     }
 
     const fetchProduct = async () => {
@@ -38,6 +49,7 @@ const ProductsPage = () => {
     };
 
     const handleAddToCart = async () => {
+        const userId = await getUserIdByUsername();
         const response = await fetch(`${BASE_URL}/api/userCart/${userId}`, {
             method: 'POST',
             headers: {
@@ -50,12 +62,11 @@ const ProductsPage = () => {
             })
         });
         const data = await response.json();
-        alert(data.message);
+        handleShow(data.message);
     }
 
     useEffect(() => {
         fetchProduct();
-        getUserIdByUsername();
     }, []);
 
     if (loading) {
@@ -68,9 +79,15 @@ const ProductsPage = () => {
 
     return (
         <div className="product-page">
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body><h4>{modalText}</h4></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>Ok</Button>
+                </Modal.Footer>
+            </Modal>
             <div className="product-title">
                 <h1>{product.name}</h1>
-                <p><i>Category: {product.Category.category}</i></p>
+                <p><i>Category: {product.category.category}</i></p>
             </div>
             <div className="product-details">
                 <div className="product-image-container-solo">

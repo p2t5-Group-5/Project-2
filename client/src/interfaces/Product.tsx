@@ -6,9 +6,9 @@ export interface Product {
     quantity: number | null;
     image_url: string | undefined;
     category_id: number | null;
-    Category: {
+    category: {
         id: number | null;
         category: string | null;
-    } | null;
+    };
     sellerId: number | null;
 }

@@ -1,5 +1,7 @@
-import "../styles/components.css";
 import { useState, useEffect } from "react";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import "../styles/components.css";
 import { Product } from "../interfaces/Product";
 import auth from "../utils/auth";
 import CartProduct from "../components/CartProduct";
@@ -28,6 +30,15 @@ const Cart = () => {
   const { username } = jwtDecode(auth.getToken()) as { username: string };
   const [cart, setCart] = useState<Product[]>([]);
   const [userId, setUserId] = useState(undefined);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [show, setShow] = useState(false);
+  const [modalText, setModalText] = useState('');
+
+  const handleClose = () => setShow(false);
+  const handleShow = (data: string) => {
+    setModalText(data);
+    setShow(true)
+  };
 
   const getUserIdByUsername = async () => {
     const response = await fetch(
@@ -69,7 +80,7 @@ const Cart = () => {
         );
         const data = await response.json();
         setCart(cart.filter((item) => item.id !== productId));
-        alert(data.message);
+        handleShow(data.message);
       } catch (error) {
         console.error("Whoops! Unable to delete item:", error);
       }
@@ -82,6 +93,12 @@ const Cart = () => {
 
   return (
     <div className="cart-page">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Body><h4>{modalText}</h4></Modal.Body>
+        <Modal.Footer>
+            <Button variant="primary" onClick={handleClose}>Ok</Button>
+        </Modal.Footer>
+      </Modal>
       <div className="cart-container">
         <h1>{username}'s Cart</h1>
         <p></p>

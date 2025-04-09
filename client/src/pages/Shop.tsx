@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { Product } from "../interfaces/Product";
 import ProductDetail from "../components/ProductDetail.tsx";
 
@@ -12,6 +14,16 @@ const Shop = () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const [products, setProducts] = useState<Product[]>([]);
     const [userId, setUserId] = useState(undefined);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [show, setShow] = useState(false);
+    const [modalText, setModalText] = useState('');
+
+    const handleClose = () => setShow(false);
+    const handleShow = (data: string) => {
+        setModalText(data);
+        setShow(true)
+    };
+    
 
     const getUserIdByUsername = async () => {
         const response = await fetch(`${BASE_URL}/api/users/username/${username}`);
@@ -50,7 +62,7 @@ const Shop = () => {
             })
         });
         const data = await response.json();
-        alert(data.message);
+        handleShow(data.message);
     }
 
     useEffect(() => {
@@ -60,6 +72,12 @@ const Shop = () => {
 
     return (
         <div className="product-container">
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body><h4>{modalText}</h4></Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleClose}>Ok</Button>
+                </Modal.Footer>
+            </Modal>
             {products.length ? products.map((product:Product) => (
                 <div key={product.id} className="product-card">
                     <ProductDetail

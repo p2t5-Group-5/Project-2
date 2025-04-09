@@ -2,12 +2,12 @@
 
 /* general color */
 :root{
-   --hovertxt: #9c6c3a;
-   --orange: rgb(193, 128, 7);
-   --teal: rgba(80, 255, 185, 0.448);
-   --lightteal: rgb(80, 255, 185);
-   --brown: rgb(79, 0, 0);
-  }
+  --hovertxt: #9c6c3a;
+  --orange: rgb(193, 128, 7);
+  --teal: rgba(80, 255, 185, 0.448);
+  --lightteal: rgb(80, 255, 185);
+  --brown: rgb(79, 0, 0);
+}
 
 /* general page look */
 * {
@@ -155,6 +155,20 @@ header {
     cursor: pointer;
     margin: 0.3em;
   }
+}
+
+.fade.modal.show {
+  padding-right: 0 !important;
+}
+
+.modal-dialog {
+  position: fixed;
+  right: 25em;
+  top: 20em;
+}
+
+.modal-footer .btn.btn-primary {
+  font-size: 15px;
 }
 
 /* Contactform.tsx */
