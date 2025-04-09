@@ -2,7 +2,7 @@
 import { ApiMessage } from "../interfaces/ApiMessage";
 import { MouseEventHandler, useState} from "react";
 import auth from '../utils/auth';
-
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 interface SellerCardProps {
     id: number; // id: number | null;
     name: string | undefined;
@@ -41,7 +41,7 @@ const SellerCard = ({id, name, description, price, quantity, image_url, deleteIn
         const productID = Number(event.currentTarget.value);
         if (!isNaN(productID)) {
             try {
-                const response = await fetch(`http://localhost:3001/api/products/${id}`, {
+                const response = await fetch(`${BASE_URL}/api/products/${id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
