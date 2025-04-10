@@ -1,6 +1,7 @@
 // import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
 
 import { Product } from "../interfaces/Product";
+
 interface CartProductProps {
     id: number;
     name: string | undefined;
@@ -12,35 +13,26 @@ interface CartProductProps {
     decreaseQuantity: (e: React.MouseEvent<HTMLButtonElement>, username: string, cart: Product[], setCart: React.Dispatch<React.SetStateAction<Product[]>>, products: Product[]) => void;
 }
 
-
 const CartProduct = ({ id, name, price, quantity, image_url, deleteCartProduct, increaseQuantity, decreaseQuantity }: CartProductProps) => {
     // Using destructured elements to avoid unused variable error
-    console.log(increaseQuantity, decreaseQuantity);
+    console.log(increaseQuantity, decreaseQuantity, quantity);
 
-     
-   
-
-
-function handleDelete(): void {
-      try {
-        const data = deleteCartProduct(id);
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error('Whoops! Unable to delete item:', error);
+    function handleDelete(): void {
+        try {
+            const data = deleteCartProduct(id);
+            return data;
+        } catch (error) {
+            console.error('Whoops! Unable to delete item:', error);
+        }
     }
-}
 
     return (
         <div className="cart-item">
             <div className="item-name">{name}</div>
             <img width="25" src={image_url}></img>
-            <div className="quantity-adjustment">
-                {/* <button value={String(id)} onClick={(e) => quantityIncrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[+]</button> */}
-              
+            {/* <div className="quantity-adjustment">
                 <div>Qty: {quantity}</div>
-            {/* <button value={String(id)} onClick={(e) => quantityDecrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[-]</button> */}
-            </div>
+            </div> */}
             <div className="price">${price}</div>
             <button value={String(id)} onClick={handleDelete}>
                 <svg xmlns="http://www.w3.org/2000/svg"

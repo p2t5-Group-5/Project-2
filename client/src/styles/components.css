@@ -63,7 +63,6 @@ header {
 
 /* Cart.tsx */
 .cart-item {
-  width: 100%;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -92,7 +91,7 @@ header {
 }
 
 .cart-item .price {
-  text-align: right;
+  text-align: left;
 }
 
 .cart-item button {
@@ -100,6 +99,19 @@ header {
   background-color:unset;
 }
 
+.cart-total {
+  text-align: right;
+}
+
+.cart-total {
+  h5 {
+    margin: 0.5em 0;
+  }
+
+  div {
+    margin: 0.2em 0;
+  }
+}
 /* Navbar.tsx */
 .nav {
   width: 100%;
@@ -388,8 +400,19 @@ footer {
 
   
   .cart-item {
-    font-size: 18px;
-    flex-direction: column;
+    font-size: 15px;
+    flex-direction: row;
+    padding: 0.4em;
+    margin-top: 1em;
+  }
+
+  .cart-item .item-name {
+    width: 30%;
+  }
+
+  .cart-item img {
+    width: 2em;
+    height: 2em;
   }
   
   .cart-item .item-name {

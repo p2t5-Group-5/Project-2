@@ -101,36 +101,33 @@ const Cart = () => {
       </Modal>
       <div className="cart-container">
         <h1>{username}'s Cart</h1>
-        <p></p>
-        <ul>
+        <div>
           {cart.length ? (
             cart.map((product: Product) => (
-              <>
-                <div key={product.id}>
-                  <CartProduct
-                    id={product.id!}
-                    name={product.name!}
-                    image_url={product.image_url!}
-                    price={product.price!}
-                    quantity={product.quantity ?? null}
-                    increaseQuantity={quantityIncrease}
-                    decreaseQuantity={quantityDecrease}
-                    deleteCartProduct={deleteCartProduct}
-                  />
-                </div>{" "}
-              </>
+              <CartProduct
+              key={product.id}
+                id={product.id!}
+                name={product.name!}
+                image_url={product.image_url!}
+                price={product.price!}
+                quantity={product.quantity ?? null}
+                increaseQuantity={quantityIncrease}
+                decreaseQuantity={quantityDecrease}
+                deleteCartProduct={deleteCartProduct}
+              />
             ))
           ) : (
             <h3>
               You do not have anything in your cart! Go to the Shop page to buy.
             </h3>
           )}
-        </ul>
+        </div>
 
-        {cart.length ? <div className="cart-total">
-          <p>Subtotal: ${calculateCartTotal(cart).subtotal}</p>
-          <p>Tax (10%): ${calculateCartTotal(cart).taxAmount}</p>
-          <h3>Total: ${calculateCartTotal(cart).total}</h3>
+        {cart.length ?
+          <div className="cart-total">
+            <div>Subtotal: ${calculateCartTotal(cart).subtotal}</div>
+            <div>Tax (10%): ${calculateCartTotal(cart).taxAmount}</div>
+            <h5>Total: ${calculateCartTotal(cart).total}</h5>
         </div> : ''}
       </div>
     </div>
