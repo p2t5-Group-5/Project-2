@@ -129,16 +129,15 @@ const EditProduct = () => {
     
   }    
   return (
-    <div className="form-container">
-            <p>Name:  </p><input className="edit-product-field" id="name" type="text" defaultValue={thisProduct?.name || ''} />
-            <p>Description:  </p><input className="edit-product-field" id="description" type="text" defaultValue={thisProduct?.description || '' }  />
-            <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" defaultValue={thisProduct?.price as number}/>
-            {/* <p>Available Quantity:  </p><input  className="edit-product-field" id="quantity" type="number" value={thisProduct?.quantity || 0}/> */}
-            <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" defaultValue={thisProduct?.image_url} />
+    <form className="form-container">
+            <p>Name:</p><input className="edit-product-field" id="name" type="text" defaultValue={thisProduct?.name || ''} />
+            <p>Description:</p><input className="edit-product-field" id="description" type="textarea" defaultValue={thisProduct?.description || '' }  />
+            <p>Price:</p><input className="edit-product-field" id="price" type="number || string" defaultValue={thisProduct?.price as number}/>
+            <p>Image URL:</p><input  className="edit-product-field" id="image" type="text" defaultValue={thisProduct?.image_url} />
             <div className="image-preview-container">
               <img src={thisProduct?.image_url} alt="Product" className="edit-product-image"/>
             </div>
-            <p>Category: </p>
+            <p>Category:</p>
             <select
               className="edit-product-field drop-down"
               id="category"
@@ -150,14 +149,13 @@ const EditProduct = () => {
                 </option>
               ))}
             </select>
-            <p></p>
     
             <div className="action-buttons">
             <button className="btn btn-primary" onClick={() => handleUpdateItem()}>Update</button>
             <button className="btn btn-primary" onClick={() => navigate("/sell")}>Cancel</button>
             </div>
             <p id="error-message">{errorMsg}</p>
-        </div>
+        </form>
       );
     
     };

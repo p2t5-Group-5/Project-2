@@ -86,17 +86,16 @@ const ProductsPage = () => {
                 </Modal.Footer>
             </Modal>
             <div className="product-title">
-                <h1>{product.name}</h1>
+                <h1 className="product-name">{product.name}</h1>
                 <p><i>Category: {product.Category?.category}</i></p>
             </div>
             <div className="product-details">
                 <div className="product-image-container-solo">
-                    <img src={product.image_url} alt={product.name} className="product-image" />
+                    <img className="product-image" src={product.image_url} alt={product.name} />
                 </div>
                 <div className="product-price-and-button">
-                    <p>{product.description}</p>
+                    <p className="product-description">{product.description}</p>
                     <p className="product-price">Price: ${product.price}</p>
-                    {/* <p>Available Quantity: {product.quantity}</p> */}
                     <button className="btn btn-primary" onClick={() => handleAddToCart()}>Add to Cart</button>
                 </div>
             </div>

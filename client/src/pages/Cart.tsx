@@ -131,7 +131,6 @@ const Cart = () => {
           <p>Subtotal: ${calculateCartTotal(cart).subtotal}</p>
           <p>Tax (10%): ${calculateCartTotal(cart).taxAmount}</p>
           <h3>Total: ${calculateCartTotal(cart).total}</h3>
-          {/* <button className="checkout-button">Checkout</button> */}
         </div> : ''}
       </div>
     </div>

@@ -1,7 +1,5 @@
-// import { Link } from "react-router-dom";
-//import { ApiMessage } from "../interfaces/ApiMessage";
 // import { quantityIncrease, quantityDecrease } from '../utils/adjustQuantity';
-//import { WhereAttributeHashValue } from "sequelize";
+
 import { Product } from "../interfaces/Product";
 interface CartProductProps {
     id: number;
@@ -12,14 +10,12 @@ interface CartProductProps {
     deleteCartProduct: (productId: number) => void;
     increaseQuantity: (e: React.MouseEvent<HTMLButtonElement>, username: string, cart: Product[], setCart: React.Dispatch<React.SetStateAction<Product[]>>, products: Product[]) => void;
     decreaseQuantity: (e: React.MouseEvent<HTMLButtonElement>, username: string, cart: Product[], setCart: React.Dispatch<React.SetStateAction<Product[]>>, products: Product[]) => void;
- }
+}
 
 
 const CartProduct = ({ id, name, price, quantity, image_url, deleteCartProduct, increaseQuantity, decreaseQuantity }: CartProductProps) => {
     // Using destructured elements to avoid unused variable error
-    console.log(id, name, price, quantity, image_url, deleteCartProduct, increaseQuantity, decreaseQuantity);
-    
-// Removed unused handleIncrease function
+    console.log(increaseQuantity, decreaseQuantity);
 
      
    
@@ -46,7 +42,6 @@ function handleDelete(): void {
             {/* <button value={String(id)} onClick={(e) => quantityDecrease(e, localStorage.getItem('username') || '', [{ id, name: name || '', description: '', price: price || 0, quantity: quantity || 0, image_url: image_url || '', category_id: 0, Category: null, sellerId: 0 }], () => {}, [])}>[-]</button> */}
             </div>
             <div className="price">${price}</div>
-            <div>Total: ${quantity && price ? quantity * price : 0}</div>
             <button value={String(id)} onClick={handleDelete}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                     width="30"

@@ -1,3 +1,5 @@
+import '../styles/ProductDetail.css';  
+
 interface ProductDetailProps {
    name: string;
    img: string;

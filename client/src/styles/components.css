@@ -3,10 +3,10 @@
 /* general color */
 :root{
   --hovertxt: #9c6c3a;
-  --orange: rgb(193, 128, 7);
   --teal: rgba(80, 255, 185, 0.448);
   --lightteal: rgb(80, 255, 185);
   --brown: rgb(79, 0, 0);
+  --beige: rgb(251, 215, 166)
 }
 
 /* general page look */
@@ -15,24 +15,15 @@
   color: #9c6c3a;
 }
 
-.company-name {
-  font-family: cursive;
-  /* font-size: 36px; */
-  font-weight: bolder;
-  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-  /* font-size: 2em; */
-  /* color: var(--hovertxt); */
-}
-
 body {
-  background-color: beige;
+  background-image: linear-gradient(292deg, rgb(219 198 164) 28%, #ebcfa5 50%, rgb(251 233 207) 70%);
   margin-bottom: 115px;
 }
 
 /* Header.tsx */
 header {
  text-align: center;
+ text-shadow: 4px 2px 2px #573e18;
   padding: 10px;
 
   img {
@@ -67,11 +58,13 @@ header {
     color: var(--hovertxt);
     font-size: 25px;
   }
-}
+} 
+
 
 /* Cart.tsx */
 .cart-item {
   width: 100%;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -91,6 +84,7 @@ header {
 .cart-item img {
   width: 4em;
   height: 4em;
+  border-radius: 10px;
 }
 
 .cart-item div {
@@ -109,12 +103,15 @@ header {
 /* Navbar.tsx */
 .nav {
   width: 100%;
+ 
   background-color: rgb(251, 215, 166);
+  box-shadow: 0px 2px 10px #573e18;
   display: flex;
   justify-content: space-between;
 
   img {
     border-radius: 50px;
+    
   }
 
   .navbar-nav {
@@ -163,11 +160,11 @@ header {
   padding-right: 0 !important;
 }
 
-.modal-dialog {
-  position: fixed;
-  right: 25em;
-  top: 20em;
+.modal {
+  display: flex !important;
+  align-items: center;
 }
+
 
 .modal-footer .btn.btn-primary {
   font-size: 15px;
@@ -179,6 +176,7 @@ form {
   flex-direction: column;
   align-items: start;
   margin-top: 1rem;
+  color: #573e18;
 
   input, textarea {
     width: 80%;
@@ -240,6 +238,7 @@ footer {
   width: 100%;
   text-align: center;
   background-color: rgb(251, 215, 166);
+  box-shadow: 0px -2px 10px #573e18;
   display: flex;
   justify-content: space-between;
 
@@ -267,9 +266,8 @@ footer {
 
 /* Darkmode */
 .dark {
-  /* general page look */
-  background-color: #9c6c3a;
-   *{
+  background-image: linear-gradient(340deg, rgba(156, 108, 58, 1) 25%, rgb(108 66 19) 50%, rgba(156, 108, 58, 1) 70%);
+  * {
     color: rgb(251, 215, 166);
   }
   /* general color */  

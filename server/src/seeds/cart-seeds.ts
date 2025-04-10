@@ -1,3 +1,5 @@
+// use for testing purposes
+// to seed the cart table with data
 import { UserCart } from '../models/index.js';
 
 export const seedUserCart = async () => {

@@ -45,10 +45,14 @@ const About =() => {
           <div className="left nameBox">
             <h3>Jonathan Hummer</h3>
             <img src="https://media.licdn.com/dms/image/v2/D5603AQHc2m1fPClZLA/profile-displayphoto-shrink_200_200/B56ZOuq4bXG8AY-/0/1733802297477?e=1749686400&v=beta&t=KpbaYuz0jcRi-yXZsxW7hQAXovwOt17obH1orLYgMPo" alt="Jonathan Hummer" className="profile-image"/>
-            <a href="https://github.com/ItsJustJon"><img className="mini-logo" src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Symbol.png" /></a>
-            <a href="https://www.linkedin.com/in/jonathanhummer/"><img className="mini-logo" src="https://static.vecteezy.com/system/resources/previews/023/986/970/non_2x/linkedin-logo-linkedin-logo-transparent-linkedin-icon-transparent-free-free-png.png" /></a>
-            
-            
+            <div className="social-links">
+              <a href="https://github.com/ItsJustJon">
+                <img className="mini-logo" src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Symbol.png" />
+              </a>
+              <a href="https://www.linkedin.com/in/jonathanhummer/">
+                <img className="mini-logo linkedin" src="https://static.vecteezy.com/system/resources/previews/023/986/970/non_2x/linkedin-logo-linkedin-logo-transparent-linkedin-icon-transparent-free-free-png.png" />
+              </a>
+            </div>
           </div>
           <div className="right"><p className="bold">Bio Information</p>
           <p>Jonathan has a demonstrated history of using his computer programming skills and logic to implement automation in business processes and reporting and develop forms and applications for use in financial, supply chain, operations, customer service, and commercial functions. However, much of that programming has been done with Visual Basic/VBA in the Microsoft Office Suite. Jonathan began the Columbia University Computer Programming Bootcamp in an effort to learn new, practical programming languages with an aim to deploy stable web applications designed to help businesses achieve their goals with bespoke programming written for their needs. You can contact Jonathan using the links to the left below the AI-generated headshot.</p></div>

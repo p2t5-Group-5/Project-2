@@ -1,7 +1,5 @@
 import { Product } from "../interfaces/Product";
 import "../styles/components.css";
-//import { handleAddToCart } from "../utils/addToCart";
-
 
 interface ProductDisplayProps {
    product: Product;

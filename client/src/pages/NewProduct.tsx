@@ -16,15 +16,11 @@ const NewProduct = () => {
   const [categoryList, setCategoryList] = useState<Category[]>([] as Category[]);
   const [category_id, setCategoryId] = useState(1);
 
-  // let sellerId: number;
-
   const getUserIdByUsername = async () => {
     const { username } = jwtDecode(auth.getToken()) as { username: string };
     const response = await fetch(`${BASE_URL}/api/users/username/${username}`);
     const data = await response.json();
     return data.id;
-    // sellerId = data.id;
-    // console.log("sellerId", sellerId);
   }
 
   const fetchCategories = async () => {
@@ -104,8 +100,8 @@ const NewProduct = () => {
   return (
     <div className="form-container new-product">
         <p>Name:  </p><input className="edit-product-field" id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        <p>Description:  </p><input className="edit-product-field" id="description" type="text" value={description} onChange={(e) => setDescription(e.target.value)}  />
-        <p>Price:  $</p><input className="edit-product-field" id="price" type="number || string" value={price} onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}/>
+        <p>Description: </p><textarea className="edit-product-field" id="description" value={description} onChange={(e) => setDescription(e.target.value)}  />
+        <p>Price:</p><input className="edit-product-field" id="price" type="number || string" value={price} onChange={(e) => setPrice(parseFloat(e.target.value) || 0)}/>
         <p>Image URL:  </p><input  className="edit-product-field" id="image" type="text" value={image_url} onChange={(e) => setImageUrl(e.target.value)} />
         <div className="image-preview-container">
           {image_url ? <img src={image_url} alt="product-image" className="edit-product-image"/>: ''}
