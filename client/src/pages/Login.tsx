@@ -2,8 +2,10 @@ import { useState, FormEvent, ChangeEvent } from "react";
 import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 import { UserLogin } from "../interfaces/UserLogin";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const  navigate = useNavigate();
   const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
     password: ''
@@ -33,7 +35,7 @@ const Login = () => {
   };
 
   const handleCreateAccount = () => {
-    window.location.assign('/signup');
+    navigate('/signup');
   }
 
   return (

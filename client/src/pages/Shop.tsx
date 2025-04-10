@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Product } from "../interfaces/Product";
 import ProductDetail from "../components/ProductDetail.tsx";
+import { useNavigate } from "react-router-dom";
 
 //  import { addToCart } from "../api/shopAPI";
 import { jwtDecode } from "jwt-decode";
@@ -17,6 +18,7 @@ const Shop = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [show, setShow] = useState(false);
     const [modalText, setModalText] = useState('');
+    const navigate = useNavigate()
 
     const handleClose = () => setShow(false);
     const handleShow = (data: string) => {
@@ -43,7 +45,7 @@ const Shop = () => {
     
     const handleDetailsClick = (productId: number | undefined) => {
         if (productId !== undefined) {
-            window.location.assign(`/products/${productId}`); // add product id
+            navigate(`/products/${productId}`);
         } else {
             console.error("Product ID is undefined");
         }

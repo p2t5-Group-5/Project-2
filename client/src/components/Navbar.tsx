@@ -6,8 +6,10 @@ import "../styles/components.css";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useNavigate } from "react-router";
 
 const Navigation = () => {
+  const  navigate = useNavigate();
   const [loginCheck, setLoginCheck] = useState(false);
 
   const checkLogin = () => {
@@ -17,7 +19,7 @@ const Navigation = () => {
   };
 
   const goToCart = () => {
-    window.location.assign('/cart');
+    navigate('/cart');
   };
 
   useEffect(() => {

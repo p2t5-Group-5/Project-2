@@ -1,5 +1,7 @@
 import { Product } from '../interfaces/Product';
 
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+
 export const handleAddToCart = async (
   e: React.MouseEvent<HTMLButtonElement>,
   username: string,
@@ -33,7 +35,7 @@ export const handleAddToCart = async (
     
     setCart(updatedCart);
     
-    const response = await fetch(`http://localhost:3001/api/cart/${username}`, {
+    const response = await fetch(`${BASE_URL}/api/cart/${username}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedCart),
@@ -56,7 +58,7 @@ export const addToCart = async (
   try {
     console.log(`Adding ${product.name} to cart for user: ${username}`);
     
-    const response = await fetch(`http://localhost:3001/api/cart/${username}`, {
+    const response = await fetch(`${BASE_URL}/api/cart/${username}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(product),

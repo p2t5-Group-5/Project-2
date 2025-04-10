@@ -7,6 +7,7 @@ import '../styles/ProductDetail.css';
 import { Link } from "react-router-dom";
 import auth from '../utils/auth';
 import ProductDetail from "../components/ProductDetail";
+import { useNavigate } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
@@ -16,6 +17,7 @@ const Sell = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [show, setShow] = useState(false);
     const [modalText, setModalText] = useState('');
+    const navigate = useNavigate();
 
     const handleClose = () => setShow(false);
     const handleShow = (data: string) => {
@@ -82,7 +84,7 @@ const Sell = () => {
                         price={product.price!}
                     />
                     <div className="action-buttons">
-                        <div onClick={() => window.location.assign(`/products/${product.id}/edit`)}>
+                        <div onClick={() => navigate(`/products/${product.id}/edit`)}>
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 width="20"
                                 height="20"

@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent } from "react";
+import { useNavigate } from "react-router";
 import { jwtDecode } from "jwt-decode";
 import auth from '../utils/auth';
 import "../styles/ProductDetail.css";
@@ -7,6 +8,7 @@ import { Category } from "../interfaces/Category";
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const NewProduct = () => {
+  const  navigate = useNavigate();
   const [name , setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -88,7 +90,7 @@ const NewProduct = () => {
       if (errorMessageElement) {
         errorMessageElement.innerHTML = "Update was successful!";
         setTimeout(function() {
-          window.location.assign("/sell")
+          navigate("/sell")
         }, 1000);
       }
     } catch (error) {
@@ -120,7 +122,7 @@ const NewProduct = () => {
 
         <div className="action-buttons">
         <button className="btn btn-primary" onClick={() => handlePostItem()}>Post</button>
-        <button className="btn btn-primary" onClick={() => window.location.assign("/sell")}>Cancel</button>
+        <button className="btn btn-primary" onClick={() => navigate("/sell")}>Cancel</button>
         </div>
         <p id="error-message"></p>
     </div>

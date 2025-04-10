@@ -1,14 +1,15 @@
 
 
-import { Product } from "../interfaces/Product";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { Product } from "../interfaces/Product";
+import { useParams, useNavigate } from "react-router";
 import "../styles/ProductDetail.css";
 import { Category } from "../interfaces/Category";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const EditProduct = () => {
+  const  navigate = useNavigate();
   const [thisProduct, setThisProduct] = useState<Product | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategory, setNewCategory] = useState<number | null>(null);
@@ -115,7 +116,7 @@ const EditProduct = () => {
       
       setErrorMsg("Update was successful!");
       setTimeout(() => {
-        window.location.assign("/sell");
+        navigate('/sell');
       }, 3000);
     } catch (error) {
       console.error("Error updating product:", error);
@@ -152,8 +153,8 @@ const EditProduct = () => {
             <p></p>
     
             <div className="action-buttons">
-            <button className="btn btn-primary" onClick={() => handleUpdateItem()}>Update Item</button>
-            <button className="btn btn-primary" onClick={() => window.location.assign("/sell")}>Nevermind!</button>
+            <button className="btn btn-primary" onClick={() => handleUpdateItem()}>Update</button>
+            <button className="btn btn-primary" onClick={() => navigate("/sell")}>Cancel</button>
             </div>
             <p id="error-message">{errorMsg}</p>
         </div>
