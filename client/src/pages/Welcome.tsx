@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import "../styles/welcome.css";
 import auth from "../utils/auth";
 import { useState, useEffect } from "react";
@@ -5,6 +6,7 @@ import { useState, useEffect } from "react";
 
 const Welcome = () => {
   const [loginCheck, setLoginCheck] = useState(false);
+  const navigate = useNavigate();
   
   const checkLogin = () => {
     if (auth.loggedIn()) {
@@ -12,6 +14,10 @@ const Welcome = () => {
     }
   };
   
+  const handleItemClick = () => {
+    navigate('/products/20');
+  } 
+
   useEffect(() => {
     checkLogin();
   }, [loginCheck]);
@@ -49,7 +55,7 @@ const Welcome = () => {
         </div>
         <div className="highlight">
           <p>This is one of their Featured Items, a {highlightItem.name}</p>
-          <div className="highlight-image">
+          <div className="highlight-image" onClick={() => handleItemClick()}>
             <img src={highlightItem.image} alt="Featured Item" className="highlight-image"/>
           </div>
         </div>

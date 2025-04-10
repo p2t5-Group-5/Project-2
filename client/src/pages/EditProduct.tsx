@@ -1,6 +1,7 @@
 
 
 import { useState, useEffect } from "react";
+// import { Modal, Button } from "react-bootstrap";
 import { Product } from "../interfaces/Product";
 import { useParams, useNavigate } from "react-router";
 import "../styles/ProductDetail.css";
@@ -15,8 +16,13 @@ const EditProduct = () => {
   const [newCategory, setNewCategory] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMsg, setErrorMsg] = useState<string>("");
+  // const [showModal, setShowModal] = useState(false);
   const params = useParams<{ id: string }>();
   
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+    
+  // };
   const fetchProduct = async () => {
     if (!params.id) {
       console.log("New product: Product ID is undefined");
@@ -31,7 +37,7 @@ const EditProduct = () => {
       if (!response.ok) {
         throw new Error(`Failed to fetch product (Status: ${response.status})`);
       }
-      
+
       const data = await response.json();
       setThisProduct(data);
       setNewCategory(data.category_id);
@@ -71,7 +77,8 @@ const EditProduct = () => {
     loadData();
   }, [params.id]);
   
-  const handleUpdateItem = async () => {
+  const handleUpdateItem = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
     setErrorMsg("");
     
     // Get form elements
@@ -113,11 +120,10 @@ const EditProduct = () => {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.message || `Failed to update product (Status: ${response.status})`);
       }
-      
+  
       setErrorMsg("Update was successful!");
-      setTimeout(() => {
-        navigate('/sell');
-      }, 3000);
+      // setShowModal(true);
+      navigate("/sell");
     } catch (error) {
       console.error("Error updating product:", error);
       setErrorMsg(`Error updating product: ${error instanceof Error ? error.message : "Please try again."}`);
@@ -130,9 +136,19 @@ const EditProduct = () => {
   }    
   return (
     <form className="form-container">
+      {/* <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Body>
+              The item was updated
+          </Modal.Body>
+          <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseModal}>
+                  Ok
+              </Button>
+          </Modal.Footer>
+      </Modal> */}
             <p>Name:</p><input className="edit-product-field" id="name" type="text" defaultValue={thisProduct?.name || ''} />
-            <p>Description:</p><input className="edit-product-field" id="description" type="textarea" defaultValue={thisProduct?.description || '' }  />
-            <p>Price:</p><input className="edit-product-field" id="price" type="number || string" defaultValue={thisProduct?.price as number}/>
+            <p>Description:</p><textarea className="edit-product-field" id="description" defaultValue={thisProduct?.description || '' }  />
+            <p>Price:</p><input className="edit-product-field" id="price" type="number" defaultValue={thisProduct?.price as number}/>
             <p>Image URL:</p><input  className="edit-product-field" id="image" type="text" defaultValue={thisProduct?.image_url} />
             <div className="image-preview-container">
               <img src={thisProduct?.image_url} alt="Product" className="edit-product-image"/>
@@ -151,7 +167,7 @@ const EditProduct = () => {
             </select>
     
             <div className="action-buttons">
-            <button className="btn btn-primary" onClick={() => handleUpdateItem()}>Update</button>
+            <button className="btn btn-primary" onClick={handleUpdateItem}>Update</button>
             <button className="btn btn-primary" onClick={() => navigate("/sell")}>Cancel</button>
             </div>
             <p id="error-message">{errorMsg}</p>
